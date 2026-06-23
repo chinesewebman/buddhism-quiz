@@ -1,0 +1,22 @@
+name: Probe
+on: workflow_dispatch
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: curl from US
+        run: |
+          echo "=== HTTPS to custom domain ==="
+          curl -sS --max-time 15 -o /dev/null -w "HTTP %{http_code} | size=%{size_download}B | time=%{time_total}s | ssl_verify=%{ssl_verify_result}\n" https://quiz.hi1984.com/ 2>&1
+          echo ""
+          echo "=== HTTPS to default pages.dev ==="
+          curl -sS --max-time 15 -o /dev/null -w "HTTP %{http_code} | size=%{size_download}B\n" https://quiz-hi1984.pages.dev/ 2>&1
+          echo ""
+          echo "=== DNS via Google ==="
+          dig +short quiz.hi1984.com @8.8.8.8
+          echo ""
+          echo "=== Headers from custom domain ==="
+          curl -sS --max-time 15 -I https://quiz.hi1984.com/ 2>&1 | head -15
+          echo ""
+          echo "=== Headers from pages.dev ==="
+          curl -sS --max-time 15 -I https://quiz-hi1984.pages.dev/ 2>&1 | head -15
