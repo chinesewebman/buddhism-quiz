@@ -24,11 +24,44 @@ jobs:
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@v1
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ secrets.CF_ACCOUNT_ID }}
           projectName: quiz-hi1984
           directory: .
-          # 首次运行会自动创建 Pages project
-          # 后续 push 走 Direct Upload, ~30s 完成
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           wranglerVersion: '3'
+
+      - name: Bind custom domain (idempotent)
+        if: success()
+        env:
+          T: ${{ secrets.CF_API_TOKEN }}
+          A: ${{ secrets.CF_ACCOUNT_ID }}
+        run: |
+          set -e
+          RESP=$(curl -sS -X POST \
+            "https://api.cloudflare.com/client/v4/accounts/${A}/pages/projects/quiz-hi1984/domains" \
+            -H "Authorization: Bearer ${T}" \
+            -H "Content-Type: application/json" \
+            --data '{"name":"quiz.hi1984.com"}' \
+            -w "\nHTTP_STATUS:%{http_code}")
+          STATUS=$(echo "$RESP" | grep -oE 'HTTP_STATUS:[0-9]+' | cut -d: -f2)
+          BODY=$(echo "$RESP" | sed '/HTTP_STATUS:/d')
+          if [ "$STATUS" = "200" ] || [ "$STATUS" = "201" ]; then
+            echo "OK Custom domain quiz.hi1984.com bound"
+          elif echo "$BODY" | grep -q '"code":8000'; then
+            echo "INFO Domain already bound (idempotent)"
+          else
+            echo "WARN Domain bind returned $STATUS"
+            echo "$BODY"
+            exit 1
+          fi
+
+      - name: Deployment summary
+        if: always()
+        run: |
+          echo "### Cloudflare Pages deploy done" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- URL: https://quiz.hi1984.com" >> $GITHUB_STEP_SUMMARY
+          echo "- Repo: chinesewebman/buddhism-quiz" >> $GITHUB_STEP_SUMMARY
+          echo "- Trigger: ${ github.event_name } (${ github.ref })" >> $GITHUB_STEP_SUMMARY
+          echo "- Commit: ${ github.sha }" >> $GITHUB_STEP_SUMMARY
