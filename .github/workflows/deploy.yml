@@ -21,6 +21,28 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Ensure Pages project exists
+        env:
+          T: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          A: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set +e
+          RESP=$(curl -sS -X POST \
+            "https://api.cloudflare.com/client/v4/accounts/${A}/pages/projects" \
+            -H "Authorization: ${T}" \
+            -H "Content-Type: application/json" \
+            --data '{"name":"quiz-hi1984","production_branch":"main"}' \
+            -w "\nHTTP_STATUS:%{http_code}")
+          STATUS=$(echo "$RESP" | grep -oE 'HTTP_STATUS:[0-9]+' | cut -d: -f2)
+          if [ "$STATUS" = "200" ] || [ "$STATUS" = "201" ]; then
+            echo "OK Pages project quiz-hi1984 created"
+          elif echo "$RESP" | grep -qi 'already exists\|"code":8000'; then
+            echo "INFO Pages project quiz-hi1984 already exists"
+          else
+            echo "WARN Project create returned $STATUS"
+            echo "$RESP"
+          fi
+
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@v1
         with:
@@ -37,7 +59,7 @@ jobs:
           T: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           A: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
-          set -e
+          set +e
           RESP=$(curl -sS -X POST \
             "https://api.cloudflare.com/client/v4/accounts/${A}/pages/projects/quiz-hi1984/domains" \
             -H "Authorization: ${T}" \
@@ -45,23 +67,19 @@ jobs:
             --data '{"name":"quiz.hi1984.com"}' \
             -w "\nHTTP_STATUS:%{http_code}")
           STATUS=$(echo "$RESP" | grep -oE 'HTTP_STATUS:[0-9]+' | cut -d: -f2)
-          BODY=$(echo "$RESP" | sed '/HTTP_STATUS:/d')
           if [ "$STATUS" = "200" ] || [ "$STATUS" = "201" ]; then
             echo "OK Custom domain quiz.hi1984.com bound"
-          elif echo "$BODY" | grep -q '"code":8000'; then
+          elif echo "$RESP" | grep -qi '"code":8000'; then
             echo "INFO Domain already bound (idempotent)"
           else
             echo "WARN Domain bind returned $STATUS"
-            echo "$BODY"
-            exit 1
+            echo "$RESP"
           fi
 
       - name: Deployment summary
         if: always()
-        env:
-          T: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: |
-          F="${F}"
+          F="$GITHUB_STEP_SUMMARY"
           echo "### Cloudflare Pages deploy done" >> "$F"
           echo "" >> "$F"
           echo "- URL: https://quiz.hi1984.com" >> "$F"
