@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>金刚经导读 · 第055讲 · 权便中观和究竟中观</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f7f1e6;        /* 宣纸米白 */
+  --paper-2: #ede4d0;       /* 略深 */
+  --ink: #2a2622;           /* 墨色 */
+  --ink-soft: #5e564c;      /* 浅墨 */
+  --ink-light: #8a8278;     /* 灰墨 */
+  --ochre: #a35d2a;         /* 赭石 */
+  --ochre-soft: #c89165;    /* 浅赭 */
+  --cinnabar: #b34340;      /* 朱砂 (用于错误) */
+  --jade: #5e7a4a;          /* 玉青 (用于正确) */
+  --line: #c9bfa9;          /* 边框线 */
+  --line-soft: #e3d9c2;     /* 软边框 */
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Noto Serif SC", "Songti SC", "STSong", "宋体", serif;
+  font-size: 16px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  background:
+    radial-gradient(ellipse at 10% 10%, rgba(167,93,42,0.04) 0%, transparent 40%),
+    radial-gradient(ellipse at 90% 80%, rgba(94,122,74,0.04) 0%, transparent 50%),
+    var(--paper);
+  min-height: 100vh;
+}
+header.page {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 56px 32px 32px;
+  text-align: center;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+header.page::before, header.page::after {
+  content: "";
+  position: absolute;
+  left: 50%; transform: translateX(-50%);
+  width: 60px; height: 1px;
+  background: var(--ink-light);
+}
+header.page::before { top: 32px; }
+header.page::after  { bottom: 0; }
+.kicker {
+  font-size: 13px;
+  letter-spacing: 0.4em;
+  color: var(--ink-light);
+  margin-bottom: 16px;
+  text-transform: none;
+  font-family: "Kaiti SC", "STKaiti", "KaiTi", serif;
+}
+h1.title {
+  font-family: "Kaiti SC", "STKaiti", "KaiTi", serif;
+  font-size: 38px;
+  font-weight: 500;
+  margin: 0 0 8px;
+  letter-spacing: 0.1em;
+}
+.subtitle {
+  font-size: 17px;
+  color: var(--ink-soft);
+  margin: 8px 0 24px;
+  font-family: "Kaiti SC", "STKaiti", serif;
+}
+.meta {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  font-size: 13px;
+  color: var(--ink-light);
+  letter-spacing: 0.1em;
+}
+.meta .sep { color: var(--line); }
+
+main {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 32px;
+}
+.nav-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 24px;
+  padding: 12px;
+  background: var(--paper-2);
+  border-radius: 4px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border: 1px solid var(--line-soft);
+}
+.nav-pills a {
+  display: inline-block;
+  min-width: 28px;
+  padding: 4px 8px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--ink-soft);
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: "Kaiti SC", "STKaiti", serif;
+}
+.nav-pills a:hover { background: var(--paper); border-color: var(--line); }
+.nav-pills a.answered { background: var(--jade); color: var(--paper); }
+.nav-pills a.wrong    { background: var(--cinnabar); color: var(--paper); }
+.nav-pills a.current  { border-color: var(--ochre); color: var(--ochre); font-weight: 600; }
+
+.q-card {
+  background: #fdfaf2;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 28px 32px;
+  margin: 0 0 24px;
+  position: relative;
+  box-shadow: 0 1px 0 rgba(94,86,76,0.04);
+}
+.q-card.correct { border-color: var(--jade); border-width: 2px; }
+.q-card.wrong   { border-color: var(--cinnabar); border-width: 2px; }
+.q-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 16px;
+  font-family: "Kaiti SC", "STKaiti", serif;
+}
+.q-no {
+  font-size: 22px;
+  color: var(--ochre);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+.q-no .badge {
+  display: inline-block;
+  font-size: 12px;
+  padding: 2px 10px;
+  margin-left: 8px;
+  background: var(--paper-2);
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  letter-spacing: 0.1em;
+  font-weight: 400;
+  vertical-align: middle;
+}
+.q-no .badge.judge   { color: var(--ochre); border-color: var(--ochre-soft); }
+.q-no .badge.fill    { color: var(--jade); border-color: var(--jade); }
+.q-no .badge.essay   { color: var(--ink-soft); }
+.q-stem {
+  font-size: 17px;
+  line-height: 1.85;
+  margin-bottom: 20px;
+  color: var(--ink);
+}
+.options { margin: 16px 0; }
+.opt {
+  display: block;
+  padding: 10px 16px;
+  margin: 6px 0;
+  background: var(--paper);
+  border: 1px solid var(--line-soft);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+  position: relative;
+}
+.opt:hover { background: var(--paper-2); border-color: var(--line); }
+.opt input { margin-right: 12px; vertical-align: middle; }
+.opt .ltr {
+  display: inline-block;
+  width: 22px;
+  font-family: "Kaiti SC", "STKaiti", serif;
+  color: var(--ochre);
+  font-weight: 500;
+}
+.opt.is-correct { background: #e8f0dd; border-color: var(--jade); color: var(--ink); }
+.opt.is-correct::after {
+  content: "✓";
+  position: absolute; right: 12px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--jade); font-weight: 700;
+}
+.opt.is-wrong { background: #f6dcd9; border-color: var(--cinnabar); }
+.opt.is-wrong::after {
+  content: "✗";
+  position: absolute; right: 12px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--cinnabar); font-weight: 700;
+}
+.fill-input, .essay-input {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 16px;
+  font-family: inherit;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  margin: 8px 0;
+  color: var(--ink);
+}
+.fill-input:focus, .essay-input:focus { outline: none; border-color: var(--ochre); }
+.essay-input { min-height: 140px; line-height: 1.7; resize: vertical; }
+
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  align-items: center;
+}
+.btn {
+  padding: 8px 20px;
+  font-size: 14px;
+  font-family: "Kaiti SC", "STKaiti", serif;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--ink-light);
+  border-radius: 3px;
+  cursor: pointer;
+  letter-spacing: 0.15em;
+  transition: all 0.15s;
+}
+.btn:hover { background: var(--paper-2); }
+.btn-primary {
+  background: var(--ochre);
+  color: var(--paper);
+  border-color: var(--ochre);
+}
+.btn-primary:hover { background: #8c4d20; }
+.btn-primary:disabled { background: var(--line); border-color: var(--line); cursor: not-allowed; }
+.btn-ghost { border-color: var(--line); color: var(--ink-soft); }
+
+.feedback {
+  margin-top: 18px;
+  padding: 16px 20px;
+  border-radius: 4px;
+  display: none;
+  font-size: 15px;
+  line-height: 1.7;
+}
+.feedback.show { display: block; }
+.feedback.right {
+  background: #e8f0dd;
+  border-left: 3px solid var(--jade);
+  color: var(--ink);
+}
+.feedback.wrong {
+  background: #f6dcd9;
+  border-left: 3px solid var(--cinnabar);
+  color: var(--ink);
+}
+.feedback .verdict {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 6px;
+  font-family: "Kaiti SC", "STKaiti", serif;
+  letter-spacing: 0.1em;
+}
+.feedback .verdict::before { content: "· "; color: var(--ink-light); }
+.feedback .ref-answer {
+  display: block;
+  margin-top: 10px;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 3px;
+  font-size: 15px;
+}
+.feedback .ref-answer .lbl {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--ink-light);
+  display: block;
+  margin-bottom: 4px;
+  font-family: "Kaiti SC", "STKaiti", serif;
+}
+.feedback .analysis-text {
+  display: block;
+  margin-top: 10px;
+  white-space: pre-wrap;
+  line-height: 1.85;
+}
+
+footer {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 32px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--ink-light);
+  letter-spacing: 0.2em;
+  border-top: 1px solid var(--line-soft);
+  font-family: "Kaiti SC", "STKaiti", serif;
+}
+
+/* 印刷感收尾 */
+@media (max-width: 600px) {
+  .q-card { padding: 20px 18px; }
+  h1.title { font-size: 28px; }
+  main { padding: 16px; }
+}
+</style>
+</head>
+<body>
+<header class="page">
+  <div class="kicker">金刚经导读 · 自测题</div>
+  <h1 class="title">第 055 讲</h1>
+  <div class="subtitle">权便中观和究竟中观</div>
+  <div class="meta">
+    <span>共 <b>19</b> 题</span>
+    <span class="sep">·</span>
+    <span>多选题 12 · 单选题 1 · 填空题 2 · 判断题 1 · 简答题 2 · 论述题 1</span>
+    <span class="sep">·</span>
+    <span id="summary">已作答 0/19</span>
+  </div>
+</header>
+
+<main>
+  <nav class="nav-pills"><a href="#q055-1" data-qid="q055-1">1</a>
+<a href="#q055-2" data-qid="q055-2">2</a>
+<a href="#q055-3" data-qid="q055-3">3</a>
+<a href="#q055-4" data-qid="q055-4">4</a>
+<a href="#q055-5" data-qid="q055-5">5</a>
+<a href="#q055-6" data-qid="q055-6">6</a>
+<a href="#q055-7" data-qid="q055-7">7</a>
+<a href="#q055-8" data-qid="q055-8">8</a>
+<a href="#q055-9" data-qid="q055-9">9</a>
+<a href="#q055-10" data-qid="q055-10">10</a>
+<a href="#q055-11" data-qid="q055-11">11</a>
+<a href="#q055-12" data-qid="q055-12">12</a>
+<a href="#q055-13" data-qid="q055-13">13</a>
+<a href="#q055-14" data-qid="q055-14">14</a>
+<a href="#q055-15" data-qid="q055-15">15</a>
+<a href="#q055-16" data-qid="q055-16">16</a>
+<a href="#q055-17" data-qid="q055-17">17</a>
+<a href="#q055-18" data-qid="q055-18">18</a>
+<a href="#q055-19" data-qid="q055-19">19</a></nav>
+  <article class="q-card" id="q055-1" data-type="多选题" data-analysis="智者发现，我们这些凡夫，有一个对凡夫自以为的真实世界的特殊认知模式：总是构建一对一对的相待名言去理解、描述我们凡夫自以为的真实世界。佛法把凡夫的这种认知模式叫二边见。通俗地讲，智者看我们凡夫是二，凡夫一定二，只要二就是凡夫。所以把凡夫的二解构了，也就是把凡夫自以为的真实世界解构了。">
+<div class="q-head">
+<span class="q-no">1.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】智者发现，我们凡夫有一个对凡夫自以为的真实世界的特殊认知模式，对此以下选项中表述正确的有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q055-1" value="A"> <span class="ltr">A.</span> 凡夫总是构建一对一对的相待名言去理解、描述我们凡夫自以为的真实世界。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q055-1" value="B"> <span class="ltr">B.</span> 佛法把凡夫的这种认知模式叫二边见。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q055-1" value="C"> <span class="ltr">C.</span> 通俗地讲，智者看我们凡夫是二，凡夫一定二，只要二就是凡夫。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q055-1" value="D"> <span class="ltr">D.</span> 把凡夫的二解构了，也就是把凡夫自以为的真实世界解构了。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q055-1" data-type="多选题" data-answer="ABCD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q055-1">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q055-2" data-type="多选题" data-analysis="大乘佛法的二时教法，紧紧抓住我们凡夫的这个特点，以解构二为入手处，以解构二为方便善巧，以达到彻底解构我们凡夫自以为的真实世界。让我们这些二的凡夫能够不二，从二走向不二，就是由凡入圣的过程，就是修行解脱的过程。……二谛模式的这种不二，并没有真正地让凡夫彻底摆脱二。">
+<div class="q-head">
+<span class="q-no">2.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】关于大乘佛法的二时教法，以下选项中表述正确的有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q055-2" value="A"> <span class="ltr">A.</span> 大乘佛法的二时教法，紧紧抓住我们凡夫二的这个特点，以解构二为入手处。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q055-2" value="B"> <span class="ltr">B.</span> 以二谛模式为方便善巧，让凡夫彻底摆脱二。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q055-2" value="C"> <span class="ltr">C.</span> 以解构二为方便善巧，以达到彻底解构我们凡夫自以为的真实世界的目的。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q055-2" value="D"> <span class="ltr">D.</span> 让我们这些二的凡夫能够不二，从二走向不二，就是由凡入圣的过程，就是修行解脱的过程。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q055-2" data-type="多选题" data-answer="ACD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q055-2">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q055-3" data-type="单选题" data-analysis="大乘佛法的二时教法，紧紧抓住我们凡夫的这个特点，以解构二为入手处，以解构二为方便善巧，以达到彻底解构我们凡夫自以为的真实世界。让我们这些二的凡夫能够不二，从二走向不二，就是由凡入圣的过程，就是修行解脱的过程。所以大乘佛法二时教法的甚深般若波罗蜜法门，还有一个别名就叫“不二法门”。">
+<div class="q-head">
+<span class="q-no">3.<span class="badge ">单选</span></span>
+</div>
+<div class="q-stem">【单选题】大乘佛法二时教法的甚深般若波罗蜜法门，还有一个别名叫什么？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="radio" name="q055-3" value="A"> <span class="ltr">A.</span> 方便法门</label>
+<label class="opt" data-ltr="B"><input type="radio" name="q055-3" value="B"> <span class="ltr">B.</span> 二边法门</label>
+<label class="opt" data-ltr="C"><input type="radio" name="q055-3" value="C"> <span class="ltr">C.</span> 不二法门</label>
+<label class="opt" data-ltr="D"><input type="radio" name="q055-3" value="D"> <span class="ltr">D.</span> 解构法门</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q055-3" data-type="单选题" data-answer="C">提交</button><button class="btn btn-ghost btn-reset" data-qid="q055-3">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q055-4" data-type="多选题" data-analysis="第一种不二，基于二谛模式而建立的不二，表述为：“既不怎么怎么样也不怎么怎么样”。这种基于二谛而建立起来的不二，最重要的功能是通过二谛渐进、递进的解构模式，来解构我们凡夫自以为存在的真实世界，重在解构。但是这个层次的不二，并未让我们这些凡夫真正地脱离二；它是用一对新的二，对治一对老的二。这个对治的过程，确实是解构我们凡夫境界的过程，功德无量。特别是对于末法众生，二谛模式这个解构的善巧，是非常必要的，如果没有了二谛模式渐进的、次第的解构模式，对于末法众生来说，度化的工作，就会变得更为艰难。">
+<div class="q-head">
+<span class="q-no">4.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】在大乘佛法的二时教法的甚深般若波罗蜜法门当中，不二有两个层次，或者两重境界。以下选项中关于第一个层次的不二，表述正确的有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q055-4" value="A"> <span class="ltr">A.</span> 第一种不二，基于二谛模式而建立的不二，表述为：“既不怎么怎么样也不怎么怎么样”。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q055-4" value="B"> <span class="ltr">B.</span> 通过二谛渐进、递进的解构模式，来解构我们凡夫自以为存在的真实世界，重在解构。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q055-4" value="C"> <span class="ltr">C.</span> 这个层次的不二，是用一对新的二，对治一对老的二，能够让我们这些凡夫真正地脱离二。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q055-4" value="D"> <span class="ltr">D.</span> 对于末法众生，二谛模式这个解构的善巧，是非常必要的，如果没有了二谛模式渐进的、次第的解构模式，对于末法众生来说，度化的工作，就会变得更为艰难。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q055-4" data-type="多选题" data-answer="ABD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q055-4">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q055-5" data-type="多选题" data-analysis="第一种不二，基于二谛模式而建立的不二，表述为：“既不怎么怎么样也不怎么怎么样”。二谛模式的这种不二，并没有真正地让凡夫彻底摆脱二。既然还是二，就一定还是凡夫的见解。还不能够算是真正意义上的远离凡夫二边见的中观。">
+<div class="q-head">
+<span class="q-no">5.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】二时教法中“不二”可以分为两个层次，以下选项中关于第一个层次的不二，表述错误的有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q055-5" value="A"> <span class="ltr">A.</span> 二谛模式的这种不二，并没有真正地让凡夫彻底摆脱二。既然还是二，就一定还是凡夫的见解。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q055-5" value="B"> <span class="ltr">B.</span> 还不能够算是真正意义上的远离凡夫二边见的中观。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q055-5" value="C"> <span class="ltr">C.</span> 这个层次的不二，可以表述为“因不什么什么故不什么什么”。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q055-5" value="D"> <span class="ltr">D.</span> 可以算是真正地让凡夫彻底摆脱了二。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q055-5" data-type="多选题" data-answer="CD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q055-5">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q055-6" data-type="多选题" data-analysis="既然这个层次的不二，不是真正意义上的中观，为什么还要安立“权便中观”这个名言呢？还要用“中观”这个名呢？这是因为在过去千百年来，包括印度的很多古德，都是在这个层次上，甚至都只是在这个层次上讲中观，大家似乎都认可了这也是一种中观，因此随顺古德，权且安立个名言，叫“权便中观”。这是不二的第一个层次。">
+<div class="q-head">
+<span class="q-no">6.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】我们给这种基于二谛而建立起来的不二安立“权便中观”这一名称，原因是什么？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q055-6" value="A"> <span class="ltr">A.</span> 因为这一层次的不二是真正远离二边见的中观，理应称为中观。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q055-6" value="B"> <span class="ltr">B.</span> 因为在过去千百年来，包括印度的很多古德，都是在这个层次上，甚至都只是在这个层次上讲中观。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q055-6" value="C"> <span class="ltr">C.</span> 因为在过去千百年来，大家似乎都认可了这也是一种中观。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q055-6" value="D"> <span class="ltr">D.</span> 为了随顺古德，权且安立个名言，叫“权便中观”。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q055-6" data-type="多选题" data-answer="BCD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q055-6">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q055-7" data-type="多选题" data-analysis="印度古德龙树，不仅是在印度，以至于到今天为止，在这个世界上，都被认为是对佛陀二时教法的甚深般若波罗蜜法门的最权威阐释者，这一点没有非议。龙树的著作非常清晰地告诉我们，对于甚深的般若波罗蜜法门的真实中观见的施设，不是建立在二谛模式上的不二……这种不二，不是用一对新的二对治老的二，而是要彻底泯灭二，并且是以完全泯灭一边，而达到二边双泯，通过彻底泯灭二而达到远离凡夫二边见的中道。这是龙树对佛陀的甚深般若波罗蜜法门的深刻解读。……在整部《中论颂》中，龙树虽然说过二谛，但是他在整部《中论颂》中没有运用二谛。">
+<div class="q-head">
+<span class="q-no">7.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】依据课程内容，关于龙树及其著作，以下选项中表述正确的有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q055-7" value="A"> <span class="ltr">A.</span> 印度古德龙树被认为是对佛陀二时教法的甚深般若波罗蜜法门的最权威阐释者。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q055-7" value="B"> <span class="ltr">B.</span> 龙树在《中论颂》中运用了二谛的模式论述中观见。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q055-7" value="C"> <span class="ltr">C.</span> 龙树的著作非常清晰地告诉我们，对于甚深的般若波罗蜜法门的真实中观见的施设，不是建立在二谛模式上的不二。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q055-7" value="D"> <span class="ltr">D.</span> 龙树对佛陀的甚深般若波罗蜜法门的深刻解读，是通过彻底泯灭二而达到远离凡夫二边见的中道。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q055-7" data-type="多选题" data-answer="ACD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q055-7">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q055-8" data-type="多选题" data-analysis="有更深层次的不二，完全区别于二谛模式所安立的不二。这种不二，表达为“因不什么什么故不什么什么”。比如说，因不常故不断，因非有故非无。这种不二，不是用一对新的二对治老的二，而是要彻底泯灭二，并且是以完全泯灭一边，而达到二边双泯，通过彻底泯灭二而达到远离凡夫二边见的中道。这是龙树对佛陀的甚深般若波罗蜜法门的深刻解读。这个层次的不二，我也给它安立了一个名言，叫“究竟中观”。">
+<div class="q-head">
+<span class="q-no">8.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】二时教法中“不二”可以分为两个层次，以下选项中关于第二个层次的不二，表述正确的有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q055-8" value="A"> <span class="ltr">A.</span> 这种不二，表达为“因不什么什么故不什么什么”。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q055-8" value="B"> <span class="ltr">B.</span> 这种不二，不是用一对新的二对治老的二，而是要彻底泯灭二。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q055-8" value="C"> <span class="ltr">C.</span> 这种不二，是以完全泯灭一边，而达到二边双泯。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q055-8" value="D"> <span class="ltr">D.</span> 这种不二，是通过彻底泯灭二而达到远离凡夫二边见的中道</label>
+<label class="opt" data-ltr="E"><input type="checkbox" name="q055-8" value="E"> <span class="ltr">E.</span> 这种“不二”和“二边”也落入了一对二的相待概念。</label>
+<label class="opt" data-ltr="F"><input type="checkbox" name="q055-8" value="F"> <span class="ltr">F.</span> 给这个层次的不二，安立一个名言叫“究竟中观”。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q055-8" data-type="多选题" data-answer="ABCDF">提交</button><button class="btn btn-ghost btn-reset" data-qid="q055-8">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q055-9" data-type="多选题" data-analysis="很多人对不生不灭的解读，都是说我们凡夫境界是生灭的境界，生住异灭、生生灭灭，佛陀说不生不灭，是说既不生也不灭，这个既不生也不灭，是有别于凡夫境界生和灭的第三种很微妙的状态，这一种状态不是凡夫可测度的，这种既不生也不灭的第三种状态就是中道、就是中观——很多人都是这样理解的。但是这种理解，完全有悖于龙树对甚深般若波罗蜜的解读，龙树认同的是因不生故不灭。">
+<div class="q-head">
+<span class="q-no">9.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】佛陀说“不生不灭”，根据龙树对甚深般若波罗蜜的解读，以下选项中理解错误的有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q055-9" value="A"> <span class="ltr">A.</span> 是既不生也不灭。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q055-9" value="B"> <span class="ltr">B.</span> 是因不生故不灭。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q055-9" value="C"> <span class="ltr">C.</span> 是有别于凡夫境界生和灭的第三种很微妙的状态。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q055-9" value="D"> <span class="ltr">D.</span> 既不生也不灭的第三种状态就是中道、就是中观。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q055-9" data-type="多选题" data-answer="ACD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q055-9">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q055-10" data-type="多选题" data-analysis="龙树认为，凡夫自以为真实的世界，从来、压根就没有生，无生，这是不生的法义。既然生都没有生，也就无从谈灭，这就彻底地泯灭了生灭二边，这是龙树对甚深般若波罗蜜的中道解读，是龙树所安立的中观见地。">
+<div class="q-head">
+<span class="q-no">10.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】依据课程内容，关于龙树的中观见地，以下选项中表述正确的有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q055-10" value="A"> <span class="ltr">A.</span> 凡夫自以为真实的世界从来、压根就没有生。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q055-10" value="B"> <span class="ltr">B.</span> 凡夫自以为真实的世界无生，这是不生的法义。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q055-10" value="C"> <span class="ltr">C.</span> 凡夫自以为真实的世界既然生都没有生，也就无从谈灭。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q055-10" value="D"> <span class="ltr">D.</span> 龙树的中观见地彻底地泯灭了生灭二边。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q055-10" data-type="多选题" data-answer="ABCD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q055-10">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q055-11" data-type="多选题" data-analysis="从大乘佛法讲，什么是常？存在就是常。只要是存在，只要产生了，就是常。非有，就是根本不存在，这就是无常，这就是不常。既然不常，肯定就不断。什么是断？先是存在，后来变为不存在，现在连存在都不存在，也就不存在着从存在变为不存在，因此断就无从安立。所以不常不断，是因不常故不断。">
+<div class="q-head">
+<span class="q-no">11.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】对于大乘佛法二时教法究竟说的“不常不断”，以下理解正确的有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q055-11" value="A"> <span class="ltr">A.</span> 存在就是常。只要是存在，只要产生了，就是常。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q055-11" value="B"> <span class="ltr">B.</span> 非有，就是根本不存在，这就是无常，这就是不常。既然不常，肯定就不断。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q055-11" value="C"> <span class="ltr">C.</span> 先是存在，后来变为不存在，就是断。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q055-11" value="D"> <span class="ltr">D.</span> 大乘佛法二时教法讲无常，是根本不存在，连存在都不存在，也就不存在着从存在变为不存在，因此断就无从安立。</label>
+<label class="opt" data-ltr="E"><input type="checkbox" name="q055-11" value="E"> <span class="ltr">E.</span> 大乘佛法的“不常不断”，就是“因不常故不断”。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q055-11" data-type="多选题" data-answer="ABCDE">提交</button><button class="btn btn-ghost btn-reset" data-qid="q055-11">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q055-12" data-type="填空题" data-analysis="究竟中观的要害是无生。能够领受无生，是进入大乘佛法的门坎，不能理解无生，永远在大乘佛法的门之外游荡。">
+<div class="q-head">
+<span class="q-no">12.<span class="badge fill">填空</span></span>
+</div>
+<div class="q-stem">【填空题】究竟中观的要害是（）。能够领受（），是进入大乘佛法的门坎，不能理解（），永远在大乘佛法的门之外游荡。</div>
+<input class="fill-input" name="q055-12" placeholder="请输入答案">
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q055-12" data-type="填空题" data-answer="无生，无生，无生">提交</button><button class="btn btn-ghost btn-reset" data-qid="q055-12">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q055-13" data-type="多选题" data-analysis="《中论》第一颂，也叫“皈敬颂”，这一颂排在第一品第一颂之前。《中论颂》第一品第一颂，鸠摩罗什翻译为：“诸法不自生，亦不从他生，不共不无因，是故知无生。”龙树早就预料到我们凡夫会有这样的疑问，所以皈敬颂一开口说“不生亦不灭”，然后第一品第一颂就告诉我们，诸法——我们凡夫境界存在的一切——不自生、不他生、不共生、不无因生。印度的哲人们认为，凡夫境界一切的存在，如果是一种存在的话，它就得产生，而产生的方式仅此四种，绝没有第五种。所以这是龙树解释什么叫“不生亦不灭”的“不生”。在龙树看来，凡夫境界一切的存在、一切诸法，根本不可能从这四种方式产生，“是故知无生”，根本就没产生。">
+<div class="q-head">
+<span class="q-no">13.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】《中论》的“皈敬颂”一开章就讲了“八不”，为什么里面的“不生亦不灭”要解读为是“因不生故不灭”？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q055-13" value="A"> <span class="ltr">A.</span> 因为皈敬颂之后，龙树马上讲了“诸法不自生，亦不从他生，不共不无因，是故知无生。”</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q055-13" value="B"> <span class="ltr">B.</span> 龙树早就预料到我们凡夫会有这样的疑问，第一品第一颂就告诉我们，诸法——我们凡夫境界存在的一切——不自生、不他生、不共生、不无因生。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q055-13" value="C"> <span class="ltr">C.</span> 印度的哲人们认为，凡夫境界一切的存在，产生的方式仅此四种，绝没有第五种。龙树通过否定这四种产生方式来解释什么叫“不生亦不灭”的“不生”。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q055-13" value="D"> <span class="ltr">D.</span> 而在龙树看来，凡夫境界一切的存在、一切诸法，根本不可能从这四种方式产生，所以是无生。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q055-13" data-type="多选题" data-answer="ABCD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q055-13">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q055-14" data-type="多选题" data-analysis="龙树认同的是因不生故不灭。从《中论颂》一开章，我们就可以理解，龙树一入手就是在讲究竟中观。在整部《中论颂》中，龙树虽然说过二谛，但是他在整部《中论颂》中没有运用二谛。龙树讲中观见，直截了当从无生说起，是究竟中观的见解。">
+<div class="q-head">
+<span class="q-no">14.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】对于龙树的《中论颂》，以下理解正确的有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q055-14" value="A"> <span class="ltr">A.</span> 龙树一入手先运用了二谛模式说中观。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q055-14" value="B"> <span class="ltr">B.</span> 龙树虽然说过二谛，但是他在整部《中论颂》中没有运用二谛。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q055-14" value="C"> <span class="ltr">C.</span> 龙树一入手就是在讲究竟中观。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q055-14" value="D"> <span class="ltr">D.</span> 龙树一开章说不生亦不灭，一定是“因不生故不灭”</label>
+<label class="opt" data-ltr="E"><input type="checkbox" name="q055-14" value="E"> <span class="ltr">E.</span> 龙树讲中观见，直截了当从无生说起，是究竟中观的见解。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q055-14" data-type="多选题" data-answer="BCDE">提交</button><button class="btn btn-ghost btn-reset" data-qid="q055-14">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q055-15" data-type="填空题" data-analysis="一切法无生，是理解、学习大乘佛法的一个纲领性观点，能不能接受无生，是能不能认同大乘佛法的一个试金石。">
+<div class="q-head">
+<span class="q-no">15.<span class="badge fill">填空</span></span>
+</div>
+<div class="q-stem">【填空题】一切法（），是理解、学习大乘佛法的一个纲领性观点，能不能接受（），是能不能认同大乘佛法的一个试金石。</div>
+<input class="fill-input" name="q055-15" placeholder="请输入答案">
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q055-15" data-type="填空题" data-answer="无生，无生">提交</button><button class="btn btn-ghost btn-reset" data-qid="q055-15">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q055-16" data-type="判断题" data-analysis="从《中论颂》一开章，我们就可以理解，龙树一入手就是在讲究竟中观。在整部《中论颂》中，龙树虽然说过二谛，但是他在整部《中论颂》中没有运用二谛。">
+<div class="q-head">
+<span class="q-no">16.<span class="badge judge">判断</span></span>
+</div>
+<div class="q-stem">【判断题】龙树在《中论颂》中提及二谛，说明他认同二谛模式是阐释究竟中观的核心方式。</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="radio" name="q055-16" value="A"> <span class="ltr">A.</span> 正确</label>
+<label class="opt" data-ltr="B"><input type="radio" name="q055-16" value="B"> <span class="ltr">B.</span> 错误</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q055-16" data-type="判断题" data-answer="错误">提交</button><button class="btn btn-ghost btn-reset" data-qid="q055-16">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q055-17" data-type="简答题" data-analysis="">
+<div class="q-head">
+<span class="q-no">17.<span class="badge essay">简答</span></span>
+</div>
+<div class="q-stem">【简答题】简述权便中观的核心特征及安立此名言的原因。</div>
+<textarea class="essay-input" name="q055-17" placeholder="请简要作答…"></textarea>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q055-17" data-type="简答题" data-answer="核心特征：基于二谛模式建立，表述为“既不怎么怎么样也不怎么怎么样”，用一对新的二对治老的二，未让凡夫彻底脱离二边见，重在解构凡夫的实有见，是度化末法众生的必要善巧。
+安立原因：过去千百年来，包括印度很多古德都在此层次上讲中观，大家普遍认可这也是一种中观，为随顺古德，权且安立“权便中观”这一名言。">提交</button><button class="btn btn-ghost btn-reset" data-qid="q055-17">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q055-18" data-type="简答题" data-analysis="">
+<div class="q-head">
+<span class="q-no">18.<span class="badge essay">简答</span></span>
+</div>
+<div class="q-stem">龙树在《中论颂》中如何阐释“不生亦不灭”的含义？请结合相关颂文简要说明。</div>
+<textarea class="essay-input" name="q055-18" placeholder="请简要作答…"></textarea>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q055-18" data-type="简答题" data-answer="龙树认为“不生亦不灭”的含义是“因不生故不灭”。《中论颂》第一品第一颂“诸法不自生，亦不从他生，不共不无因，是故知无生”表明，凡夫境界的一切诸法，无法通过自生、他生、共生、无因生四种方式产生，本质是无生；既然从未生起，灭就无从谈起，由此彻底泯灭生灭二边，这是究竟中观的核心见解。">提交</button><button class="btn btn-ghost btn-reset" data-qid="q055-18">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q055-19" data-type="论述题" data-analysis="">
+<div class="q-head">
+<span class="q-no">19.<span class="badge essay">论述</span></span>
+</div>
+<div class="q-stem">论述权便中观与究竟中观的区别，并结合导读内容说明二者在大乘佛法二时教法中的作用。</div>
+<textarea class="essay-input" name="q055-19" placeholder="请详细论述…"></textarea>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q055-19" data-type="论述题" data-answer="区别：
+权便中观基于二谛模式建立，表述为“既不怎么怎么样也不怎么怎么样”，如既不常也不断、既非有也非无；究竟中观不建立在二谛模式上，表述为“因不什么什么故不什么什么”，如因不生故不灭、因不常故不断，是龙树对甚深般若波罗蜜法门的深层解读。
+核心作用不同：权便中观用新的二对治老的二，重在次第解构凡夫实有见，未让凡夫彻底脱离二边见；究竟中观彻底泯灭二边，以无生为核心，彻底解构凡夫自以为的真实世界，让凡夫真正远离二边见。
+境界层次不同：权便中观仍属于凡夫见解的范畴，不是真正意义上的中观；究竟中观是远离凡夫二边见的中道，是龙树所安立的真正中观见地。
+二者在二时教法中的作用：
+权便中观的作用：作为次第解构的方便善巧，能够逐步结构凡夫的实有见，契合末法众生的根器，让凡夫渐进领受无我、无生的法义，为度化末法众生提供了可行的路径，功德无量。
+究竟中观的作用：以无生为起点和要害，是进入大乘佛法的门坎，彻底解构凡夫自以为的真实世界，让凡夫真正远离二边见，是理解、学习大乘佛法的纲领性观点，决定了修行者能否真正认同大乘佛法、进入大乘修行之门。">提交</button><button class="btn btn-ghost btn-reset" data-qid="q055-19">重做</button></div><div class="feedback"></div></article>
+</main>
+
+<footer>
+  <p>业精于勤 · 行成于思</p>
+</footer>
+
+<script>window.QSET = "quiz-055";</script>
+<script>
+(function(){
+  const KEY = (window.QSET || 'quiz') + '.progress';
+
+  function load() {
+    try { return JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e) { return {}; }
+  }
+  function save(data) {
+    try { localStorage.setItem(KEY, JSON.stringify(data)); } catch(e) {}
+  }
+
+  function setCurrent(anchor) {
+    document.querySelectorAll('.nav-pills a').forEach(a => a.classList.remove('current'));
+    const el = document.querySelector('.nav-pills a[href="#' + anchor + '"]');
+    if (el) el.classList.add('current');
+  }
+
+  function grade(qid, type, answer) {
+    const card = document.getElementById(qid);
+    if (!card) return;
+    const fb = card.querySelector('.feedback');
+    const correctEl = card.querySelector('.q-no .verdict-mark');
+    const userAnswer = collect(card, type);
+
+    // 标记作答
+    if (userAnswer !== null && userAnswer !== '' && !(Array.isArray(userAnswer) && userAnswer.length === 0)) {
+      const navA = document.querySelector('.nav-pills a[href="#' + qid + '"]');
+      if (navA) navA.classList.add('answered');
+    }
+
+    // 判分
+    let isRight = null;
+    if (type === '简答题' || type === '论述题') {
+      // 开放题: 不判分, 只显示参考答案
+      isRight = 'open';
+    } else if (type === '判断题') {
+      // 判断题: A=正确, B=错误; answer 可能是字母或文字, 归一化后再比较
+      const normJudge = v => v === 'A' ? '正确' : v === 'B' ? '错误' : v;
+      isRight = (normJudge(userAnswer) === normJudge(answer));
+    } else if (type === '单选题') {
+      isRight = (userAnswer === answer);
+    } else if (type === '多选题') {
+      const u = Array.isArray(userAnswer) ? userAnswer.slice().sort().join('') : '';
+      const a = (answer || '').split('').sort().join('');
+      isRight = (u === a);
+    } else if (type === '填空题') {
+      isRight = (String(userAnswer || '').trim() === String(answer || '').trim());
+    }
+
+    // 渲染反馈
+    fb.classList.add('show');
+    fb.classList.remove('right', 'wrong');
+    if (isRight === 'open') {
+      fb.classList.add('right');
+      fb.innerHTML = '<div class="verdict">参考答案</div>' +
+        '<span class="analysis-text">' + escHtml(answer) + '</span>' +
+        renderAnalysis(card);
+      card.classList.add('correct');
+    } else if (isRight) {
+      fb.classList.add('right');
+      fb.innerHTML = '<div class="verdict">正确</div>' + renderAnalysis(card);
+      card.classList.add('correct');
+    } else {
+      fb.classList.add('wrong');
+      fb.innerHTML = '<div class="verdict">错误 · 正确答案: ' + escHtml(answer) + '</div>' + renderAnalysis(card);
+      card.classList.add('wrong');
+      const navA = document.querySelector('.nav-pills a[href="#' + qid + '"]');
+      if (navA) {
+        navA.classList.remove('answered');
+        navA.classList.add('wrong');
+      }
+    }
+
+    // 标记正确选项
+    if (type === '单选题' || type === '多选题') {
+      const correctSet = new Set((answer || '').split(''));
+      card.querySelectorAll('.opt').forEach(opt => {
+        const ltr = opt.getAttribute('data-ltr');
+        if (correctSet.has(ltr)) opt.classList.add('is-correct');
+      });
+    } else if (type === '判断题') {
+      // answer 可能是 '正确'/'错误' 或 'A'/'B', 归一化为字母再比较
+      const ansLetter = answer === '正确' ? 'A' : answer === '错误' ? 'B' : answer;
+      card.querySelectorAll('.opt').forEach(opt => {
+        if (opt.getAttribute('data-ltr') === ansLetter) opt.classList.add('is-correct');
+      });
+    }
+
+    // 禁用重复提交
+    card.querySelector('.btn-submit').disabled = true;
+    card.querySelector('.btn-submit').textContent = '已提交';
+
+    // 保存进度
+    const data = load();
+    data[qid] = { type, answer, userAnswer, isRight, ts: Date.now() };
+    save(data);
+
+    // 更新统计
+    updateSummary();
+  }
+
+  function collect(card, type) {
+    if (type === '单选题' || type === '判断题') {
+      const sel = card.querySelector('input[type=radio]:checked');
+      return sel ? sel.value : null;
+    }
+    if (type === '多选题') {
+      const sels = card.querySelectorAll('input[type=checkbox]:checked');
+      return Array.from(sels).map(s => s.value);
+    }
+    if (type === '填空题') {
+      const inp = card.querySelector('.fill-input');
+      return inp ? inp.value : '';
+    }
+    if (type === '简答题' || type === '论述题') {
+      const inp = card.querySelector('.essay-input');
+      return inp ? inp.value : '';
+    }
+    return null;
+  }
+
+  function renderAnalysis(card) {
+    const a = card.getAttribute('data-analysis');
+    if (!a) return '';
+    return '<div class="ref-answer"><span class="lbl">解析</span>' +
+      '<span class="analysis-text">' + escHtml(a) + '</span></div>';
+  }
+
+  function escHtml(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function updateSummary() {
+    const data = load();
+    const cards = document.querySelectorAll('.q-card');
+    let total = 0, correct = 0, wrong = 0, open_ = 0;
+    cards.forEach(c => {
+      const qid = c.id;
+      const type = c.getAttribute('data-type');
+      const r = data[qid];
+      if (!r) return;
+      total += 1;
+      if (r.isRight === 'open') open_ += 1;
+      else if (r.isRight) correct += 1;
+      else wrong += 1;
+    });
+    const sum = document.getElementById('summary');
+    if (sum) {
+      sum.innerHTML = '已作答 <b>' + total + '</b>/' + cards.length +
+        ' · 正确 <b style="color:var(--jade)">' + correct + '</b>' +
+        ' · 错误 <b style="color:var(--cinnabar)">' + wrong + '</b>' +
+        ' · 开放题 <b>' + open_ + '</b>';
+    }
+  }
+
+  function bind() {
+    document.querySelectorAll('.btn-submit').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const qid = btn.getAttribute('data-qid');
+        const type = btn.getAttribute('data-type');
+        const answer = btn.getAttribute('data-answer');
+        grade(qid, type, answer);
+      });
+    });
+    document.querySelectorAll('.btn-reset').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const qid = btn.getAttribute('data-qid');
+        const data = load();
+        delete data[qid];
+        save(data);
+        location.reload();
+      });
+    });
+    // 平滑滚动 + current 高亮
+    document.querySelectorAll('.nav-pills a').forEach(a => {
+      a.addEventListener('click', e => {
+        setCurrent(a.getAttribute('href').slice(1));
+      });
+    });
+    // 恢复历史进度
+    const data = load();
+    Object.keys(data).forEach(qid => {
+      const r = data[qid];
+      const card = document.getElementById(qid);
+      if (!card) return;
+      const navA = document.querySelector('.nav-pills a[href="#' + qid + '"]');
+      if (r.isRight === true) {
+        card.classList.add('correct');
+        if (navA) navA.classList.add('answered');
+      } else if (r.isRight === false) {
+        card.classList.add('wrong');
+        if (navA) { navA.classList.remove('answered'); navA.classList.add('wrong'); }
+      } else if (r.isRight === 'open') {
+        card.classList.add('correct');
+        if (navA) navA.classList.add('answered');
+      }
+    });
+    updateSummary();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bind);
+  } else { bind(); }
+})();
+</script>
+</body>
+</html>

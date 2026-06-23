@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>金刚经导读 · 第048讲 · 信心不逆</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f7f1e6;        /* 宣纸米白 */
+  --paper-2: #ede4d0;       /* 略深 */
+  --ink: #2a2622;           /* 墨色 */
+  --ink-soft: #5e564c;      /* 浅墨 */
+  --ink-light: #8a8278;     /* 灰墨 */
+  --ochre: #a35d2a;         /* 赭石 */
+  --ochre-soft: #c89165;    /* 浅赭 */
+  --cinnabar: #b34340;      /* 朱砂 (用于错误) */
+  --jade: #5e7a4a;          /* 玉青 (用于正确) */
+  --line: #c9bfa9;          /* 边框线 */
+  --line-soft: #e3d9c2;     /* 软边框 */
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Noto Serif SC", "Songti SC", "STSong", "宋体", serif;
+  font-size: 16px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  background:
+    radial-gradient(ellipse at 10% 10%, rgba(167,93,42,0.04) 0%, transparent 40%),
+    radial-gradient(ellipse at 90% 80%, rgba(94,122,74,0.04) 0%, transparent 50%),
+    var(--paper);
+  min-height: 100vh;
+}
+header.page {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 56px 32px 32px;
+  text-align: center;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+header.page::before, header.page::after {
+  content: "";
+  position: absolute;
+  left: 50%; transform: translateX(-50%);
+  width: 60px; height: 1px;
+  background: var(--ink-light);
+}
+header.page::before { top: 32px; }
+header.page::after  { bottom: 0; }
+.kicker {
+  font-size: 13px;
+  letter-spacing: 0.4em;
+  color: var(--ink-light);
+  margin-bottom: 16px;
+  text-transform: none;
+  font-family: "Kaiti SC", "STKaiti", "KaiTi", serif;
+}
+h1.title {
+  font-family: "Kaiti SC", "STKaiti", "KaiTi", serif;
+  font-size: 38px;
+  font-weight: 500;
+  margin: 0 0 8px;
+  letter-spacing: 0.1em;
+}
+.subtitle {
+  font-size: 17px;
+  color: var(--ink-soft);
+  margin: 8px 0 24px;
+  font-family: "Kaiti SC", "STKaiti", serif;
+}
+.meta {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  font-size: 13px;
+  color: var(--ink-light);
+  letter-spacing: 0.1em;
+}
+.meta .sep { color: var(--line); }
+
+main {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 32px;
+}
+.nav-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 24px;
+  padding: 12px;
+  background: var(--paper-2);
+  border-radius: 4px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border: 1px solid var(--line-soft);
+}
+.nav-pills a {
+  display: inline-block;
+  min-width: 28px;
+  padding: 4px 8px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--ink-soft);
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: "Kaiti SC", "STKaiti", serif;
+}
+.nav-pills a:hover { background: var(--paper); border-color: var(--line); }
+.nav-pills a.answered { background: var(--jade); color: var(--paper); }
+.nav-pills a.wrong    { background: var(--cinnabar); color: var(--paper); }
+.nav-pills a.current  { border-color: var(--ochre); color: var(--ochre); font-weight: 600; }
+
+.q-card {
+  background: #fdfaf2;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 28px 32px;
+  margin: 0 0 24px;
+  position: relative;
+  box-shadow: 0 1px 0 rgba(94,86,76,0.04);
+}
+.q-card.correct { border-color: var(--jade); border-width: 2px; }
+.q-card.wrong   { border-color: var(--cinnabar); border-width: 2px; }
+.q-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 16px;
+  font-family: "Kaiti SC", "STKaiti", serif;
+}
+.q-no {
+  font-size: 22px;
+  color: var(--ochre);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+.q-no .badge {
+  display: inline-block;
+  font-size: 12px;
+  padding: 2px 10px;
+  margin-left: 8px;
+  background: var(--paper-2);
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  letter-spacing: 0.1em;
+  font-weight: 400;
+  vertical-align: middle;
+}
+.q-no .badge.judge   { color: var(--ochre); border-color: var(--ochre-soft); }
+.q-no .badge.fill    { color: var(--jade); border-color: var(--jade); }
+.q-no .badge.essay   { color: var(--ink-soft); }
+.q-stem {
+  font-size: 17px;
+  line-height: 1.85;
+  margin-bottom: 20px;
+  color: var(--ink);
+}
+.options { margin: 16px 0; }
+.opt {
+  display: block;
+  padding: 10px 16px;
+  margin: 6px 0;
+  background: var(--paper);
+  border: 1px solid var(--line-soft);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+  position: relative;
+}
+.opt:hover { background: var(--paper-2); border-color: var(--line); }
+.opt input { margin-right: 12px; vertical-align: middle; }
+.opt .ltr {
+  display: inline-block;
+  width: 22px;
+  font-family: "Kaiti SC", "STKaiti", serif;
+  color: var(--ochre);
+  font-weight: 500;
+}
+.opt.is-correct { background: #e8f0dd; border-color: var(--jade); color: var(--ink); }
+.opt.is-correct::after {
+  content: "✓";
+  position: absolute; right: 12px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--jade); font-weight: 700;
+}
+.opt.is-wrong { background: #f6dcd9; border-color: var(--cinnabar); }
+.opt.is-wrong::after {
+  content: "✗";
+  position: absolute; right: 12px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--cinnabar); font-weight: 700;
+}
+.fill-input, .essay-input {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 16px;
+  font-family: inherit;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  margin: 8px 0;
+  color: var(--ink);
+}
+.fill-input:focus, .essay-input:focus { outline: none; border-color: var(--ochre); }
+.essay-input { min-height: 140px; line-height: 1.7; resize: vertical; }
+
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  align-items: center;
+}
+.btn {
+  padding: 8px 20px;
+  font-size: 14px;
+  font-family: "Kaiti SC", "STKaiti", serif;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--ink-light);
+  border-radius: 3px;
+  cursor: pointer;
+  letter-spacing: 0.15em;
+  transition: all 0.15s;
+}
+.btn:hover { background: var(--paper-2); }
+.btn-primary {
+  background: var(--ochre);
+  color: var(--paper);
+  border-color: var(--ochre);
+}
+.btn-primary:hover { background: #8c4d20; }
+.btn-primary:disabled { background: var(--line); border-color: var(--line); cursor: not-allowed; }
+.btn-ghost { border-color: var(--line); color: var(--ink-soft); }
+
+.feedback {
+  margin-top: 18px;
+  padding: 16px 20px;
+  border-radius: 4px;
+  display: none;
+  font-size: 15px;
+  line-height: 1.7;
+}
+.feedback.show { display: block; }
+.feedback.right {
+  background: #e8f0dd;
+  border-left: 3px solid var(--jade);
+  color: var(--ink);
+}
+.feedback.wrong {
+  background: #f6dcd9;
+  border-left: 3px solid var(--cinnabar);
+  color: var(--ink);
+}
+.feedback .verdict {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 6px;
+  font-family: "Kaiti SC", "STKaiti", serif;
+  letter-spacing: 0.1em;
+}
+.feedback .verdict::before { content: "· "; color: var(--ink-light); }
+.feedback .ref-answer {
+  display: block;
+  margin-top: 10px;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 3px;
+  font-size: 15px;
+}
+.feedback .ref-answer .lbl {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--ink-light);
+  display: block;
+  margin-bottom: 4px;
+  font-family: "Kaiti SC", "STKaiti", serif;
+}
+.feedback .analysis-text {
+  display: block;
+  margin-top: 10px;
+  white-space: pre-wrap;
+  line-height: 1.85;
+}
+
+footer {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 32px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--ink-light);
+  letter-spacing: 0.2em;
+  border-top: 1px solid var(--line-soft);
+  font-family: "Kaiti SC", "STKaiti", serif;
+}
+
+/* 印刷感收尾 */
+@media (max-width: 600px) {
+  .q-card { padding: 20px 18px; }
+  h1.title { font-size: 28px; }
+  main { padding: 16px; }
+}
+</style>
+</head>
+<body>
+<header class="page">
+  <div class="kicker">金刚经导读 · 自测题</div>
+  <h1 class="title">第 048 讲</h1>
+  <div class="subtitle">信心不逆</div>
+  <div class="meta">
+    <span>共 <b>19</b> 题</span>
+    <span class="sep">·</span>
+    <span>多选题 11 · 判断题 3 · 填空题 1 · 单选题 1 · 简答题 2 · 论述题 1</span>
+    <span class="sep">·</span>
+    <span id="summary">已作答 0/19</span>
+  </div>
+</header>
+
+<main>
+  <nav class="nav-pills"><a href="#q048-1" data-qid="q048-1">1</a>
+<a href="#q048-2" data-qid="q048-2">2</a>
+<a href="#q048-3" data-qid="q048-3">3</a>
+<a href="#q048-4" data-qid="q048-4">4</a>
+<a href="#q048-5" data-qid="q048-5">5</a>
+<a href="#q048-6" data-qid="q048-6">6</a>
+<a href="#q048-7" data-qid="q048-7">7</a>
+<a href="#q048-8" data-qid="q048-8">8</a>
+<a href="#q048-9" data-qid="q048-9">9</a>
+<a href="#q048-10" data-qid="q048-10">10</a>
+<a href="#q048-11" data-qid="q048-11">11</a>
+<a href="#q048-12" data-qid="q048-12">12</a>
+<a href="#q048-13" data-qid="q048-13">13</a>
+<a href="#q048-14" data-qid="q048-14">14</a>
+<a href="#q048-15" data-qid="q048-15">15</a>
+<a href="#q048-16" data-qid="q048-16">16</a>
+<a href="#q048-17" data-qid="q048-17">17</a>
+<a href="#q048-18" data-qid="q048-18">18</a>
+<a href="#q048-19" data-qid="q048-19">19</a></nav>
+  <article class="q-card" id="q048-1" data-type="多选题" data-analysis="“心住于法而行布施”，首先说，还是行了布施的，只要是行了布施，就是善法，但是这个善法是心住于法的善法，佛教管它叫世间善法，为什么？因为心住于法的布施，虽然是布施，但是这样的布施，不能淡化我们凡夫心中的我执，不能引领我们去证悟空性，更不能引领我们去见实相，这样的布施是善法，它种下的善因，只能让我们在未来死了再来、死了再来的生生死死的轮回中，得个善报而已，不能令众生解脱，因此是世间善法，是有漏的善法。">
+<div class="q-head">
+<span class="q-no">1.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】依据课程内容，对于经文“须菩提，若菩萨心住于法而行布施，如人入暗，则无所见”，为何说“心住于法而行布施”是“如人入暗，则无所见”？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q048-1" value="A"> <span class="ltr">A.</span> 因为不能淡化凡夫心中的我执。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q048-1" value="B"> <span class="ltr">B.</span> 因为不能引领着凡夫去证悟空性。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q048-1" value="C"> <span class="ltr">C.</span> 因为不能引领着凡夫去见实相。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q048-1" value="D"> <span class="ltr">D.</span> 不能令众生解脱。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q048-1" data-type="多选题" data-answer="ABCD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q048-1">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q048-2" data-type="多选题" data-analysis="“心住于法而行布施”，首先说，还是行了布施的，只要是行了布施，就是善法，但是这个善法是心住于法的善法，佛教管它叫世间善法。因此是世间善法，是有漏的善法。佛陀这里形象比喻：“如人入暗，则无所见。”">
+<div class="q-head">
+<span class="q-no">2.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】依据课程内容，对于经文“须菩提，若菩萨心住于法而行布施，如人入暗，则无所见”中的“心住于法而行布施”的善法，在佛教里叫什么？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q048-2" value="A"> <span class="ltr">A.</span> 出世间善法</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q048-2" value="B"> <span class="ltr">B.</span> 世间善法</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q048-2" value="C"> <span class="ltr">C.</span> 有漏善法</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q048-2" value="D"> <span class="ltr">D.</span> 无漏善法</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q048-2" data-type="多选题" data-answer="BC">提交</button><button class="btn btn-ghost btn-reset" data-qid="q048-2">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q048-3" data-type="多选题" data-analysis="菩萨心不住于法的布施，就像一个人有了眼睛，在阳光的照耀下能够见到种种的颜色。 什么是“心不住法而行布施”？其实就是在般若统摄下去行布施。大乘六度，前五度布施、持戒、忍辱、精进、禅定如果失去了第六度即般若波罗蜜的摄受，佛教经典里说，前五度为盲，而在第六度般若波罗蜜的摄受下，就如同一个人有了眼睛，有了光明。所以心不住法的布施，是在般若统摄下的布施，“如人有目，日光明照，见种种色”。">
+<div class="q-head">
+<span class="q-no">3.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】依据课程内容，对于经文“若菩萨心不住法而行布施，如人有目，日光明照，见种种色”，下列选项中理解正确的是哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q048-3" value="A"> <span class="ltr">A.</span> “心不住法而行布施”，就是在般若统摄下去行布施。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q048-3" value="B"> <span class="ltr">B.</span> 大乘六度，前五度如果失去了第六度即般若度的摄受，则为盲；而在第六度的摄受下，就如同一个人有了眼睛，有了光明。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q048-3" value="C"> <span class="ltr">C.</span> 如果菩萨的布施是心不住于法的布施，那么就像一个人有了眼睛，在阳光的照耀下能够见到种种的颜色。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q048-3" value="D"> <span class="ltr">D.</span> “心不住法的布施”指的就是心不在焉的布施。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q048-3" data-type="多选题" data-answer="ABC">提交</button><button class="btn btn-ghost btn-reset" data-qid="q048-3">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q048-4" data-type="判断题" data-analysis="心住于法的布施，虽然是布施，但是这样的布施，不能淡化我们凡夫心中的我执，不能引领着我们去证悟空性，更不能引领着我们去见实相，这样的布施是善法，它种下的善因，只能让我们在未来死了再来、死了再来的生生死死的轮回中，得个善报而已，不能令众生解脱。">
+<div class="q-head">
+<span class="q-no">4.<span class="badge judge">判断</span></span>
+</div>
+<div class="q-stem">【判断题】“心住于法而行布施”这样的布施也是善法，但它种下的善因，只能让众生在生生死死的轮回中得个善报，并不能令众生解脱。</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="radio" name="q048-4" value="A"> <span class="ltr">A.</span> 正确</label>
+<label class="opt" data-ltr="B"><input type="radio" name="q048-4" value="B"> <span class="ltr">B.</span> 错误</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q048-4" data-type="判断题" data-answer="正确">提交</button><button class="btn btn-ghost btn-reset" data-qid="q048-4">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q048-5" data-type="填空题" data-analysis="只要是行了布施，就是善法，但是这个善法是心住于法的善法，佛教管它叫世间善法，为什么?因为心住于法的布施，虽然是布施，但是这样的布施，不能淡化我们凡夫心中的我执，不能引领我们去证悟空性，更不能引领我们去见实相，这样的布施是善法，它种下的善因，只能让我们在未来死了再来、死了再来的生生死死的轮回中，得个善报而已，不能令众生解脱，因此是世间善法，是有漏的善法。反之，心不住法而行布施，是出世间善法，是无漏善法。">
+<div class="q-head">
+<span class="q-no">5.<span class="badge fill">填空</span></span>
+</div>
+<div class="q-stem">【填空题】心住于法的布施，虽然是布施，但是这样的布施，不能淡化凡夫心中的（），不能引领我们去证悟空性，更不能引领我们去见实相，这样的布施是世间善法；反之，心不住法而行布施，是（）善法，是（）善法。</div>
+<input class="fill-input" name="q048-5" placeholder="请输入答案">
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q048-5" data-type="填空题" data-answer="我执  出世间，无漏">提交</button><button class="btn btn-ghost btn-reset" data-qid="q048-5">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q048-6" data-type="多选题" data-analysis="鸠摩罗什的译本语言非常简洁，在这里他译作“受持读诵”，对照梵本，其实是五个动词：第一是获取，第二是受持，第三是读诵，第四是通晓法义，第五是为别人详细解说，也就是获取、受持、读诵、通晓、解说五个动词。">
+<div class="q-head">
+<span class="q-no">6.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】依据课程内容，经文“若有善男子、善女人，能于此经受持读诵，则为如来以佛智慧，悉知是人，悉见是人，皆得成就无量无边功德”中，“受持读诵”一词，对照梵本包括哪些含义？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q048-6" value="A"> <span class="ltr">A.</span> 信受</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q048-6" value="B"> <span class="ltr">B.</span> 获取</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q048-6" value="C"> <span class="ltr">C.</span> 受持</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q048-6" value="D"> <span class="ltr">D.</span> 读诵</label>
+<label class="opt" data-ltr="E"><input type="checkbox" name="q048-6" value="E"> <span class="ltr">E.</span> 通晓</label>
+<label class="opt" data-ltr="F"><input type="checkbox" name="q048-6" value="F"> <span class="ltr">F.</span> 解说</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q048-6" data-type="多选题" data-answer="BCDEF">提交</button><button class="btn btn-ghost btn-reset" data-qid="q048-6">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q048-7" data-type="多选题" data-analysis="我们现在共同学习《金刚般若波罗蜜经》，为什么说功德是无量无边？因为金刚般若波罗蜜的法门，能够引领着我们证空性，见实相，走向解脱。">
+<div class="q-head">
+<span class="q-no">7.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">依据课程内容，为什么我们现在共同学习《金刚般若波罗蜜经》，功德是无量无边的？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q048-7" value="A"> <span class="ltr">A.</span> 因为金刚般若波罗蜜的法门，能够引领着我们证空性，见实相。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q048-7" value="B"> <span class="ltr">B.</span> 因为金刚般若波罗蜜的法门，能够引领着我们走向解脱。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q048-7" value="C"> <span class="ltr">C.</span> 因为学习金刚般若波罗蜜的法门，能够受生三善道，不入三恶道。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q048-7" value="D"> <span class="ltr">D.</span> 金刚般若波罗蜜的法门甚深难解，而因为我们的共同学习，功德无量无边。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q048-7" data-type="多选题" data-answer="AB">提交</button><button class="btn btn-ghost btn-reset" data-qid="q048-7">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q048-8" data-type="多选题" data-analysis="鸠摩罗什的译本语言非常简洁，在这里他译作“受持读诵”，对照梵本，其实是五个动词：第一是获取，第二是受持，第三是读诵，第四是通晓法义，第五是为别人详细解说，也就是获取、受持、读诵、通晓、解说五个动词。做到这五件事儿，“则为如来以佛智慧，悉知是人，悉见是人”。我们共同在这里受持、读诵、学习《金刚般若波罗蜜经》，佛陀以他老人家的智慧、以佛的眼睛，能够看到我们，能够知道我们，皆得成就无量无边的功德。">
+<div class="q-head">
+<span class="q-no">8.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】依据课程内容，对于经文“须菩提，当来之世，若有善男子、善女人，能于此经受持读诵，则为如来以佛智慧，悉知是人，悉见是人，皆得成就无量无边功德。”以下选项中理解正确的有哪几项？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q048-8" value="A"> <span class="ltr">A.</span> 鸠摩罗什的译本语言非常简洁，在这里译作的“受持读诵”，对照梵本，其实是五个动词。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q048-8" value="B"> <span class="ltr">B.</span> 做到“受持诵读”这五件事儿，“则为如来以佛智慧，悉知是人，悉见是人”。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q048-8" value="C"> <span class="ltr">C.</span> 对于《金刚经》能够“受持读诵”的人，皆能成就无量无边功德。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q048-8" value="D"> <span class="ltr">D.</span> 我们共同在这里受持、读诵、学习《金刚般若波罗蜜经》，佛陀以他老人家的智慧、以佛的眼睛，能够看到我们，能够知道我们，皆得成就无量无边的功德。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q048-8" data-type="多选题" data-answer="ABCD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q048-8">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q048-9" data-type="多选题" data-analysis="什么是初日分、中日分和后日分呢？我们现在把一天分为24小时，中国古人把一天分为12个时辰，而印度古人把一天分为六时，所以佛教徒经常祝愿大家“六时吉祥”，六时就是一天；这六时又分“日三时”和“夜三时”。用现在的时间计量单位看，早晨六点钟到下午六点钟，是日三时；从傍晚六点钟到第二天早晨六点钟，是夜三时。初日分，指日三时的第一时，大概是早晨六点到上午十点；中日分，指日三时的第二部分，大概是上午十点到下午两点；后日分指日三时的第三时，下午两点到下午六点。">
+<div class="q-head">
+<span class="q-no">9.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】依据课程内容，对于经文“须菩提，若有善男子、善女人，初日分以恒河沙等身布施，中日分复以恒河沙等身布施，后日分亦以恒河沙等身布施。”中的“初日分、中日分、后日分”，以下选项中理解正确的有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q048-9" value="A"> <span class="ltr">A.</span> 初日分、中日分、后日分，都属于“六时”中的“夜三时”。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q048-9" value="B"> <span class="ltr">B.</span> 初日分，大概是早晨六点到上午十点。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q048-9" value="C"> <span class="ltr">C.</span> 中日分，大概是上午十点到下午两点。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q048-9" value="D"> <span class="ltr">D.</span> 后日分，大概是下午两点到下午六点。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q048-9" data-type="多选题" data-answer="BCD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q048-9">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q048-10" data-type="单选题" data-analysis="我们现在把一天分为24小时，中国古人把一天分为12个时辰，而印度古人把一天分为六时，所以佛教徒经常祝愿大家“六时吉祥”,六时就是一天；这六时又分“日三时”和“夜三时”。用现在的时间计量单位看，早晨六点钟到下午六点钟，是日三时；从傍晚六点钟到第二天早晨六点钟，是夜三时。">
+<div class="q-head">
+<span class="q-no">10.<span class="badge ">单选</span></span>
+</div>
+<div class="q-stem">【单选题】佛教徒们经常说“六时吉祥”，“六时”是指什么？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="radio" name="q048-10" value="A"> <span class="ltr">A.</span> 代表六个小时。</label>
+<label class="opt" data-ltr="B"><input type="radio" name="q048-10" value="B"> <span class="ltr">B.</span> 代表六个时辰。</label>
+<label class="opt" data-ltr="C"><input type="radio" name="q048-10" value="C"> <span class="ltr">C.</span> 代表“一天”，印度古人把一天分为“日三时”和“夜三时”，共六时。</label>
+<label class="opt" data-ltr="D"><input type="radio" name="q048-10" value="D"> <span class="ltr">D.</span> 代表从早晨六点到十二点。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q048-10" data-type="单选题" data-answer="C">提交</button><button class="btn btn-ghost btn-reset" data-qid="q048-10">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q048-11" data-type="判断题" data-analysis="如果还有一个人，他听闻了《金刚经》，“信心不逆”，逆就是“倒退”，佛教常用语。对金刚般若波罗蜜法门的信心，只要不退转，那么所获得的福德，比前面那个做了那么多身命布施的人的福德还要多。这里佛陀是用了一个非常夸张的手法，就是要强调法布施为最。法布施与身命布施相比，是质的差别，不是量的差别，所以不管做多少身命布施，都不如对金刚般若波罗蜜法门的信心不逆。">
+<div class="q-head">
+<span class="q-no">11.<span class="badge judge">判断</span></span>
+</div>
+<div class="q-stem">【判断题】依据《金刚经》鸠摩罗什译本，对金刚般若波罗蜜法门的信心不退转，所获得的福德，不如做了无量百千万亿劫恒河沙数那么多身命布施的人的福德多。</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="radio" name="q048-11" value="A"> <span class="ltr">A.</span> 正确</label>
+<label class="opt" data-ltr="B"><input type="radio" name="q048-11" value="B"> <span class="ltr">B.</span> 错误</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q048-11" data-type="判断题" data-answer="错误">提交</button><button class="btn btn-ghost btn-reset" data-qid="q048-11">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q048-12" data-type="多选题" data-analysis="鸠摩罗什在这里译作“信心不逆”，逆就是倒退，佛教常用语。指对金刚般若波罗蜜法门的信心不退转。对照现存的梵本，是“不诽谤”，玄奘法师即译作“不生诽谤”，义净法师亦译作“不生毁谤”。从这个角度而言，一个人听闻了金刚般若波罗蜜法门，只要不生诽谤，那么所获得的福德比前面做了那么多身命布施的人还要多。">
+<div class="q-head">
+<span class="q-no">12.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】依据课程内容，对经文“若复有人，闻此经典，信心不逆，其福胜彼。”中“信心不逆”理解，以下正确的选项有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q048-12" value="A"> <span class="ltr">A.</span> 对金刚般若波罗蜜法门的信心不退转，鸠摩罗什译本。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q048-12" value="B"> <span class="ltr">B.</span> 对金刚般若波罗蜜法门不生诽谤，玄奘译本。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q048-12" value="C"> <span class="ltr">C.</span> 对金刚般若波罗蜜法门不退心，义净译本。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q048-12" value="D"> <span class="ltr">D.</span> 依玄奘译本，只要不生诽谤所获得的福德，比做了百千万亿劫恒河沙数身命布施的人福德还多。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q048-12" data-type="多选题" data-answer="ABD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q048-12">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q048-13" data-type="判断题" data-analysis="对大乘佛法，可以理解、可以不理解，听了以后，可以接受、也可能暂时接受不了，这都是可以的。但是当不能理解、不能接受的时候，千万不要诽谤。有人说，我不诽谤能做到，有时候有意的诽谤可以不做，由于无明所障，由于凡夫愚痴无智，无意的诽谤，还是很容易发生的。">
+<div class="q-head">
+<span class="q-no">13.<span class="badge judge">判断</span></span>
+</div>
+<div class="q-stem">【判断题】对大乘佛法不能理解、不能接受的时候，千万不要诽谤。凡夫听闻《金刚经》后有意的诽谤不会做，但由于无明所障，由于凡夫的愚痴，无意的诽谤还是很容易发生的。</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="radio" name="q048-13" value="A"> <span class="ltr">A.</span> 正确</label>
+<label class="opt" data-ltr="B"><input type="radio" name="q048-13" value="B"> <span class="ltr">B.</span> 错误</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q048-13" data-type="判断题" data-answer="正确">提交</button><button class="btn btn-ghost btn-reset" data-qid="q048-13">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q048-14" data-type="多选题" data-analysis="四弘誓愿里有一愿：“法门无量誓愿学”。为什么要发这个誓愿？因为菩提心是度一切众生入无余涅槃的心，由于众生有种种差别、众生有种种病，因此度化众生就得有种种药、种种的方便，因此佛陀才说了种种有差别的法门。为了度无量众生，要誓愿去学佛陀所说的无量法门。">
+<div class="q-head">
+<span class="q-no">14.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】一个修行大乘佛法的人，要发四弘誓愿。四弘誓愿里有一愿“法门无量誓愿学”，为什么要发这个誓愿？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q048-14" value="A"> <span class="ltr">A.</span> 学更多法门，显得自己知识渊博。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q048-14" value="B"> <span class="ltr">B.</span> 众生有种种的差别、种种的病，度化众生需要种种的药、种种的方便，因此佛陀说了种种有差别的法。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q048-14" value="C"> <span class="ltr">C.</span> 为了度化无量的众生，誓愿学佛陀说的无量法门。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q048-14" value="D"> <span class="ltr">D.</span> 学更多法门，可以高人一等。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q048-14" data-type="多选题" data-answer="BC">提交</button><button class="btn btn-ghost btn-reset" data-qid="q048-14">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q048-15" data-type="多选题" data-analysis="为了度无量众生，要誓愿去学佛陀所说的无量法门。但是有人说，我的能力有限，目前还做不到法门无量都要学，读一本经都感到很困难，学一个法门都很吃力，因此现在拿出所有的精力，专精学习一部法，学习一部经，可以不可以？当然是可以的。但是大家要理解，为什么现在做不到法门无量誓愿学，为什么感到自己力不从心？因为往昔的业障。所以可以专精去学一部经或者专精去修某一部法，但是一定要生起忏悔的心，一定要生起惭愧的心，为什么别人可以学习无量的法门而我做不到呢？要忏悔，要惭愧。其次，当我们见到别人能够学习无量的法门，我们必须要赞叹，要随喜，要生起欢喜的心。">
+<div class="q-head">
+<span class="q-no">15.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】依据课程内容，有人说我的能力有限，目前还做不到法门无量誓愿学，对于这种情况，应如何做呢？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q048-15" value="A"> <span class="ltr">A.</span> 可以专精学习一部经或专修一部法。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q048-15" value="B"> <span class="ltr">B.</span> 没有关系，等待机缘成熟后再学习。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q048-15" value="C"> <span class="ltr">C.</span> 一定要生起忏悔的心、惭愧的心。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q048-15" value="D"> <span class="ltr">D.</span> 见到别人能够学习无量的法门，必须要赞叹，要随喜，要生起欢喜的心。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q048-15" data-type="多选题" data-answer="ACD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q048-15">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q048-16" data-type="多选题" data-analysis="如果还有一个人，他听闻了《金刚经》，“信心不逆”，逆就是“倒退”，佛教常用语。对金刚般若波罗蜜法门的信心，只要不退转，那么所获得的福德，比前面那个做了那么多身命布施的人的福德还要多。注意，佛陀是用了一个非常夸张的手法。这样的夸张手法用意是什么？前边已经讨论过了，佛陀要强调法布施为最。法布施与身命布施相比，是质的差别，不是量的差别，所以不管做多少身命布施，都不如对金刚般若波罗蜜法门的信心不逆。">
+<div class="q-head">
+<span class="q-no">16.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】《金刚经》第十五段经文，有人百千万亿劫在初日分、中日分、后日分以身命布施，然后又讲“若复有人，闻此经典，信心不逆，其福胜彼。”对于这段经文，以下选项中理解正确的有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q048-16" value="A"> <span class="ltr">A.</span> 对金刚般若波罗蜜法门的信心只要不退转所获得的福德，比做了那么多身命布施的人的福德还要多。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q048-16" value="B"> <span class="ltr">B.</span> 这是佛陀用了一个非常夸张的手法，用意是强调法布施为最。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q048-16" value="C"> <span class="ltr">C.</span> 不管做了多少身命布施，都不如对金刚般若波罗蜜法门的信心不逆。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q048-16" value="D"> <span class="ltr">D.</span> 法布施与身命布施相比，是质的差别，不是量的差别。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q048-16" data-type="多选题" data-answer="ABCD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q048-16">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q048-17" data-type="简答题" data-analysis="">
+<div class="q-head">
+<span class="q-no">17.<span class="badge essay">简答</span></span>
+</div>
+<div class="q-stem">【简答题】请结合本讲内容谈谈，什么是“心住于法而行布施”？什么是“心不住于法的布施”？二者有何区别？</div>
+<textarea class="essay-input" name="q048-17" placeholder="请简要作答…"></textarea>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q048-17" data-type="简答题" data-answer="“心住于法而行布施”，是行了布施的，是善法，但是这个善法是心住于法的善法，佛教管它叫世间善法，虽然是布施，但是这样的布施，不能淡化凡夫心中的我执，不能引领着凡夫证悟空性，更不能引领凡夫去见实相，这样的布施是善法，它种下的善因，只能让凡夫在生死轮回中得个善报，不能令众生解脱，因此是世间善法，是有漏的善法。经中形象比喻：“如人入暗，则无所见。
+“心不住法而行布施”？其实就是在般若统摄下去行布施。如果失去了第六度即般若波罗蜜的摄受，佛教经典里说，前五度为盲。在第六度般若波罗蜜的摄受下进行布施，就如同一个人有了眼睛，有了光明，如经中比喻“如人有目，日光明照，见种种色”。">提交</button><button class="btn btn-ghost btn-reset" data-qid="q048-17">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q048-18" data-type="简答题" data-analysis="">
+<div class="q-head">
+<span class="q-no">18.<span class="badge essay">简答</span></span>
+</div>
+<div class="q-stem">【简答题】结合本讲内容，简述什么是对般若波罗蜜法门的 “信心不逆”？为何这件事不容易做到？</div>
+<textarea class="essay-input" name="q048-18" placeholder="请简要作答…"></textarea>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q048-18" data-type="简答题" data-answer="对般若波罗蜜法门的 “信心不逆”指对金刚般若波罗蜜法门的信心不退转，“逆” 为倒退之意；对照现存梵本，指对金刚般若波罗蜜法门不生诽谤，玄奘法师译作“不生诽谤”，义净法师译作“不生毁谤”。
+这件事看似很容易，实际上有的时候无意当中就会诽谤。在讲第三重、第四重二谛之前，也就是讲无生、讲空性之前，特别强调，对大乘佛法，可以理解、可以不理解，听了以后，可以接受、也可能暂时接受不了，这都是可以的。但是当不能理解、不能接受的时候，千万不要诽谤。有人说不诽谤，没有诽谤，能做到，但是有的时候，有意的诽谤可以不做，但是由于无明所障，由于我们凡夫愚痴，无意的诽谤，还是很容易发生的。">提交</button><button class="btn btn-ghost btn-reset" data-qid="q048-18">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q048-19" data-type="论述题" data-analysis="">
+<div class="q-head">
+<span class="q-no">19.<span class="badge essay">论述</span></span>
+</div>
+<div class="q-stem">【论述题】结合本讲内容，谈谈修学大乘佛法者应如何践行 “法门无量誓愿学” 的誓愿？</div>
+<textarea class="essay-input" name="q048-19" placeholder="请详细论述…"></textarea>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q048-19" data-type="论述题" data-answer="众生有种种差别与烦恼，度化众生需种种方便与法门，佛陀因此说种种法，修学者为度无量众生，当誓愿学佛陀所说无量法门。
+若暂做不到学无量法门，可拿出全部精力专精学习一部经、专修一部法。
+因往昔业障导致学无量法门力不从心，需生起忏悔、惭愧之心。
+见到他人能学习无量法门，应生起赞叹、随喜、欢喜之心。
+不能学一经轻一经，学一经轻一切经；不能学一经谤一经，学一经谤一切经，这是严重过失。
+对佛陀说的法门要不生诽谤。有意的诽谤不可以做，无意的诽谤同样也不可以做。
+不要因为追随自己的老师而轻视其他的善知识。一定要对世界上一切的善知识，具有正知正见、有修有证、能够弘扬佛陀正法的法师们、堪布们、仁波切们、大德居士们，都要尊重、随喜、赞叹、供养。">提交</button><button class="btn btn-ghost btn-reset" data-qid="q048-19">重做</button></div><div class="feedback"></div></article>
+</main>
+
+<footer>
+  <p>业精于勤 · 行成于思</p>
+</footer>
+
+<script>window.QSET = "quiz-048";</script>
+<script>
+(function(){
+  const KEY = (window.QSET || 'quiz') + '.progress';
+
+  function load() {
+    try { return JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e) { return {}; }
+  }
+  function save(data) {
+    try { localStorage.setItem(KEY, JSON.stringify(data)); } catch(e) {}
+  }
+
+  function setCurrent(anchor) {
+    document.querySelectorAll('.nav-pills a').forEach(a => a.classList.remove('current'));
+    const el = document.querySelector('.nav-pills a[href="#' + anchor + '"]');
+    if (el) el.classList.add('current');
+  }
+
+  function grade(qid, type, answer) {
+    const card = document.getElementById(qid);
+    if (!card) return;
+    const fb = card.querySelector('.feedback');
+    const correctEl = card.querySelector('.q-no .verdict-mark');
+    const userAnswer = collect(card, type);
+
+    // 标记作答
+    if (userAnswer !== null && userAnswer !== '' && !(Array.isArray(userAnswer) && userAnswer.length === 0)) {
+      const navA = document.querySelector('.nav-pills a[href="#' + qid + '"]');
+      if (navA) navA.classList.add('answered');
+    }
+
+    // 判分
+    let isRight = null;
+    if (type === '简答题' || type === '论述题') {
+      // 开放题: 不判分, 只显示参考答案
+      isRight = 'open';
+    } else if (type === '判断题') {
+      // 判断题: A=正确, B=错误; answer 可能是字母或文字, 归一化后再比较
+      const normJudge = v => v === 'A' ? '正确' : v === 'B' ? '错误' : v;
+      isRight = (normJudge(userAnswer) === normJudge(answer));
+    } else if (type === '单选题') {
+      isRight = (userAnswer === answer);
+    } else if (type === '多选题') {
+      const u = Array.isArray(userAnswer) ? userAnswer.slice().sort().join('') : '';
+      const a = (answer || '').split('').sort().join('');
+      isRight = (u === a);
+    } else if (type === '填空题') {
+      isRight = (String(userAnswer || '').trim() === String(answer || '').trim());
+    }
+
+    // 渲染反馈
+    fb.classList.add('show');
+    fb.classList.remove('right', 'wrong');
+    if (isRight === 'open') {
+      fb.classList.add('right');
+      fb.innerHTML = '<div class="verdict">参考答案</div>' +
+        '<span class="analysis-text">' + escHtml(answer) + '</span>' +
+        renderAnalysis(card);
+      card.classList.add('correct');
+    } else if (isRight) {
+      fb.classList.add('right');
+      fb.innerHTML = '<div class="verdict">正确</div>' + renderAnalysis(card);
+      card.classList.add('correct');
+    } else {
+      fb.classList.add('wrong');
+      fb.innerHTML = '<div class="verdict">错误 · 正确答案: ' + escHtml(answer) + '</div>' + renderAnalysis(card);
+      card.classList.add('wrong');
+      const navA = document.querySelector('.nav-pills a[href="#' + qid + '"]');
+      if (navA) {
+        navA.classList.remove('answered');
+        navA.classList.add('wrong');
+      }
+    }
+
+    // 标记正确选项
+    if (type === '单选题' || type === '多选题') {
+      const correctSet = new Set((answer || '').split(''));
+      card.querySelectorAll('.opt').forEach(opt => {
+        const ltr = opt.getAttribute('data-ltr');
+        if (correctSet.has(ltr)) opt.classList.add('is-correct');
+      });
+    } else if (type === '判断题') {
+      // answer 可能是 '正确'/'错误' 或 'A'/'B', 归一化为字母再比较
+      const ansLetter = answer === '正确' ? 'A' : answer === '错误' ? 'B' : answer;
+      card.querySelectorAll('.opt').forEach(opt => {
+        if (opt.getAttribute('data-ltr') === ansLetter) opt.classList.add('is-correct');
+      });
+    }
+
+    // 禁用重复提交
+    card.querySelector('.btn-submit').disabled = true;
+    card.querySelector('.btn-submit').textContent = '已提交';
+
+    // 保存进度
+    const data = load();
+    data[qid] = { type, answer, userAnswer, isRight, ts: Date.now() };
+    save(data);
+
+    // 更新统计
+    updateSummary();
+  }
+
+  function collect(card, type) {
+    if (type === '单选题' || type === '判断题') {
+      const sel = card.querySelector('input[type=radio]:checked');
+      return sel ? sel.value : null;
+    }
+    if (type === '多选题') {
+      const sels = card.querySelectorAll('input[type=checkbox]:checked');
+      return Array.from(sels).map(s => s.value);
+    }
+    if (type === '填空题') {
+      const inp = card.querySelector('.fill-input');
+      return inp ? inp.value : '';
+    }
+    if (type === '简答题' || type === '论述题') {
+      const inp = card.querySelector('.essay-input');
+      return inp ? inp.value : '';
+    }
+    return null;
+  }
+
+  function renderAnalysis(card) {
+    const a = card.getAttribute('data-analysis');
+    if (!a) return '';
+    return '<div class="ref-answer"><span class="lbl">解析</span>' +
+      '<span class="analysis-text">' + escHtml(a) + '</span></div>';
+  }
+
+  function escHtml(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function updateSummary() {
+    const data = load();
+    const cards = document.querySelectorAll('.q-card');
+    let total = 0, correct = 0, wrong = 0, open_ = 0;
+    cards.forEach(c => {
+      const qid = c.id;
+      const type = c.getAttribute('data-type');
+      const r = data[qid];
+      if (!r) return;
+      total += 1;
+      if (r.isRight === 'open') open_ += 1;
+      else if (r.isRight) correct += 1;
+      else wrong += 1;
+    });
+    const sum = document.getElementById('summary');
+    if (sum) {
+      sum.innerHTML = '已作答 <b>' + total + '</b>/' + cards.length +
+        ' · 正确 <b style="color:var(--jade)">' + correct + '</b>' +
+        ' · 错误 <b style="color:var(--cinnabar)">' + wrong + '</b>' +
+        ' · 开放题 <b>' + open_ + '</b>';
+    }
+  }
+
+  function bind() {
+    document.querySelectorAll('.btn-submit').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const qid = btn.getAttribute('data-qid');
+        const type = btn.getAttribute('data-type');
+        const answer = btn.getAttribute('data-answer');
+        grade(qid, type, answer);
+      });
+    });
+    document.querySelectorAll('.btn-reset').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const qid = btn.getAttribute('data-qid');
+        const data = load();
+        delete data[qid];
+        save(data);
+        location.reload();
+      });
+    });
+    // 平滑滚动 + current 高亮
+    document.querySelectorAll('.nav-pills a').forEach(a => {
+      a.addEventListener('click', e => {
+        setCurrent(a.getAttribute('href').slice(1));
+      });
+    });
+    // 恢复历史进度
+    const data = load();
+    Object.keys(data).forEach(qid => {
+      const r = data[qid];
+      const card = document.getElementById(qid);
+      if (!card) return;
+      const navA = document.querySelector('.nav-pills a[href="#' + qid + '"]');
+      if (r.isRight === true) {
+        card.classList.add('correct');
+        if (navA) navA.classList.add('answered');
+      } else if (r.isRight === false) {
+        card.classList.add('wrong');
+        if (navA) { navA.classList.remove('answered'); navA.classList.add('wrong'); }
+      } else if (r.isRight === 'open') {
+        card.classList.add('correct');
+        if (navA) navA.classList.add('answered');
+      }
+    });
+    updateSummary();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bind);
+  } else { bind(); }
+})();
+</script>
+</body>
+</html>

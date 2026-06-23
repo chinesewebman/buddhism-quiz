@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>金刚经导读 · 第042讲 · 以第四重二谛再解经文</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f7f1e6;        /* 宣纸米白 */
+  --paper-2: #ede4d0;       /* 略深 */
+  --ink: #2a2622;           /* 墨色 */
+  --ink-soft: #5e564c;      /* 浅墨 */
+  --ink-light: #8a8278;     /* 灰墨 */
+  --ochre: #a35d2a;         /* 赭石 */
+  --ochre-soft: #c89165;    /* 浅赭 */
+  --cinnabar: #b34340;      /* 朱砂 (用于错误) */
+  --jade: #5e7a4a;          /* 玉青 (用于正确) */
+  --line: #c9bfa9;          /* 边框线 */
+  --line-soft: #e3d9c2;     /* 软边框 */
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Noto Serif SC", "Songti SC", "STSong", "宋体", serif;
+  font-size: 16px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  background:
+    radial-gradient(ellipse at 10% 10%, rgba(167,93,42,0.04) 0%, transparent 40%),
+    radial-gradient(ellipse at 90% 80%, rgba(94,122,74,0.04) 0%, transparent 50%),
+    var(--paper);
+  min-height: 100vh;
+}
+header.page {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 56px 32px 32px;
+  text-align: center;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+header.page::before, header.page::after {
+  content: "";
+  position: absolute;
+  left: 50%; transform: translateX(-50%);
+  width: 60px; height: 1px;
+  background: var(--ink-light);
+}
+header.page::before { top: 32px; }
+header.page::after  { bottom: 0; }
+.kicker {
+  font-size: 13px;
+  letter-spacing: 0.4em;
+  color: var(--ink-light);
+  margin-bottom: 16px;
+  text-transform: none;
+  font-family: "Kaiti SC", "STKaiti", "KaiTi", serif;
+}
+h1.title {
+  font-family: "Kaiti SC", "STKaiti", "KaiTi", serif;
+  font-size: 38px;
+  font-weight: 500;
+  margin: 0 0 8px;
+  letter-spacing: 0.1em;
+}
+.subtitle {
+  font-size: 17px;
+  color: var(--ink-soft);
+  margin: 8px 0 24px;
+  font-family: "Kaiti SC", "STKaiti", serif;
+}
+.meta {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  font-size: 13px;
+  color: var(--ink-light);
+  letter-spacing: 0.1em;
+}
+.meta .sep { color: var(--line); }
+
+main {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 32px;
+}
+.nav-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 24px;
+  padding: 12px;
+  background: var(--paper-2);
+  border-radius: 4px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border: 1px solid var(--line-soft);
+}
+.nav-pills a {
+  display: inline-block;
+  min-width: 28px;
+  padding: 4px 8px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--ink-soft);
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: "Kaiti SC", "STKaiti", serif;
+}
+.nav-pills a:hover { background: var(--paper); border-color: var(--line); }
+.nav-pills a.answered { background: var(--jade); color: var(--paper); }
+.nav-pills a.wrong    { background: var(--cinnabar); color: var(--paper); }
+.nav-pills a.current  { border-color: var(--ochre); color: var(--ochre); font-weight: 600; }
+
+.q-card {
+  background: #fdfaf2;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 28px 32px;
+  margin: 0 0 24px;
+  position: relative;
+  box-shadow: 0 1px 0 rgba(94,86,76,0.04);
+}
+.q-card.correct { border-color: var(--jade); border-width: 2px; }
+.q-card.wrong   { border-color: var(--cinnabar); border-width: 2px; }
+.q-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 16px;
+  font-family: "Kaiti SC", "STKaiti", serif;
+}
+.q-no {
+  font-size: 22px;
+  color: var(--ochre);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+.q-no .badge {
+  display: inline-block;
+  font-size: 12px;
+  padding: 2px 10px;
+  margin-left: 8px;
+  background: var(--paper-2);
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  letter-spacing: 0.1em;
+  font-weight: 400;
+  vertical-align: middle;
+}
+.q-no .badge.judge   { color: var(--ochre); border-color: var(--ochre-soft); }
+.q-no .badge.fill    { color: var(--jade); border-color: var(--jade); }
+.q-no .badge.essay   { color: var(--ink-soft); }
+.q-stem {
+  font-size: 17px;
+  line-height: 1.85;
+  margin-bottom: 20px;
+  color: var(--ink);
+}
+.options { margin: 16px 0; }
+.opt {
+  display: block;
+  padding: 10px 16px;
+  margin: 6px 0;
+  background: var(--paper);
+  border: 1px solid var(--line-soft);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+  position: relative;
+}
+.opt:hover { background: var(--paper-2); border-color: var(--line); }
+.opt input { margin-right: 12px; vertical-align: middle; }
+.opt .ltr {
+  display: inline-block;
+  width: 22px;
+  font-family: "Kaiti SC", "STKaiti", serif;
+  color: var(--ochre);
+  font-weight: 500;
+}
+.opt.is-correct { background: #e8f0dd; border-color: var(--jade); color: var(--ink); }
+.opt.is-correct::after {
+  content: "✓";
+  position: absolute; right: 12px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--jade); font-weight: 700;
+}
+.opt.is-wrong { background: #f6dcd9; border-color: var(--cinnabar); }
+.opt.is-wrong::after {
+  content: "✗";
+  position: absolute; right: 12px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--cinnabar); font-weight: 700;
+}
+.fill-input, .essay-input {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 16px;
+  font-family: inherit;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  margin: 8px 0;
+  color: var(--ink);
+}
+.fill-input:focus, .essay-input:focus { outline: none; border-color: var(--ochre); }
+.essay-input { min-height: 140px; line-height: 1.7; resize: vertical; }
+
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  align-items: center;
+}
+.btn {
+  padding: 8px 20px;
+  font-size: 14px;
+  font-family: "Kaiti SC", "STKaiti", serif;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--ink-light);
+  border-radius: 3px;
+  cursor: pointer;
+  letter-spacing: 0.15em;
+  transition: all 0.15s;
+}
+.btn:hover { background: var(--paper-2); }
+.btn-primary {
+  background: var(--ochre);
+  color: var(--paper);
+  border-color: var(--ochre);
+}
+.btn-primary:hover { background: #8c4d20; }
+.btn-primary:disabled { background: var(--line); border-color: var(--line); cursor: not-allowed; }
+.btn-ghost { border-color: var(--line); color: var(--ink-soft); }
+
+.feedback {
+  margin-top: 18px;
+  padding: 16px 20px;
+  border-radius: 4px;
+  display: none;
+  font-size: 15px;
+  line-height: 1.7;
+}
+.feedback.show { display: block; }
+.feedback.right {
+  background: #e8f0dd;
+  border-left: 3px solid var(--jade);
+  color: var(--ink);
+}
+.feedback.wrong {
+  background: #f6dcd9;
+  border-left: 3px solid var(--cinnabar);
+  color: var(--ink);
+}
+.feedback .verdict {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 6px;
+  font-family: "Kaiti SC", "STKaiti", serif;
+  letter-spacing: 0.1em;
+}
+.feedback .verdict::before { content: "· "; color: var(--ink-light); }
+.feedback .ref-answer {
+  display: block;
+  margin-top: 10px;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 3px;
+  font-size: 15px;
+}
+.feedback .ref-answer .lbl {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--ink-light);
+  display: block;
+  margin-bottom: 4px;
+  font-family: "Kaiti SC", "STKaiti", serif;
+}
+.feedback .analysis-text {
+  display: block;
+  margin-top: 10px;
+  white-space: pre-wrap;
+  line-height: 1.85;
+}
+
+footer {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 32px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--ink-light);
+  letter-spacing: 0.2em;
+  border-top: 1px solid var(--line-soft);
+  font-family: "Kaiti SC", "STKaiti", serif;
+}
+
+/* 印刷感收尾 */
+@media (max-width: 600px) {
+  .q-card { padding: 20px 18px; }
+  h1.title { font-size: 28px; }
+  main { padding: 16px; }
+}
+</style>
+</head>
+<body>
+<header class="page">
+  <div class="kicker">金刚经导读 · 自测题</div>
+  <h1 class="title">第 042 讲</h1>
+  <div class="subtitle">以第四重二谛再解经文</div>
+  <div class="meta">
+    <span>共 <b>20</b> 题</span>
+    <span class="sep">·</span>
+    <span>多选题 11 · 填空题 2 · 单选题 2 · 判断题 2 · 简答题 3</span>
+    <span class="sep">·</span>
+    <span id="summary">已作答 0/20</span>
+  </div>
+</header>
+
+<main>
+  <nav class="nav-pills"><a href="#q042-1" data-qid="q042-1">1</a>
+<a href="#q042-2" data-qid="q042-2">2</a>
+<a href="#q042-3" data-qid="q042-3">3</a>
+<a href="#q042-4" data-qid="q042-4">4</a>
+<a href="#q042-5" data-qid="q042-5">5</a>
+<a href="#q042-6" data-qid="q042-6">6</a>
+<a href="#q042-7" data-qid="q042-7">7</a>
+<a href="#q042-8" data-qid="q042-8">8</a>
+<a href="#q042-9" data-qid="q042-9">9</a>
+<a href="#q042-10" data-qid="q042-10">10</a>
+<a href="#q042-11" data-qid="q042-11">11</a>
+<a href="#q042-12" data-qid="q042-12">12</a>
+<a href="#q042-13" data-qid="q042-13">13</a>
+<a href="#q042-14" data-qid="q042-14">14</a>
+<a href="#q042-15" data-qid="q042-15">15</a>
+<a href="#q042-16" data-qid="q042-16">16</a>
+<a href="#q042-17" data-qid="q042-17">17</a>
+<a href="#q042-18" data-qid="q042-18">18</a>
+<a href="#q042-19" data-qid="q042-19">19</a>
+<a href="#q042-20" data-qid="q042-20">20</a></nav>
+  <article class="q-card" id="q042-1" data-type="多选题" data-analysis="在胜义谛上，能度、所度，皆是空性。所以“实无众生得灭度者”。世俗谛上，如梦如幻的名言菩萨，必须得去度化如梦如幻的名言众生。只有切切实实地度化的过程，才能增长如梦如幻的名言菩萨的名言福德。但是在胜义谛上，同时必须观空性，度了还得当没度，“实无众生得灭度者”。这是用第四重二谛的境界重新解读《金刚经》的第三段经文。">
+<div class="q-head">
+<span class="q-no">1.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】以四重二谛第四重二谛的境界解读《金刚经》第三段经文：“我皆令入无余涅槃而灭度之。如是灭度无量无数无边众生，实无众生得灭度者。”，以下选项中理解正确的有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q042-1" value="A"> <span class="ltr">A.</span> 在第四重二谛的世俗谛假有唯名上，如梦如幻的名言菩萨，必须得去度化如梦如幻的名言众生。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q042-1" value="B"> <span class="ltr">B.</span> 在第四重二谛的胜义谛“离言空性”上，能度、所度，皆是空性。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q042-1" value="C"> <span class="ltr">C.</span> 只有切切实实地度化的过程，才能增长如梦如幻的名言菩萨的名言福德。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q042-1" value="D"> <span class="ltr">D.</span> 在第四重二谛的胜义谛“离言空性”上，必须观空性，度了还得当没度，所以众生压根不需要度。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q042-1" data-type="多选题" data-answer="ABC">提交</button><button class="btn btn-ghost btn-reset" data-qid="q042-1">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q042-2" data-type="多选题" data-analysis="第四段经文讲无住布施。其实布施只是一个举例，是用布施代表六度，所以第四段经文是讲无住地修六度。世俗谛上，如梦如幻的名言菩萨修行六度，胜义谛上的空性，就使得如梦如幻的名言菩萨的六度是无住而修。因为空性，所以无住。有一丁丁点不空，都不可能是无住。所以世俗谛的要求是，发菩提心的如梦如幻的名言菩萨，必须得行六度。胜义谛上，行六度的同时观空性，所以无住而修六度。这就叫悲智双运，叫福慧双修。">
+<div class="q-head">
+<span class="q-no">2.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】以四重二谛第四重二谛的境界解读《金刚经》第四段经文，佛陀以布施度为例来讲大乘菩萨的修行，以下选项中理解正确的有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q042-2" value="A"> <span class="ltr">A.</span> 第四重二谛的世俗谛假有唯名的要求是，发菩提心的如梦如幻的名言菩萨，必须得行六度。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q042-2" value="B"> <span class="ltr">B.</span> 第四重二谛的胜义谛“离言空性”上，行六度的同时观空性，无住而修六度。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q042-2" value="C"> <span class="ltr">C.</span> 因为空性，所以无住，有一丁丁点儿不空，都不可能是无住。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q042-2" value="D"> <span class="ltr">D.</span> 无住而修六度就叫悲智双运，福慧双修。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q042-2" data-type="多选题" data-answer="ABCD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q042-2">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q042-3" data-type="多选题" data-analysis="目前你只是知道了空性，听说了空性，并未证得空性。从听闻知道空性，到能够证得空性，这个过程是需要付出艰辛努力的，是要经过无住而修六度才能实现的。所以听了空性，就觉得自己可以什么都不干了，什么都不做了，是为原本就不想干、不想做、原本就很懒惰的心态找个借口而已。从听闻到空性，到能够证得空性，这中间要无住修六度，这是要付出艰辛努力的。所以听了空性，不是什么都不干，而恰恰要努力地去干。">
+<div class="q-head">
+<span class="q-no">3.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】有人听闻空性以后认为：“既然什么都空了，我就可以什么都不干了，因为都是空，我做什么都没意义。”依据课程内容，以下选项中理解正确的有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q042-3" value="A"> <span class="ltr">A.</span> 只是知道了空性，听闻了空性，并未证得空性。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q042-3" value="B"> <span class="ltr">B.</span> 从听闻空性，到能够证得空性，这个过程要无住修六度，要付出艰辛努力。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q042-3" value="C"> <span class="ltr">C.</span> 听了空性，就觉得自己可以什么都不干、什么都不做，是为原本就不想干、不想做、原本就很懒惰的心态找个借口。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q042-3" value="D"> <span class="ltr">D.</span> 听了空性，不是什么都不干，而恰恰要努力地去干。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q042-3" data-type="多选题" data-answer="ABCD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q042-3">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q042-4" data-type="多选题" data-analysis="如果没有听闻到空性的道理，不懂得空性的道理，也许我们世间的善法即一切利益众生的事，还可以有选择性地去做，也就是说可做可不做，做也是有条件地做。因为没有听过空性的众生，心中一定有着强烈的我执。现在终于听闻到了空性，知道了空性，不是因此什么都不做，而恰恰相反：世间的一切善法，一切利益众生的事，这个时候不仅得做，而且必须得做，反而是没有选择的了，是无条件的了，因为无我。这就是世俗谛菩提心。所以听闻到空性，不是什么都不做了，而是要基于空性而发起度一切众生的世俗谛菩提心，基于这个世俗谛菩提心，要没有选择地、没有条件地去利益一切众生。">
+<div class="q-head">
+<span class="q-no">4.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】依据课程内容，未听闻空性与已听闻空性的众生，在对待利益众生这件事上有不同的态度，以下选项中理解正确的有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q042-4" value="A"> <span class="ltr">A.</span> 如果没有听闻到、不懂得空性的道理，也许我们世间的善法还可以有选择性地去做。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q042-4" value="B"> <span class="ltr">B.</span> 没有听过空性的众生，利益众生的事可做可不做，做也是有条件地做，因为他的心中一定有着强烈的我执。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q042-4" value="C"> <span class="ltr">C.</span> 听闻并知道了空性后，对于世间的一切善法和一切利益众生的事儿不仅得做，而且必须得做、无条件地做，因为无我，这就是世俗谛菩提心。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q042-4" value="D"> <span class="ltr">D.</span> 听闻到空性，不是什么都不做，而是要没有选择地、没有条件地去利益一切众生，要基于空性发起度一切众生的世俗谛菩提心。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q042-4" data-type="多选题" data-answer="ABCD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q042-4">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q042-5" data-type="填空题" data-analysis="那些大菩萨们发愿度一切众生，而度了众生还要觉得自己一个没度，行布施还要无住而布施，无住修六度，这就是世俗谛菩提心与胜义谛菩提心的不二，这是基于空性而生起的真实菩提心。">
+<div class="q-head">
+<span class="q-no">5.<span class="badge fill">填空</span></span>
+</div>
+<div class="q-stem">【填空题】那些大菩萨们发愿度一切众生，而度了众生还要觉得自己一个没度，行布施还要无住而布施，无住修六度，这就是世俗谛菩提心与胜义谛菩提心的（），这是基于（）而生起的真实菩提心。</div>
+<input class="fill-input" name="q042-5" placeholder="请输入答案">
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q042-5" data-type="填空题" data-answer="不二，空性">提交</button><button class="btn btn-ghost btn-reset" data-qid="q042-5">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q042-6" data-type="填空题" data-analysis="正是基于空性而生起的菩提心，才使得我们度了众生实无众生得度，才是无住而行布施。因为空性所以无住，无住修六度，因此成佛的涅槃是无住涅槃，是智不住生死，悲不住涅槃。这是大乘佛法的根本境界。">
+<div class="q-head">
+<span class="q-no">6.<span class="badge fill">填空</span></span>
+</div>
+<div class="q-stem">【填空题】正是基于（）而生起的菩提心，才使得我们度了众生实无众生得度，才是无住而行布施。因为空性所以无住，（）修六度，因此成佛的涅槃是（），是智不住生死，悲不住涅槃。这是大乘佛法的根本境界。</div>
+<input class="fill-input" name="q042-6" placeholder="请输入答案">
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q042-6" data-type="填空题" data-answer="空性，无住，无住涅槃">提交</button><button class="btn btn-ghost btn-reset" data-qid="q042-6">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q042-7" data-type="多选题" data-analysis="第五段经文中“凡所有相，皆是虚妄”。“凡所有相”的“相”是凡夫境界，包括佛陀的三十二相、八十种好，“皆是虚妄”，不过是名言上的如梦如幻。所以“见相非相”，才能见如来。见相，从第四重二谛来分析，在世俗谛上，名言上的如梦如幻，在此时的凡夫境界上见了，但是“非相”，根本没有相。胜义谛上是空性，见了还得当没见，因为要观能见、所见皆是空性。这是对第五段经文的解读。">
+<div class="q-head">
+<span class="q-no">7.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】依据课程内容，如何以四重二谛的第四重二谛的境界解读《金刚经》第五段经文中的“凡所有相，皆是虚妄”？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q042-7" value="A"> <span class="ltr">A.</span> “凡所有相”的“相”是指凡夫境界，包括佛陀的三十二相、八十种好。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q042-7" value="B"> <span class="ltr">B.</span> “皆是虚妄”，指凡夫境界不过是名言上的如梦如幻。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q042-7" value="C"> <span class="ltr">C.</span> “见相”，是在第四重二谛的世俗谛上、名言上的如梦如幻的相，在此时的凡夫境界上见了。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q042-7" value="D"> <span class="ltr">D.</span> “非相”，是根本没有相。第四重二谛的胜义谛“离言空性”上，见了还得当没见，因为要观能见、所见皆是空性。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q042-7" data-type="多选题" data-answer="ABCD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q042-7">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q042-8" data-type="多选题" data-analysis="第七段经文中“如来有所说法耶？”佛说法了吗？在世俗谛名言上说了，佛陀正在说。但是在胜义谛的“离言空性”上，“无有定法，如来可说”。">
+<div class="q-head">
+<span class="q-no">8.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】以四重二谛第四重二谛的境界解读《金刚经》第七段经文“如来有所说法耶？……亦无有定法，如来可说”，以下选项中理解正确的有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q042-8" value="A"> <span class="ltr">A.</span> “如来有所说法耶？”佛在第四重二谛的世俗谛名言上说了，佛陀正在说。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q042-8" value="B"> <span class="ltr">B.</span> 在第四重二谛的胜义谛的“离言空性”上，“无有定法，如来可说”。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q042-8" value="C"> <span class="ltr">C.</span> “如来有所说法耶？”佛说法了吗？在第四重二谛的世俗谛名言上佛陀没有说法。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q042-8" value="D"> <span class="ltr">D.</span> 在第四重二谛的胜义谛的“离言空性”上，名言上的如来说了如梦如幻的名言上的法。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q042-8" data-type="多选题" data-answer="AB">提交</button><button class="btn btn-ghost btn-reset" data-qid="q042-8">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q042-9" data-type="多选题" data-analysis="一个证了须陀洹果的人，在胜义谛上，要观能入、所入皆是空，“名为入流而无所入，不入色声香味触法”，而在世俗谛上，不过是名须陀洹，只是个如梦如幻的名言上的须陀洹。">
+<div class="q-head">
+<span class="q-no">9.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】佛说：“于意云何？须陀洹能作是念，我得须陀洹果不？”须菩提言：“不也世尊，何以故？须陀洹名为入流，而无所入，不入色声香味触法，是名须陀洹。”依据四重二谛第四重二谛的境界，以下选项中对经文理解正确的有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q042-9" value="A"> <span class="ltr">A.</span> 一个证了须陀洹果的人，在第四重二谛的胜义谛“离言空性”上，要观能入、所入皆是空。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q042-9" value="B"> <span class="ltr">B.</span> 一个证了须陀洹果的人，在第四重二谛的胜义谛空性上，要观能入、所入皆是如梦如幻的有。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q042-9" value="C"> <span class="ltr">C.</span> 在第四重二谛的世俗谛假有唯名上名须陀洹，只是如梦如幻的名言上的须陀洹。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q042-9" value="D"> <span class="ltr">D.</span> 在第四重二谛的世俗谛名言谛上名须陀洹，压根就没有须陀洹这个名言。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q042-9" data-type="多选题" data-answer="AC">提交</button><button class="btn btn-ghost btn-reset" data-qid="q042-9">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q042-10" data-type="多选题" data-analysis="在四重二谛的第四重二谛世俗谛假有唯名上，斯陀含是一往来，而在第四重二谛的胜义谛上、在空性上，要观能来、所来皆是空性，因此实无往来。只不过在世俗谛上、在假有唯名上，名为斯陀含，只是名言斯陀含。">
+<div class="q-head">
+<span class="q-no">10.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】《金刚经》第九段经文：“斯陀含名一往来，而实无往来，是名斯陀含。”依据四重二谛第四重二谛的境界解读经文，以下选项中说法正确的有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q042-10" value="A"> <span class="ltr">A.</span> 在第四重二谛世俗谛假有唯名上，斯陀含是一往来。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q042-10" value="B"> <span class="ltr">B.</span> 在第四重二谛的胜义谛“离言空性”上，要观能来、所来皆是空性，因此实无往来。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q042-10" value="C"> <span class="ltr">C.</span> 在第四重二谛的世俗谛假有唯名上，名为斯陀含，只是名言斯陀含。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q042-10" value="D"> <span class="ltr">D.</span> 斯陀含已不需要再来欲界受生，所以叫实无往来。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q042-10" data-type="多选题" data-answer="ABC">提交</button><button class="btn btn-ghost btn-reset" data-qid="q042-10">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q042-11" data-type="多选题" data-analysis="四果阿罗汉，“实无有法名阿罗汉”，根本就没有一个阿罗汉的法。在第四重二谛的胜义谛空性上而言，实无有法名阿罗汉，但是在世俗谛上，“须菩提实无所行，而名须菩提是乐阿兰那行者”，说须菩提证了阿罗汉，其实在胜义谛上是空性，根本没有阿罗汉可得。不过在世俗谛上、在名言上，名须菩提为阿罗汉，名须菩提是乐阿兰那行。">
+<div class="q-head">
+<span class="q-no">11.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】《金刚经》第九段经文：“须菩提实无所行，而名须菩提是乐阿兰那行者。”以四重二谛第四重二谛的境界解读经文，以下选项中理解正确的有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q042-11" value="A"> <span class="ltr">A.</span> 在第四重二谛的胜义谛空性上而言，实无有法名阿罗汉。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q042-11" value="B"> <span class="ltr">B.</span> 在第四重二谛的世俗谛假有唯名上，说名言上的须菩提没有证得名言上的阿罗汉。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q042-11" value="C"> <span class="ltr">C.</span> 在第四重二谛的胜义谛“离言空性”上，根本没有阿罗汉可得。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q042-11" value="D"> <span class="ltr">D.</span> 在第四重二谛的世俗谛上、在名言上，名须菩提为阿罗汉，名须菩提是乐阿兰那行。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q042-11" data-type="多选题" data-answer="ACD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q042-11">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q042-12" data-type="单选题" data-analysis="在第四重二谛上，为什么须菩提回答说“如来在然灯佛所，于法实无所得”？在胜义谛上，能得、所得皆是空性，因此实无所得。这是金刚经第十段的第一部分。">
+<div class="q-head">
+<span class="q-no">12.<span class="badge ">单选</span></span>
+</div>
+<div class="q-stem">【单选题】二时教法中，以四重二谛第四重二谛的境界解读《金刚经》第十段的第一部分经文，须菩提回答佛陀说“如来在然灯佛所，于法实无所得”。以下选项中理解正确的是哪个？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="radio" name="q042-12" value="A"> <span class="ltr">A.</span> 在第四重二谛的胜义谛“离言空性”上，能得、所得皆是空性，因此实无所得。</label>
+<label class="opt" data-ltr="B"><input type="radio" name="q042-12" value="B"> <span class="ltr">B.</span> 在第四重二谛的胜义谛性空上，能得、所得皆是空，因此实无所得。</label>
+<label class="opt" data-ltr="C"><input type="radio" name="q042-12" value="C"> <span class="ltr">C.</span> 在第四重二谛的世俗谛缘生上，如来于法实无所得。</label>
+<label class="opt" data-ltr="D"><input type="radio" name="q042-12" value="D"> <span class="ltr">D.</span> 在第四重二谛的世俗谛假有唯名上，如来于法实无所得。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q042-12" data-type="单选题" data-answer="A">提交</button><button class="btn btn-ghost btn-reset" data-qid="q042-12">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q042-13" data-type="多选题" data-analysis="第十段第二部分的经文“庄严佛土者，即非庄严，是名庄严。”“庄严佛土者”，佛陀在很多经里边都讲，所谓大菩萨的修行就是庄严佛土，但是在《金刚经》里，须菩提回答说“即非庄严，是名庄严”。在胜义谛上是空性，能庄严、所庄严皆是空性，所以非庄严，是名庄严。佛陀为什么要在很多经典里讲修行是庄严佛土呢？佛陀只不过是在世俗谛上为了度化众生的方便，名言上说菩萨庄严佛土，只是名庄严。">
+<div class="q-head">
+<span class="q-no">13.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】《金刚经》第十段第二部分经文：“庄严佛土者，即非庄严，是名庄严。”依据四重二谛第四重二谛的境界，以下选项中理解正确的有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q042-13" value="A"> <span class="ltr">A.</span> 佛陀在很多经里都讲，所谓大菩萨的修行就是庄严佛土，但是在《金刚经》里，须菩提回答说“即非庄严，是名庄严”。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q042-13" value="B"> <span class="ltr">B.</span> 在第四重二谛的胜义谛“离言空性”上，能庄严、所庄严皆是空性，所以非庄严。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q042-13" value="C"> <span class="ltr">C.</span> 在第四重二谛的世俗谛假有唯名上，佛陀为了度化众生的方便，名言上说菩萨庄严佛土，只是名庄严。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q042-13" value="D"> <span class="ltr">D.</span> 在佛陀看来有一个实有的名叫净土的佛国可以被庄严。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q042-13" data-type="多选题" data-answer="ABC">提交</button><button class="btn btn-ghost btn-reset" data-qid="q042-13">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q042-14" data-type="判断题" data-analysis="学习完四重二谛，可以用第四重二谛的境界，回过头来再解读一下已经学习过的《金刚经》前面的几段经文，这是非常重要的。">
+<div class="q-head">
+<span class="q-no">14.<span class="badge judge">判断</span></span>
+</div>
+<div class="q-stem">【判断题】《金刚经》的第三到第十段经文，对应的只能是四重二谛中第二重二谛的境界，因此学习完四重二谛，不必回头重新解读这几段经文。</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="radio" name="q042-14" value="A"> <span class="ltr">A.</span> 正确</label>
+<label class="opt" data-ltr="B"><input type="radio" name="q042-14" value="B"> <span class="ltr">B.</span> 错误</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q042-14" data-type="判断题" data-answer="错误">提交</button><button class="btn btn-ghost btn-reset" data-qid="q042-14">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q042-15" data-type="单选题" data-analysis="《金刚经》第九段经文以大乘法境界去解读小乘四果。有了第四重二谛的境界，回来再看这段经文，会感觉很亲切。">
+<div class="q-head">
+<span class="q-no">15.<span class="badge ">单选</span></span>
+</div>
+<div class="q-stem">【单选题】依据课程内容，下列选项中对《金刚经》的第九段经文的境界理解正确的是哪个？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="radio" name="q042-15" value="A"> <span class="ltr">A.</span> 以大乘法境界去解读小乘四果。</label>
+<label class="opt" data-ltr="B"><input type="radio" name="q042-15" value="B"> <span class="ltr">B.</span> 以小乘法境界去解读大乘四果。</label>
+<label class="opt" data-ltr="C"><input type="radio" name="q042-15" value="C"> <span class="ltr">C.</span> 以大乘法境界去解读大乘四果。</label>
+<label class="opt" data-ltr="D"><input type="radio" name="q042-15" value="D"> <span class="ltr">D.</span> 以小乘法境界去解读小乘四果。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q042-15" data-type="单选题" data-answer="A">提交</button><button class="btn btn-ghost btn-reset" data-qid="q042-15">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q042-16" data-type="判断题" data-analysis="所谓大乘菩萨的修行，其实概括为一句话就是“庄严佛土”。阿弥陀佛的成就是庄严佛土而成就的，药师佛的成就也是庄严佛土而成就的，十方一切诸佛的成就都是庄严佛土而成就的。">
+<div class="q-head">
+<span class="q-no">16.<span class="badge judge">判断</span></span>
+</div>
+<div class="q-stem">【判断题】所谓大乘菩萨的修行，用一句话概括就是“庄严佛土”。阿弥陀佛的成就是庄严佛土而成就的，药师佛的成就也是庄严佛土而成就的，十方一切诸佛的成就都是庄严佛土而成就的。</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="radio" name="q042-16" value="A"> <span class="ltr">A.</span> 正确</label>
+<label class="opt" data-ltr="B"><input type="radio" name="q042-16" value="B"> <span class="ltr">B.</span> 错误</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q042-16" data-type="判断题" data-answer="正确">提交</button><button class="btn btn-ghost btn-reset" data-qid="q042-16">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q042-17" data-type="多选题" data-analysis="在佛陀的二时教法中，在四重二谛的第四重二谛的世俗谛假有唯名上，要求发菩提心的如梦如幻的名言菩萨必须得行六度。在第四重二谛的胜义谛“离言空性”上，行六度的同时观空性，所以无住而修六度，这就叫悲智双运，福慧双修。">
+<div class="q-head">
+<span class="q-no">17.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】用四重二谛的第四重二谛的境界解读六度，下列选项中理解正确的有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q042-17" value="A"> <span class="ltr">A.</span> 在第四重二谛的世俗谛假有唯名上，要求发菩提心的如梦如幻的名言菩萨必须得行六度。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q042-17" value="B"> <span class="ltr">B.</span> 在第四重二谛的胜义谛“离言空性”上，行六度的同时观空性，要无住而修六度。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q042-17" value="C"> <span class="ltr">C.</span> 要无住而修六度，这就叫悲智双运，福慧双修。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q042-17" value="D"> <span class="ltr">D.</span> 既然第四重二谛的胜义谛是空性，一切皆空，也没有必要度众生了。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q042-17" data-type="多选题" data-answer="ABC">提交</button><button class="btn btn-ghost btn-reset" data-qid="q042-17">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q042-18" data-type="简答题" data-analysis="">
+<div class="q-head">
+<span class="q-no">18.<span class="badge essay">简答</span></span>
+</div>
+<div class="q-stem">【简答题】听闻空性后为何不能“什么都不干”，反而要无条件行持善法、利益众生？</div>
+<textarea class="essay-input" name="q042-18" placeholder="请简要作答…"></textarea>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q042-18" data-type="简答题" data-answer="（1）仅听闻空性未证得空性，从听闻至证得需无住修六度，付出艰辛努力。
+（2）以“空性”为借口懈怠，是为自身懒惰心态找理由。
+（3）未闻空性者有强烈我执，善法可选择性做；闻空性后知无我，需发起世俗谛菩提心，无条件、无选择地利益众生。
+（4）于空性发起的世俗谛菩提心，才是真实的菩提心。">提交</button><button class="btn btn-ghost btn-reset" data-qid="q042-18">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q042-19" data-type="简答题" data-analysis="">
+<div class="q-head">
+<span class="q-no">19.<span class="badge essay">简答</span></span>
+</div>
+<div class="q-stem">【简答题】“庄严佛土者，即非庄严，是名庄严。” 这是鸠摩罗什译本第一次出现的《金刚经》著名三段论。请问什么叫三段论？什么是庄严佛土？如何用四重二谛的第四重二谛的境界解读这句三段论？</div>
+<textarea class="essay-input" name="q042-19" placeholder="请简要作答…"></textarea>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q042-19" data-type="简答题" data-answer="（1）“佛说什么，即非什么，是名什么”，这是《金刚经》中著名的三段论。
+（2）大乘菩萨的修行过程，其实概括为一句话就是“庄严佛土”。阿弥陀佛的成就是庄严佛土而成就的，药师佛的成就也是庄严佛土而成就的，十方一切诸佛的成就都是庄严佛土而成就的，菩萨在因地发大愿、历劫修行，圆满愿力、成就净土、最终成佛的过程，就是庄严佛土。
+（3）“庄严佛土者，即非庄严，是名庄严。”在四重二谛的第四重二谛的胜义谛“离言空性”上，能庄严、所庄严皆是空性，所以非庄严；佛陀在很多经典里讲修行是庄严佛土，只不过是为了度化众生的方便，在第四重二谛的世俗谛假有唯名上，名言上说菩萨庄严佛土，只是名庄严。">提交</button><button class="btn btn-ghost btn-reset" data-qid="q042-19">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q042-20" data-type="简答题" data-analysis="">
+<div class="q-head">
+<span class="q-no">20.<span class="badge essay">简答</span></span>
+</div>
+<div class="q-stem">【简答题】《金刚经》中，佛告须菩提：“凡所有相，皆是虚妄。若见诸相非相，则见如来。”其中，“凡所有相”的“相”的含义是什么？分别用四重二谛的第二重二谛和第四重二谛的境界解读这句经文。</div>
+<textarea class="essay-input" name="q042-20" placeholder="请简要作答…"></textarea>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q042-20" data-type="简答题" data-answer="（1）“凡所有相”的“相”，对照梵文原本来看，指的是佛陀应化到人间的色身的“三十二相”“八十种好”。当我们平时引用这八个字的时候，把这个“相”就扩展到我们凡夫境界上的、一切凡夫所能理解所认定的相。概念大大地扩大了，这是可以的。
+（2）用四重二谛第二重二谛的境界解释：
+“凡所有相，皆是虚妄”，佛陀跟须菩提讲，在第二重二谛的胜义谛性空上，佛陀“三十二相”“八十种好”的色身形象，是虚妄不实的，是空。
+“若见诸相非相，则见如来。”要见诸相，还得非相，才是见如来。
+从第二重二谛的世俗谛缘生上见相了，但是见了相还得“非相”。
+在第二重二谛的胜义谛性空上，还要观“相”本然是性空，所以见了还得当没见，这才是见如来。
+压根儿就没见，不是见如来；见了当真见，也还是没有见如来。见相非相，见了还得当没见，才是见如来。这是二谛，是中道。
+（3）用四重二谛第四重二谛的境界解释：
+“凡所有相”的“相”是凡夫境界，包括佛陀的三十二相、八十种好，“皆是虚妄”，不过是名言上的如梦如幻。所以“见相非相”，才能见如来。
+在第四重二谛的世俗谛假有唯名上，名言上的如梦如幻，在此时的凡夫境界上见相了，但是“非相”，根本没有相。
+在第四重二谛的胜义谛“离言空性”上，见了还得当没见，因为要观能见、所见皆是空性。">提交</button><button class="btn btn-ghost btn-reset" data-qid="q042-20">重做</button></div><div class="feedback"></div></article>
+</main>
+
+<footer>
+  <p>业精于勤 · 行成于思</p>
+</footer>
+
+<script>window.QSET = "quiz-042";</script>
+<script>
+(function(){
+  const KEY = (window.QSET || 'quiz') + '.progress';
+
+  function load() {
+    try { return JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e) { return {}; }
+  }
+  function save(data) {
+    try { localStorage.setItem(KEY, JSON.stringify(data)); } catch(e) {}
+  }
+
+  function setCurrent(anchor) {
+    document.querySelectorAll('.nav-pills a').forEach(a => a.classList.remove('current'));
+    const el = document.querySelector('.nav-pills a[href="#' + anchor + '"]');
+    if (el) el.classList.add('current');
+  }
+
+  function grade(qid, type, answer) {
+    const card = document.getElementById(qid);
+    if (!card) return;
+    const fb = card.querySelector('.feedback');
+    const correctEl = card.querySelector('.q-no .verdict-mark');
+    const userAnswer = collect(card, type);
+
+    // 标记作答
+    if (userAnswer !== null && userAnswer !== '' && !(Array.isArray(userAnswer) && userAnswer.length === 0)) {
+      const navA = document.querySelector('.nav-pills a[href="#' + qid + '"]');
+      if (navA) navA.classList.add('answered');
+    }
+
+    // 判分
+    let isRight = null;
+    if (type === '简答题' || type === '论述题') {
+      // 开放题: 不判分, 只显示参考答案
+      isRight = 'open';
+    } else if (type === '判断题') {
+      // 判断题: A=正确, B=错误; answer 可能是字母或文字, 归一化后再比较
+      const normJudge = v => v === 'A' ? '正确' : v === 'B' ? '错误' : v;
+      isRight = (normJudge(userAnswer) === normJudge(answer));
+    } else if (type === '单选题') {
+      isRight = (userAnswer === answer);
+    } else if (type === '多选题') {
+      const u = Array.isArray(userAnswer) ? userAnswer.slice().sort().join('') : '';
+      const a = (answer || '').split('').sort().join('');
+      isRight = (u === a);
+    } else if (type === '填空题') {
+      isRight = (String(userAnswer || '').trim() === String(answer || '').trim());
+    }
+
+    // 渲染反馈
+    fb.classList.add('show');
+    fb.classList.remove('right', 'wrong');
+    if (isRight === 'open') {
+      fb.classList.add('right');
+      fb.innerHTML = '<div class="verdict">参考答案</div>' +
+        '<span class="analysis-text">' + escHtml(answer) + '</span>' +
+        renderAnalysis(card);
+      card.classList.add('correct');
+    } else if (isRight) {
+      fb.classList.add('right');
+      fb.innerHTML = '<div class="verdict">正确</div>' + renderAnalysis(card);
+      card.classList.add('correct');
+    } else {
+      fb.classList.add('wrong');
+      fb.innerHTML = '<div class="verdict">错误 · 正确答案: ' + escHtml(answer) + '</div>' + renderAnalysis(card);
+      card.classList.add('wrong');
+      const navA = document.querySelector('.nav-pills a[href="#' + qid + '"]');
+      if (navA) {
+        navA.classList.remove('answered');
+        navA.classList.add('wrong');
+      }
+    }
+
+    // 标记正确选项
+    if (type === '单选题' || type === '多选题') {
+      const correctSet = new Set((answer || '').split(''));
+      card.querySelectorAll('.opt').forEach(opt => {
+        const ltr = opt.getAttribute('data-ltr');
+        if (correctSet.has(ltr)) opt.classList.add('is-correct');
+      });
+    } else if (type === '判断题') {
+      // answer 可能是 '正确'/'错误' 或 'A'/'B', 归一化为字母再比较
+      const ansLetter = answer === '正确' ? 'A' : answer === '错误' ? 'B' : answer;
+      card.querySelectorAll('.opt').forEach(opt => {
+        if (opt.getAttribute('data-ltr') === ansLetter) opt.classList.add('is-correct');
+      });
+    }
+
+    // 禁用重复提交
+    card.querySelector('.btn-submit').disabled = true;
+    card.querySelector('.btn-submit').textContent = '已提交';
+
+    // 保存进度
+    const data = load();
+    data[qid] = { type, answer, userAnswer, isRight, ts: Date.now() };
+    save(data);
+
+    // 更新统计
+    updateSummary();
+  }
+
+  function collect(card, type) {
+    if (type === '单选题' || type === '判断题') {
+      const sel = card.querySelector('input[type=radio]:checked');
+      return sel ? sel.value : null;
+    }
+    if (type === '多选题') {
+      const sels = card.querySelectorAll('input[type=checkbox]:checked');
+      return Array.from(sels).map(s => s.value);
+    }
+    if (type === '填空题') {
+      const inp = card.querySelector('.fill-input');
+      return inp ? inp.value : '';
+    }
+    if (type === '简答题' || type === '论述题') {
+      const inp = card.querySelector('.essay-input');
+      return inp ? inp.value : '';
+    }
+    return null;
+  }
+
+  function renderAnalysis(card) {
+    const a = card.getAttribute('data-analysis');
+    if (!a) return '';
+    return '<div class="ref-answer"><span class="lbl">解析</span>' +
+      '<span class="analysis-text">' + escHtml(a) + '</span></div>';
+  }
+
+  function escHtml(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function updateSummary() {
+    const data = load();
+    const cards = document.querySelectorAll('.q-card');
+    let total = 0, correct = 0, wrong = 0, open_ = 0;
+    cards.forEach(c => {
+      const qid = c.id;
+      const type = c.getAttribute('data-type');
+      const r = data[qid];
+      if (!r) return;
+      total += 1;
+      if (r.isRight === 'open') open_ += 1;
+      else if (r.isRight) correct += 1;
+      else wrong += 1;
+    });
+    const sum = document.getElementById('summary');
+    if (sum) {
+      sum.innerHTML = '已作答 <b>' + total + '</b>/' + cards.length +
+        ' · 正确 <b style="color:var(--jade)">' + correct + '</b>' +
+        ' · 错误 <b style="color:var(--cinnabar)">' + wrong + '</b>' +
+        ' · 开放题 <b>' + open_ + '</b>';
+    }
+  }
+
+  function bind() {
+    document.querySelectorAll('.btn-submit').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const qid = btn.getAttribute('data-qid');
+        const type = btn.getAttribute('data-type');
+        const answer = btn.getAttribute('data-answer');
+        grade(qid, type, answer);
+      });
+    });
+    document.querySelectorAll('.btn-reset').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const qid = btn.getAttribute('data-qid');
+        const data = load();
+        delete data[qid];
+        save(data);
+        location.reload();
+      });
+    });
+    // 平滑滚动 + current 高亮
+    document.querySelectorAll('.nav-pills a').forEach(a => {
+      a.addEventListener('click', e => {
+        setCurrent(a.getAttribute('href').slice(1));
+      });
+    });
+    // 恢复历史进度
+    const data = load();
+    Object.keys(data).forEach(qid => {
+      const r = data[qid];
+      const card = document.getElementById(qid);
+      if (!card) return;
+      const navA = document.querySelector('.nav-pills a[href="#' + qid + '"]');
+      if (r.isRight === true) {
+        card.classList.add('correct');
+        if (navA) navA.classList.add('answered');
+      } else if (r.isRight === false) {
+        card.classList.add('wrong');
+        if (navA) { navA.classList.remove('answered'); navA.classList.add('wrong'); }
+      } else if (r.isRight === 'open') {
+        card.classList.add('correct');
+        if (navA) navA.classList.add('answered');
+      }
+    });
+    updateSummary();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bind);
+  } else { bind(); }
+})();
+</script>
+</body>
+</html>

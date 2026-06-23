@@ -1,0 +1,8 @@
+# 防御未来 build 产物混入
+.DS_Store
+__pycache__/
+*.pyc
+*.swp
+*~
+.vscode/
+.idea/

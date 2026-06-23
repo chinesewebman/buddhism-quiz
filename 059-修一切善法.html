@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>金刚经导读 · 第059讲 · 修一切善法</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f7f1e6;        /* 宣纸米白 */
+  --paper-2: #ede4d0;       /* 略深 */
+  --ink: #2a2622;           /* 墨色 */
+  --ink-soft: #5e564c;      /* 浅墨 */
+  --ink-light: #8a8278;     /* 灰墨 */
+  --ochre: #a35d2a;         /* 赭石 */
+  --ochre-soft: #c89165;    /* 浅赭 */
+  --cinnabar: #b34340;      /* 朱砂 (用于错误) */
+  --jade: #5e7a4a;          /* 玉青 (用于正确) */
+  --line: #c9bfa9;          /* 边框线 */
+  --line-soft: #e3d9c2;     /* 软边框 */
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Noto Serif SC", "Songti SC", "STSong", "宋体", serif;
+  font-size: 16px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  background:
+    radial-gradient(ellipse at 10% 10%, rgba(167,93,42,0.04) 0%, transparent 40%),
+    radial-gradient(ellipse at 90% 80%, rgba(94,122,74,0.04) 0%, transparent 50%),
+    var(--paper);
+  min-height: 100vh;
+}
+header.page {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 56px 32px 32px;
+  text-align: center;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+header.page::before, header.page::after {
+  content: "";
+  position: absolute;
+  left: 50%; transform: translateX(-50%);
+  width: 60px; height: 1px;
+  background: var(--ink-light);
+}
+header.page::before { top: 32px; }
+header.page::after  { bottom: 0; }
+.kicker {
+  font-size: 13px;
+  letter-spacing: 0.4em;
+  color: var(--ink-light);
+  margin-bottom: 16px;
+  text-transform: none;
+  font-family: "Kaiti SC", "STKaiti", "KaiTi", serif;
+}
+h1.title {
+  font-family: "Kaiti SC", "STKaiti", "KaiTi", serif;
+  font-size: 38px;
+  font-weight: 500;
+  margin: 0 0 8px;
+  letter-spacing: 0.1em;
+}
+.subtitle {
+  font-size: 17px;
+  color: var(--ink-soft);
+  margin: 8px 0 24px;
+  font-family: "Kaiti SC", "STKaiti", serif;
+}
+.meta {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  font-size: 13px;
+  color: var(--ink-light);
+  letter-spacing: 0.1em;
+}
+.meta .sep { color: var(--line); }
+
+main {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 32px;
+}
+.nav-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 24px;
+  padding: 12px;
+  background: var(--paper-2);
+  border-radius: 4px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border: 1px solid var(--line-soft);
+}
+.nav-pills a {
+  display: inline-block;
+  min-width: 28px;
+  padding: 4px 8px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--ink-soft);
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: "Kaiti SC", "STKaiti", serif;
+}
+.nav-pills a:hover { background: var(--paper); border-color: var(--line); }
+.nav-pills a.answered { background: var(--jade); color: var(--paper); }
+.nav-pills a.wrong    { background: var(--cinnabar); color: var(--paper); }
+.nav-pills a.current  { border-color: var(--ochre); color: var(--ochre); font-weight: 600; }
+
+.q-card {
+  background: #fdfaf2;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 28px 32px;
+  margin: 0 0 24px;
+  position: relative;
+  box-shadow: 0 1px 0 rgba(94,86,76,0.04);
+}
+.q-card.correct { border-color: var(--jade); border-width: 2px; }
+.q-card.wrong   { border-color: var(--cinnabar); border-width: 2px; }
+.q-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 16px;
+  font-family: "Kaiti SC", "STKaiti", serif;
+}
+.q-no {
+  font-size: 22px;
+  color: var(--ochre);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+.q-no .badge {
+  display: inline-block;
+  font-size: 12px;
+  padding: 2px 10px;
+  margin-left: 8px;
+  background: var(--paper-2);
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  letter-spacing: 0.1em;
+  font-weight: 400;
+  vertical-align: middle;
+}
+.q-no .badge.judge   { color: var(--ochre); border-color: var(--ochre-soft); }
+.q-no .badge.fill    { color: var(--jade); border-color: var(--jade); }
+.q-no .badge.essay   { color: var(--ink-soft); }
+.q-stem {
+  font-size: 17px;
+  line-height: 1.85;
+  margin-bottom: 20px;
+  color: var(--ink);
+}
+.options { margin: 16px 0; }
+.opt {
+  display: block;
+  padding: 10px 16px;
+  margin: 6px 0;
+  background: var(--paper);
+  border: 1px solid var(--line-soft);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+  position: relative;
+}
+.opt:hover { background: var(--paper-2); border-color: var(--line); }
+.opt input { margin-right: 12px; vertical-align: middle; }
+.opt .ltr {
+  display: inline-block;
+  width: 22px;
+  font-family: "Kaiti SC", "STKaiti", serif;
+  color: var(--ochre);
+  font-weight: 500;
+}
+.opt.is-correct { background: #e8f0dd; border-color: var(--jade); color: var(--ink); }
+.opt.is-correct::after {
+  content: "✓";
+  position: absolute; right: 12px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--jade); font-weight: 700;
+}
+.opt.is-wrong { background: #f6dcd9; border-color: var(--cinnabar); }
+.opt.is-wrong::after {
+  content: "✗";
+  position: absolute; right: 12px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--cinnabar); font-weight: 700;
+}
+.fill-input, .essay-input {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 16px;
+  font-family: inherit;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  margin: 8px 0;
+  color: var(--ink);
+}
+.fill-input:focus, .essay-input:focus { outline: none; border-color: var(--ochre); }
+.essay-input { min-height: 140px; line-height: 1.7; resize: vertical; }
+
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  align-items: center;
+}
+.btn {
+  padding: 8px 20px;
+  font-size: 14px;
+  font-family: "Kaiti SC", "STKaiti", serif;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--ink-light);
+  border-radius: 3px;
+  cursor: pointer;
+  letter-spacing: 0.15em;
+  transition: all 0.15s;
+}
+.btn:hover { background: var(--paper-2); }
+.btn-primary {
+  background: var(--ochre);
+  color: var(--paper);
+  border-color: var(--ochre);
+}
+.btn-primary:hover { background: #8c4d20; }
+.btn-primary:disabled { background: var(--line); border-color: var(--line); cursor: not-allowed; }
+.btn-ghost { border-color: var(--line); color: var(--ink-soft); }
+
+.feedback {
+  margin-top: 18px;
+  padding: 16px 20px;
+  border-radius: 4px;
+  display: none;
+  font-size: 15px;
+  line-height: 1.7;
+}
+.feedback.show { display: block; }
+.feedback.right {
+  background: #e8f0dd;
+  border-left: 3px solid var(--jade);
+  color: var(--ink);
+}
+.feedback.wrong {
+  background: #f6dcd9;
+  border-left: 3px solid var(--cinnabar);
+  color: var(--ink);
+}
+.feedback .verdict {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 6px;
+  font-family: "Kaiti SC", "STKaiti", serif;
+  letter-spacing: 0.1em;
+}
+.feedback .verdict::before { content: "· "; color: var(--ink-light); }
+.feedback .ref-answer {
+  display: block;
+  margin-top: 10px;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 3px;
+  font-size: 15px;
+}
+.feedback .ref-answer .lbl {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--ink-light);
+  display: block;
+  margin-bottom: 4px;
+  font-family: "Kaiti SC", "STKaiti", serif;
+}
+.feedback .analysis-text {
+  display: block;
+  margin-top: 10px;
+  white-space: pre-wrap;
+  line-height: 1.85;
+}
+
+footer {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 32px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--ink-light);
+  letter-spacing: 0.2em;
+  border-top: 1px solid var(--line-soft);
+  font-family: "Kaiti SC", "STKaiti", serif;
+}
+
+/* 印刷感收尾 */
+@media (max-width: 600px) {
+  .q-card { padding: 20px 18px; }
+  h1.title { font-size: 28px; }
+  main { padding: 16px; }
+}
+</style>
+</head>
+<body>
+<header class="page">
+  <div class="kicker">金刚经导读 · 自测题</div>
+  <h1 class="title">第 059 讲</h1>
+  <div class="subtitle">修一切善法</div>
+  <div class="meta">
+    <span>共 <b>18</b> 题</span>
+    <span class="sep">·</span>
+    <span>多选题 11 · 判断题 2 · 单选题 1 · 填空题 2 · 简答题 1 · 论述题 1</span>
+    <span class="sep">·</span>
+    <span id="summary">已作答 0/18</span>
+  </div>
+</header>
+
+<main>
+  <nav class="nav-pills"><a href="#q059-1" data-qid="q059-1">1</a>
+<a href="#q059-2" data-qid="q059-2">2</a>
+<a href="#q059-3" data-qid="q059-3">3</a>
+<a href="#q059-4" data-qid="q059-4">4</a>
+<a href="#q059-5" data-qid="q059-5">5</a>
+<a href="#q059-6" data-qid="q059-6">6</a>
+<a href="#q059-7" data-qid="q059-7">7</a>
+<a href="#q059-8" data-qid="q059-8">8</a>
+<a href="#q059-9" data-qid="q059-9">9</a>
+<a href="#q059-10" data-qid="q059-10">10</a>
+<a href="#q059-11" data-qid="q059-11">11</a>
+<a href="#q059-12" data-qid="q059-12">12</a>
+<a href="#q059-13" data-qid="q059-13">13</a>
+<a href="#q059-14" data-qid="q059-14">14</a>
+<a href="#q059-15" data-qid="q059-15">15</a>
+<a href="#q059-16" data-qid="q059-16">16</a>
+<a href="#q059-17" data-qid="q059-17">17</a>
+<a href="#q059-18" data-qid="q059-18">18</a></nav>
+  <article class="q-card" id="q059-1" data-type="多选题" data-analysis="老师问须菩提，可不可以以这种完美的色身，就可以见到佛了？具足色身，义净法师译为“色身圆满”。梵文是“pariniṣpatti”，“完美、圆满、具足”。“不也，世尊，如来不应以具足色身见。”不可以以这种完美的色身，就算观到如来了。“如来说具足色身，即非具足色身，是名具足色身。”如来说具足色身，在空性上，根本就没有什么具足色身，只是假名安立具足色身。“不也，世尊，如来不应以具足诸相见。”不可以以观见这个具足的相，就算观见如来了。“何以故？如来说诸相具足，即非具足，是名诸相具足。”如来说诸相具足，在空性上，在智者的实相上，根本没有什么具足诸相，只是假名安立具足诸相。">
+<div class="q-head">
+<span class="q-no">1.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】依据课程内容，在《金刚经》第二十段经文中，佛陀与须菩提关于能否以具足色身、具足诸相见如来的问答中，以下选项中说法正确的是哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q059-1" value="A"> <span class="ltr">A.</span> 具足色身，义净法师译为“色身圆满”。梵文是“pariniṣpatti”，“完美、圆满、具足”。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q059-1" value="B"> <span class="ltr">B.</span> 不可以以这种完美的色身，就算观到如来了。不可以以观见这个具足的相，就算观见如来了。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q059-1" value="C"> <span class="ltr">C.</span> 如来说具足色身，在空性上根本就没有什么具足色身，只是假名安立具足色身。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q059-1" value="D"> <span class="ltr">D.</span> 如来说诸相具足，在空性上，在智者的实相上，根本没有什么具足诸相，只是假名安立具足诸相。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q059-1" data-type="多选题" data-answer="ABCD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q059-1">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q059-2" data-type="多选题" data-analysis="“须菩提，于意云何？佛可以具足色身见不？” “须菩提，于意云何？如来可以具足诸相见不？”这里的具足色身，是指整个色身。具足诸相，即色身上所显现的种种的相，比如说三十二相，这种完美的相。">
+<div class="q-head">
+<span class="q-no">2.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】依据课程内容，应如何理解《金刚经》第二十段经文中的“具足色身、具足诸相”的法义？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q059-2" value="A"> <span class="ltr">A.</span> 具足色身，是指整个色身。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q059-2" value="B"> <span class="ltr">B.</span> 具足诸相，即色身上所显现的种种的相.</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q059-2" value="C"> <span class="ltr">C.</span> 具足诸相，可以指三十二相，这种完美的相。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q059-2" value="D"> <span class="ltr">D.</span> 具足色身与具足诸相两者法义完全相同。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q059-2" data-type="多选题" data-answer="ABC">提交</button><button class="btn btn-ghost btn-reset" data-qid="q059-2">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q059-3" data-type="多选题" data-analysis="《金刚经》第二十一段经文：“须菩提，说法者，无法可说，是名说法。”佛陀证悟的实相是离言，在空性上无法可说，只是名为说法。在智者的实相中，没有说法者，没有听法者，也没有说法这个事，根本无生。在这重境界上，佛陀把自己过去说的法，全盘否定了。">
+<div class="q-head">
+<span class="q-no">3.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】依据课程内容：《金刚经》第二十一段经文中，为什么佛陀说“若人言如来有所说法，即为谤佛，不能解我所说故”？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q059-3" value="A"> <span class="ltr">A.</span> 因为“说法者，无法可说，是名说法。”</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q059-3" value="B"> <span class="ltr">B.</span> 因为佛陀证悟的实相是离言，在空性上无法可说，只是名为说法。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q059-3" value="C"> <span class="ltr">C.</span> 因为在智者的实相中，没有说法者，没有听法者，也没有说法这个事，根本无生。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q059-3" value="D"> <span class="ltr">D.</span> 这句话不是佛说，是有人不认可佛陀说的法，歪曲了佛说的法，这就是谤佛。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q059-3" data-type="多选题" data-answer="ABC">提交</button><button class="btn btn-ghost btn-reset" data-qid="q059-3">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q059-4" data-type="多选题" data-analysis="“无色受想行识”，把五蕴否定了。“无眼耳鼻舌身意，无色声香味触法”，把十二处否定了。“无眼界，乃至无意识界”，把十八界否定了。“无无明，亦无无明尽，乃至无老死，亦无老死尽”，把十二因缘否定了。“无苦集灭道”，把四谛否定了。“无智亦无得”，把能证的般若与所证的涅槃也否定了。这是在什么境界上说法？是在智者证的实相上说法。从凡夫角度讲，是在空性上说法，说而无说，无法可说。">
+<div class="q-head">
+<span class="q-no">4.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】《心经》经文：“是故空中无色，无受想行识，无眼耳鼻舌身意……无智亦无得。”依据课程内容，这一连串的“无”，表达了哪些法义？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q059-4" value="A"> <span class="ltr">A.</span> “无色受想行识”，把五蕴否定了。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q059-4" value="B"> <span class="ltr">B.</span> “无眼耳鼻舌身意，无色声香味触法”，把十二处否定了。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q059-4" value="C"> <span class="ltr">C.</span> “无苦集灭道”，把四谛否定了。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q059-4" value="D"> <span class="ltr">D.</span> “无智亦无得”，把能证的般若与所证的涅槃也否定了。</label>
+<label class="opt" data-ltr="E"><input type="checkbox" name="q059-4" value="E"> <span class="ltr">E.</span> “无无明，亦无无明尽，乃至无老死，亦无老死尽”，把十二因缘否定了。</label>
+<label class="opt" data-ltr="F"><input type="checkbox" name="q059-4" value="F"> <span class="ltr">F.</span> 这是在智者证的实相上说法。从凡夫角度讲，是在空性上说法，说而无说，无法可说。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q059-4" data-type="多选题" data-answer="ABCDEF">提交</button><button class="btn btn-ghost btn-reset" data-qid="q059-4">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q059-5" data-type="多选题" data-analysis="大家注意，否定的五蕴、十二处、十八界，特别是十二因缘、四谛、智与得，这都是佛陀说的法。这些否定的东西，十二因缘、四谛，都不是外道法，都是佛陀自己亲口所说的法。但是在《心经》这里，佛陀把自己过去所说的这一切，全盘否定了。这是在智者证的实相上说法。从凡夫角度讲，是在空性上说法，说而无说，无法可说。">
+<div class="q-head">
+<span class="q-no">5.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】依据课程内容，在《心经》中一连用多个“无”，否定了五蕴、十二处、十八界、十二因缘、四谛以及能证之智、所证之得，对此应如何理解这段经文的法义？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q059-5" value="A"> <span class="ltr">A.</span> 这说明十二因缘、四谛这些法，其实都是外道法。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q059-5" value="B"> <span class="ltr">B.</span> 在《心经》这段经文里，佛陀把自己过去所说的这一切，全盘否定了。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q059-5" value="C"> <span class="ltr">C.</span> 这是佛陀在智者证的实相上说法。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q059-5" value="D"> <span class="ltr">D.</span> 从凡夫角度讲，这是在空性上说法，说而无说，无法可说。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q059-5" data-type="多选题" data-answer="BCD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q059-5">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q059-6" data-type="判断题" data-analysis="“须菩提，汝勿谓如来作是念：‘我当有所说法。’莫作是念。”佛陀跟须菩提说，你千万不要认为，如来会觉得我当有所说法，你不要这样想。为什么呢？“若人言如来有所说法，即为谤佛，不能解我所说故。”你不能够认为我这个如来有所说法，为什么呢？如果你说如来有所说法，就是诽谤佛。">
+<div class="q-head">
+<span class="q-no">6.<span class="badge judge">判断</span></span>
+</div>
+<div class="q-stem">【判断题】依据《金刚经》第二十一段经文，佛陀告诉须菩提不要认为如来会觉得“我当有所说法”，如果有人说如来有所说法即是谤佛，是不能解如来真实义。</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="radio" name="q059-6" value="A"> <span class="ltr">A.</span> 正确</label>
+<label class="opt" data-ltr="B"><input type="radio" name="q059-6" value="B"> <span class="ltr">B.</span> 错误</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q059-6" data-type="判断题" data-answer="正确">提交</button><button class="btn btn-ghost btn-reset" data-qid="q059-6">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q059-7" data-type="单选题" data-analysis="须菩提对佛说，老师，以后会有众生，特别是在未来世—玄奘译本很明确地讲“后五百岁”，也就是到了我们今天这个时候。">
+<div class="q-head">
+<span class="q-no">7.<span class="badge ">单选</span></span>
+</div>
+<div class="q-stem">【单选题】依据课程内容，《金刚经》第二十一段经文“尔时，慧命须菩提白佛言：‘世尊，颇有众生，于未来世，闻说是法，生信心不？’”这里的“未来世”指的是以下哪一个时期？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="radio" name="q059-7" value="A"> <span class="ltr">A.</span> 正法时期</label>
+<label class="opt" data-ltr="B"><input type="radio" name="q059-7" value="B"> <span class="ltr">B.</span> 像法时期</label>
+<label class="opt" data-ltr="C"><input type="radio" name="q059-7" value="C"> <span class="ltr">C.</span> 初五百岁</label>
+<label class="opt" data-ltr="D"><input type="radio" name="q059-7" value="D"> <span class="ltr">D.</span> 后五百岁</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q059-7" data-type="单选题" data-answer="D">提交</button><button class="btn btn-ghost btn-reset" data-qid="q059-7">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q059-8" data-type="多选题" data-analysis="对照第六段经文和第二十一段经文，境界截然不同。第六段经文，明显是说给资粮位众生听的。这第二十一段经文，是说见道位、修道位的法。大家要体会第二十一段经文和第六段经文佛陀这两段回答的差异。">
+<div class="q-head">
+<span class="q-no">8.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】《金刚经》第二十一段经文和第六段经文，须菩提都向佛陀提问：“颇有众生，于未来世，闻说是法，生信心不？”以下选项中说法正确的有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q059-8" value="A"> <span class="ltr">A.</span> 这两段经文是在说同一个问题，佛陀的回答虽不同，但意思相同。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q059-8" value="B"> <span class="ltr">B.</span> 对照第六段经文和第二十一段经文，佛陀回答的境界截然不同。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q059-8" value="C"> <span class="ltr">C.</span> 第六段经文，佛陀是说给资粮位众生听的。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q059-8" value="D"> <span class="ltr">D.</span> 第二十一段经文，佛陀是说见道位、修道位的法。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q059-8" data-type="多选题" data-answer="BCD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q059-8">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q059-9" data-type="多选题" data-analysis="按照印度古德的划分，《金刚经》第十七段经文开始，是讲加行位、见道位、修道位的境界，和第十七段经文之前的资粮位，是不一样的。在这一段经文，老师对类似问题的回答就可以体现出来。第六段经文老师耐心回答说，会有众生信的，这里回答完全不一样，说他们根本不是什么众生，当然也不是不是众生，为什么这么说呢？众生，如来说非众生，是名众生。在空性上，在实相上根本就没有众生，只是假名安立的众生。还有什么信与不信的呢？所以大家对照第六段经文和第二十一段经文，境界截然不同。第六段经文，明显是说给资粮位众生听的。这第二十一段经文，是说见道位、修道位的法。根本就没有众生，当然也不是不是众生，要远离有无二边。">
+<div class="q-head">
+<span class="q-no">9.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】依据课程内容，对于《金刚经》第二十一段经文“佛言：须菩提，彼非众生，非不众生。何以故？须菩提，众生众生者，如来说非众生，是名众生。”以下选项中理解正确的有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q059-9" value="A"> <span class="ltr">A.</span> 他们根本不是什么众生，当然也不是不是众生，要远离有无二边。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q059-9" value="B"> <span class="ltr">B.</span> 第六段与本段虽是同一提问，但佛陀回答境界不同；第六段对资粮位所说，本段为见道位、修道位所说。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q059-9" value="C"> <span class="ltr">C.</span> 因为能听信佛法的众生，都不是普通人，所以既是众生也不是众生。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q059-9" value="D"> <span class="ltr">D.</span> 在空性上，在实相上根本就没有众生，只是假名安立的众生。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q059-9" data-type="多选题" data-answer="ABD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q059-9">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q059-10" data-type="多选题" data-analysis="“须菩提白佛言：‘世尊，佛得阿耨多罗三藐三菩提，为无所得耶？’”这个“得”还是“证得”。佛证得阿耨多罗三藐三菩提，是无所得。注意，《心经》也说“以无所得故”，无所得。佛陀所证得的阿耨多罗三藐三菩提，是没有一丁丁点儿的法可以得到的，只是假名安立阿耨多罗三藐三菩提。">
+<div class="q-head">
+<span class="q-no">10.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】对于《金刚经》第二十二段经文，“世尊，佛得阿耨多罗三藐三菩提，为无所得耶？如是如是，须菩提，我于阿耨多罗三藐三菩提，乃至无有少法可得，是名阿耨多罗三藐三菩提。”以下选项中说法正确的是？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q059-10" value="A"> <span class="ltr">A.</span> 这里的“得”是“证得”。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q059-10" value="B"> <span class="ltr">B.</span> 这里的“得”是“获得”。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q059-10" value="C"> <span class="ltr">C.</span> 佛证得阿耨多罗三藐三菩提，是无所得。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q059-10" value="D"> <span class="ltr">D.</span> “我于阿耨多罗三藐三菩提，乃至无有少法可得”这与《心经》说“以无所得故”相互印证。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q059-10" data-type="多选题" data-answer="ACD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q059-10">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q059-11" data-type="多选题" data-analysis="“复次，须菩提，是法平等，无有高下，是名阿耨多罗三藐三菩提。”这个法是平等的，没有高下。什么叫没有高下？高下是二边见，其实也可以说：是法平等，无有优劣；是法平等，无有好坏；是法平等，无有美丑；是法平等，无有善恶。泯灭二边，只是名阿耨多罗三藐三菩提。">
+<div class="q-head">
+<span class="q-no">11.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】依据课程内容，《金刚经》第二十三段经文，“须菩提，是法平等，无有高下，是名阿耨多罗三藐三菩提”，对其中的“是法平等，无有高下”，以下选项中理解正确的有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q059-11" value="A"> <span class="ltr">A.</span> 这个法是平等的，没有高下。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q059-11" value="B"> <span class="ltr">B.</span> 高下是二边见，所以也可以说，是法平等，无有优劣，无有好坏，无有美丑，无有善恶。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q059-11" value="C"> <span class="ltr">C.</span> “是法平等，无有高下”，这是在泯灭二边。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q059-11" value="D"> <span class="ltr">D.</span> “是法平等，无有高下”，法虽然有，但是不要执着，因此法是平等的，没有高下。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q059-11" data-type="多选题" data-answer="ABC">提交</button><button class="btn btn-ghost btn-reset" data-qid="q059-11">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q059-12" data-type="多选题" data-analysis="只有善法，才能与无我、无人、无众生、无寿者相应。善法，可以是有我，也可以是无我。但是恶法，是不能与无我、无人、无众生、无寿者相应的。因为恶法只可能是有我的，不可能是无我的。抢银行一定有我，杀人放火一定有我，不可能无我，所以恶法是不与无我、无人、无众生、无寿者相应。既然以无我、无人、无众生、无寿者修的法，一定是善法，善法虽不是真实，但是善法随顺真实。">
+<div class="q-head">
+<span class="q-no">12.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】《金刚经》第二十三段经文讲到：是法平等无有高下，却仍要“以无我、无人、无众生、无寿者，修一切善法，即得阿耨多罗三藐三菩提。”既然在实相上善恶不二，为何还要修一切善法？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q059-12" value="A"> <span class="ltr">A.</span> 因为只有善法，才能与无我、无人、无众生、无寿者相应。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q059-12" value="B"> <span class="ltr">B.</span> 恶法只可能是有我的，不可能是无我的。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q059-12" value="C"> <span class="ltr">C.</span> 恶法是不与无我、无人、无众生、无寿者相应。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q059-12" value="D"> <span class="ltr">D.</span> 以无我、无人、无众生、无寿者修的法，一定是善法，善法虽不是真实，但是善法随顺真实。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q059-12" data-type="多选题" data-answer="ABCD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q059-12">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q059-13" data-type="填空题" data-analysis="“须菩提，所言善法者，如来说即非善法，是名善法。”如来安立了善法的名言，但是在空性，在实相上，根本就没有什么善法，只是假名安立善法。佛陀提了善法的名言，随说随扫。">
+<div class="q-head">
+<span class="q-no">13.<span class="badge fill">填空</span></span>
+</div>
+<div class="q-stem">【填空题】在《金刚经》第二十三段经文中，佛说“须菩提，所言善法者，如来说即非善法，是名善法。”是说如来安立了善法的名言，但是在（）和（）上，根本就没有什么善法，只是（）善法。佛陀提了善法的名言，随说随扫。</div>
+<input class="fill-input" name="q059-13" placeholder="请输入答案">
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q059-13" data-type="填空题" data-answer="空性，实相，假名安立">提交</button><button class="btn btn-ghost btn-reset" data-qid="q059-13">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q059-14" data-type="判断题" data-analysis="“实无有众生如来度者。”压根、根本就没有众生如来度，一切法无生。">
+<div class="q-head">
+<span class="q-no">14.<span class="badge judge">判断</span></span>
+</div>
+<div class="q-stem">【判断题】在《金刚经》第二十五段经文中，佛说“汝等勿谓如来作是念：我当度众生”，是因为实无有众生如来度者，压根、根本就没有众生如来度，一切法无生。</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="radio" name="q059-14" value="A"> <span class="ltr">A.</span> 正确</label>
+<label class="opt" data-ltr="B"><input type="radio" name="q059-14" value="B"> <span class="ltr">B.</span> 错误</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q059-14" data-type="判断题" data-answer="正确">提交</button><button class="btn btn-ghost btn-reset" data-qid="q059-14">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q059-15" data-type="多选题" data-analysis="佛陀说，我也不过就是假名安立个我，但是凡夫之人是以为有我。凡夫所执的我，是虚妄分别，是妄执，是把一个根本没有的当成有，是凡夫以为有。这里的“凡夫”，梵文实际上是“愚钝的普通人”，这些愚钝的普通人，以为有我。当然佛陀安立了凡夫之名，随说随扫。">
+<div class="q-head">
+<span class="q-no">15.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】对于《金刚经》第二十五段经文“须菩提，如来说有我者，则非有我，而凡夫之人以为有我”，以下选项中理解正确的有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q059-15" value="A"> <span class="ltr">A.</span> 佛陀说，“我”也不过就是假名安立个我，但是凡夫之人是以为有我。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q059-15" value="B"> <span class="ltr">B.</span> 凡夫所执的我，是虚妄分别，是妄执，这些愚钝的普通人，以为有我。。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q059-15" value="C"> <span class="ltr">C.</span> 凡夫所执的我，是把一个根本没有的当成有，是凡夫以为有。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q059-15" value="D"> <span class="ltr">D.</span> 佛陀安立了凡夫之名，随说随扫。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q059-15" data-type="多选题" data-answer="ABCD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q059-15">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q059-16" data-type="填空题" data-analysis="这里的“凡夫”，梵文实际上是“愚钝的普通人”，这些愚钝的普通人，以为有我。不要以为如来说了凡夫，就以为真的有凡夫。在空性，在实相中，根本就没有凡夫。">
+<div class="q-head">
+<span class="q-no">16.<span class="badge fill">填空</span></span>
+</div>
+<div class="q-stem">【填空题】在《金刚经》第二十五段经文：“须菩提，凡夫者，如来说则非凡夫。”不要以为如来说了凡夫，就以为真的有凡夫。在（）和（）中，根本就没有凡夫。</div>
+<input class="fill-input" name="q059-16" placeholder="请输入答案">
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q059-16" data-type="填空题" data-answer="空性，实相">提交</button><button class="btn btn-ghost btn-reset" data-qid="q059-16">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q059-17" data-type="简答题" data-analysis="">
+<div class="q-head">
+<span class="q-no">17.<span class="badge essay">简答</span></span>
+</div>
+<div class="q-stem">【简答题】依据课程内容，《金刚经》第二十三段说“是法平等，无有高下”，紧接着又说要“修一切善法”。既然诸法在实相上平等无二、无有善恶，为什么佛陀还要特别强调“修一切善法”？</div>
+<textarea class="essay-input" name="q059-17" placeholder="请简要作答…"></textarea>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q059-17" data-type="简答题" data-answer="既然以无我、无人、无众生、无寿者修的法，一定是善法，善法虽不是真实，但是善法随顺真实。">提交</button><button class="btn btn-ghost btn-reset" data-qid="q059-17">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q059-18" data-type="论述题" data-analysis="">
+<div class="q-head">
+<span class="q-no">18.<span class="badge essay">论述</span></span>
+</div>
+<div class="q-stem">【论述题】从《金刚经》第二十一段“无法可说”到第二十三段“修一切善法”，佛陀明明说法四十九年，为何《金刚经》第二十一段说‘无法可说’？又在第二十三段说“修一切善法”。表面上看，“无法可说”否定说法，“修一切善法”肯定修行，二者似乎矛盾。请结合课程内容，阐述这一“否定”与“肯定”是如何在修行次第上得到统一的。</div>
+<textarea class="essay-input" name="q059-18" placeholder="请详细论述…"></textarea>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q059-18" data-type="论述题" data-answer="1、《金刚经》第二十一段讲“无法可说”，佛陀证悟的实相是离言，在空性上无法可说，只是名为说法。在智者的实相中，没有说法者，没有听法者，也没有说法这个事，根本无生。在这重境界上，佛陀把自己过去说的法，全盘否定了。这是在智者证的实相上说法。从凡夫角度讲，是在空性上说法，说而无说，无法可说。
+2、《金刚经》第二十三段讲“修一切善法”，虽然诸法实相平等无二，但作为被无明所障的凡夫，必须依靠一个“随顺真实”的方便来逐步破除无明。佛陀指导因地的菩萨，还没有如实证得这个“无法可说”的境界时应该怎样修行。应该“以无我、无人、无众生、无寿者，修一切善法”。前面说“是法平等，无有高下”，也可以理解为是法平等、无有善恶，已经远离二边，在空性上，在实相上，善恶无二，泯灭了善恶二边。但是作为因地的菩萨的修行，无我、无人、无众生、无寿者修法，只有善法，才能与无我、无人、无众生、无寿者相应。善法，可以是有我，也可以是无我。但是恶法，是不能与无我、无人、无众生、无寿者相应的。因为恶法只可能是有我的，不可能是无我的。抢银行一定有我，杀人放火一定有我，不可能无我，所以恶法是不与无我、无人、无众生、无寿者相应。既然以无我、无人、无众生、无寿者修的法，一定是善法，善法虽不是真实，但是善法随顺真实。
+这一“否定”与“肯定”统一于修行次第：佛陀用以“无我”的“修一切善法”的行持来让因地的菩萨趋向那个“无法可说”的实相。二者不是矛盾，而是次第。">提交</button><button class="btn btn-ghost btn-reset" data-qid="q059-18">重做</button></div><div class="feedback"></div></article>
+</main>
+
+<footer>
+  <p>业精于勤 · 行成于思</p>
+</footer>
+
+<script>window.QSET = "quiz-059";</script>
+<script>
+(function(){
+  const KEY = (window.QSET || 'quiz') + '.progress';
+
+  function load() {
+    try { return JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e) { return {}; }
+  }
+  function save(data) {
+    try { localStorage.setItem(KEY, JSON.stringify(data)); } catch(e) {}
+  }
+
+  function setCurrent(anchor) {
+    document.querySelectorAll('.nav-pills a').forEach(a => a.classList.remove('current'));
+    const el = document.querySelector('.nav-pills a[href="#' + anchor + '"]');
+    if (el) el.classList.add('current');
+  }
+
+  function grade(qid, type, answer) {
+    const card = document.getElementById(qid);
+    if (!card) return;
+    const fb = card.querySelector('.feedback');
+    const correctEl = card.querySelector('.q-no .verdict-mark');
+    const userAnswer = collect(card, type);
+
+    // 标记作答
+    if (userAnswer !== null && userAnswer !== '' && !(Array.isArray(userAnswer) && userAnswer.length === 0)) {
+      const navA = document.querySelector('.nav-pills a[href="#' + qid + '"]');
+      if (navA) navA.classList.add('answered');
+    }
+
+    // 判分
+    let isRight = null;
+    if (type === '简答题' || type === '论述题') {
+      // 开放题: 不判分, 只显示参考答案
+      isRight = 'open';
+    } else if (type === '判断题') {
+      // 判断题: A=正确, B=错误; answer 可能是字母或文字, 归一化后再比较
+      const normJudge = v => v === 'A' ? '正确' : v === 'B' ? '错误' : v;
+      isRight = (normJudge(userAnswer) === normJudge(answer));
+    } else if (type === '单选题') {
+      isRight = (userAnswer === answer);
+    } else if (type === '多选题') {
+      const u = Array.isArray(userAnswer) ? userAnswer.slice().sort().join('') : '';
+      const a = (answer || '').split('').sort().join('');
+      isRight = (u === a);
+    } else if (type === '填空题') {
+      isRight = (String(userAnswer || '').trim() === String(answer || '').trim());
+    }
+
+    // 渲染反馈
+    fb.classList.add('show');
+    fb.classList.remove('right', 'wrong');
+    if (isRight === 'open') {
+      fb.classList.add('right');
+      fb.innerHTML = '<div class="verdict">参考答案</div>' +
+        '<span class="analysis-text">' + escHtml(answer) + '</span>' +
+        renderAnalysis(card);
+      card.classList.add('correct');
+    } else if (isRight) {
+      fb.classList.add('right');
+      fb.innerHTML = '<div class="verdict">正确</div>' + renderAnalysis(card);
+      card.classList.add('correct');
+    } else {
+      fb.classList.add('wrong');
+      fb.innerHTML = '<div class="verdict">错误 · 正确答案: ' + escHtml(answer) + '</div>' + renderAnalysis(card);
+      card.classList.add('wrong');
+      const navA = document.querySelector('.nav-pills a[href="#' + qid + '"]');
+      if (navA) {
+        navA.classList.remove('answered');
+        navA.classList.add('wrong');
+      }
+    }
+
+    // 标记正确选项
+    if (type === '单选题' || type === '多选题') {
+      const correctSet = new Set((answer || '').split(''));
+      card.querySelectorAll('.opt').forEach(opt => {
+        const ltr = opt.getAttribute('data-ltr');
+        if (correctSet.has(ltr)) opt.classList.add('is-correct');
+      });
+    } else if (type === '判断题') {
+      // answer 可能是 '正确'/'错误' 或 'A'/'B', 归一化为字母再比较
+      const ansLetter = answer === '正确' ? 'A' : answer === '错误' ? 'B' : answer;
+      card.querySelectorAll('.opt').forEach(opt => {
+        if (opt.getAttribute('data-ltr') === ansLetter) opt.classList.add('is-correct');
+      });
+    }
+
+    // 禁用重复提交
+    card.querySelector('.btn-submit').disabled = true;
+    card.querySelector('.btn-submit').textContent = '已提交';
+
+    // 保存进度
+    const data = load();
+    data[qid] = { type, answer, userAnswer, isRight, ts: Date.now() };
+    save(data);
+
+    // 更新统计
+    updateSummary();
+  }
+
+  function collect(card, type) {
+    if (type === '单选题' || type === '判断题') {
+      const sel = card.querySelector('input[type=radio]:checked');
+      return sel ? sel.value : null;
+    }
+    if (type === '多选题') {
+      const sels = card.querySelectorAll('input[type=checkbox]:checked');
+      return Array.from(sels).map(s => s.value);
+    }
+    if (type === '填空题') {
+      const inp = card.querySelector('.fill-input');
+      return inp ? inp.value : '';
+    }
+    if (type === '简答题' || type === '论述题') {
+      const inp = card.querySelector('.essay-input');
+      return inp ? inp.value : '';
+    }
+    return null;
+  }
+
+  function renderAnalysis(card) {
+    const a = card.getAttribute('data-analysis');
+    if (!a) return '';
+    return '<div class="ref-answer"><span class="lbl">解析</span>' +
+      '<span class="analysis-text">' + escHtml(a) + '</span></div>';
+  }
+
+  function escHtml(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function updateSummary() {
+    const data = load();
+    const cards = document.querySelectorAll('.q-card');
+    let total = 0, correct = 0, wrong = 0, open_ = 0;
+    cards.forEach(c => {
+      const qid = c.id;
+      const type = c.getAttribute('data-type');
+      const r = data[qid];
+      if (!r) return;
+      total += 1;
+      if (r.isRight === 'open') open_ += 1;
+      else if (r.isRight) correct += 1;
+      else wrong += 1;
+    });
+    const sum = document.getElementById('summary');
+    if (sum) {
+      sum.innerHTML = '已作答 <b>' + total + '</b>/' + cards.length +
+        ' · 正确 <b style="color:var(--jade)">' + correct + '</b>' +
+        ' · 错误 <b style="color:var(--cinnabar)">' + wrong + '</b>' +
+        ' · 开放题 <b>' + open_ + '</b>';
+    }
+  }
+
+  function bind() {
+    document.querySelectorAll('.btn-submit').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const qid = btn.getAttribute('data-qid');
+        const type = btn.getAttribute('data-type');
+        const answer = btn.getAttribute('data-answer');
+        grade(qid, type, answer);
+      });
+    });
+    document.querySelectorAll('.btn-reset').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const qid = btn.getAttribute('data-qid');
+        const data = load();
+        delete data[qid];
+        save(data);
+        location.reload();
+      });
+    });
+    // 平滑滚动 + current 高亮
+    document.querySelectorAll('.nav-pills a').forEach(a => {
+      a.addEventListener('click', e => {
+        setCurrent(a.getAttribute('href').slice(1));
+      });
+    });
+    // 恢复历史进度
+    const data = load();
+    Object.keys(data).forEach(qid => {
+      const r = data[qid];
+      const card = document.getElementById(qid);
+      if (!card) return;
+      const navA = document.querySelector('.nav-pills a[href="#' + qid + '"]');
+      if (r.isRight === true) {
+        card.classList.add('correct');
+        if (navA) navA.classList.add('answered');
+      } else if (r.isRight === false) {
+        card.classList.add('wrong');
+        if (navA) { navA.classList.remove('answered'); navA.classList.add('wrong'); }
+      } else if (r.isRight === 'open') {
+        card.classList.add('correct');
+        if (navA) navA.classList.add('answered');
+      }
+    });
+    updateSummary();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bind);
+  } else { bind(); }
+})();
+</script>
+</body>
+</html>

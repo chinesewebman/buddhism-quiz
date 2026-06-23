@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>金刚经导读 · 第052讲 · 无生法义</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f7f1e6;        /* 宣纸米白 */
+  --paper-2: #ede4d0;       /* 略深 */
+  --ink: #2a2622;           /* 墨色 */
+  --ink-soft: #5e564c;      /* 浅墨 */
+  --ink-light: #8a8278;     /* 灰墨 */
+  --ochre: #a35d2a;         /* 赭石 */
+  --ochre-soft: #c89165;    /* 浅赭 */
+  --cinnabar: #b34340;      /* 朱砂 (用于错误) */
+  --jade: #5e7a4a;          /* 玉青 (用于正确) */
+  --line: #c9bfa9;          /* 边框线 */
+  --line-soft: #e3d9c2;     /* 软边框 */
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Noto Serif SC", "Songti SC", "STSong", "宋体", serif;
+  font-size: 16px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  background:
+    radial-gradient(ellipse at 10% 10%, rgba(167,93,42,0.04) 0%, transparent 40%),
+    radial-gradient(ellipse at 90% 80%, rgba(94,122,74,0.04) 0%, transparent 50%),
+    var(--paper);
+  min-height: 100vh;
+}
+header.page {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 56px 32px 32px;
+  text-align: center;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+header.page::before, header.page::after {
+  content: "";
+  position: absolute;
+  left: 50%; transform: translateX(-50%);
+  width: 60px; height: 1px;
+  background: var(--ink-light);
+}
+header.page::before { top: 32px; }
+header.page::after  { bottom: 0; }
+.kicker {
+  font-size: 13px;
+  letter-spacing: 0.4em;
+  color: var(--ink-light);
+  margin-bottom: 16px;
+  text-transform: none;
+  font-family: "Kaiti SC", "STKaiti", "KaiTi", serif;
+}
+h1.title {
+  font-family: "Kaiti SC", "STKaiti", "KaiTi", serif;
+  font-size: 38px;
+  font-weight: 500;
+  margin: 0 0 8px;
+  letter-spacing: 0.1em;
+}
+.subtitle {
+  font-size: 17px;
+  color: var(--ink-soft);
+  margin: 8px 0 24px;
+  font-family: "Kaiti SC", "STKaiti", serif;
+}
+.meta {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  font-size: 13px;
+  color: var(--ink-light);
+  letter-spacing: 0.1em;
+}
+.meta .sep { color: var(--line); }
+
+main {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 32px;
+}
+.nav-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 24px;
+  padding: 12px;
+  background: var(--paper-2);
+  border-radius: 4px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border: 1px solid var(--line-soft);
+}
+.nav-pills a {
+  display: inline-block;
+  min-width: 28px;
+  padding: 4px 8px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--ink-soft);
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: "Kaiti SC", "STKaiti", serif;
+}
+.nav-pills a:hover { background: var(--paper); border-color: var(--line); }
+.nav-pills a.answered { background: var(--jade); color: var(--paper); }
+.nav-pills a.wrong    { background: var(--cinnabar); color: var(--paper); }
+.nav-pills a.current  { border-color: var(--ochre); color: var(--ochre); font-weight: 600; }
+
+.q-card {
+  background: #fdfaf2;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 28px 32px;
+  margin: 0 0 24px;
+  position: relative;
+  box-shadow: 0 1px 0 rgba(94,86,76,0.04);
+}
+.q-card.correct { border-color: var(--jade); border-width: 2px; }
+.q-card.wrong   { border-color: var(--cinnabar); border-width: 2px; }
+.q-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 16px;
+  font-family: "Kaiti SC", "STKaiti", serif;
+}
+.q-no {
+  font-size: 22px;
+  color: var(--ochre);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+.q-no .badge {
+  display: inline-block;
+  font-size: 12px;
+  padding: 2px 10px;
+  margin-left: 8px;
+  background: var(--paper-2);
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  letter-spacing: 0.1em;
+  font-weight: 400;
+  vertical-align: middle;
+}
+.q-no .badge.judge   { color: var(--ochre); border-color: var(--ochre-soft); }
+.q-no .badge.fill    { color: var(--jade); border-color: var(--jade); }
+.q-no .badge.essay   { color: var(--ink-soft); }
+.q-stem {
+  font-size: 17px;
+  line-height: 1.85;
+  margin-bottom: 20px;
+  color: var(--ink);
+}
+.options { margin: 16px 0; }
+.opt {
+  display: block;
+  padding: 10px 16px;
+  margin: 6px 0;
+  background: var(--paper);
+  border: 1px solid var(--line-soft);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+  position: relative;
+}
+.opt:hover { background: var(--paper-2); border-color: var(--line); }
+.opt input { margin-right: 12px; vertical-align: middle; }
+.opt .ltr {
+  display: inline-block;
+  width: 22px;
+  font-family: "Kaiti SC", "STKaiti", serif;
+  color: var(--ochre);
+  font-weight: 500;
+}
+.opt.is-correct { background: #e8f0dd; border-color: var(--jade); color: var(--ink); }
+.opt.is-correct::after {
+  content: "✓";
+  position: absolute; right: 12px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--jade); font-weight: 700;
+}
+.opt.is-wrong { background: #f6dcd9; border-color: var(--cinnabar); }
+.opt.is-wrong::after {
+  content: "✗";
+  position: absolute; right: 12px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--cinnabar); font-weight: 700;
+}
+.fill-input, .essay-input {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 16px;
+  font-family: inherit;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  margin: 8px 0;
+  color: var(--ink);
+}
+.fill-input:focus, .essay-input:focus { outline: none; border-color: var(--ochre); }
+.essay-input { min-height: 140px; line-height: 1.7; resize: vertical; }
+
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  align-items: center;
+}
+.btn {
+  padding: 8px 20px;
+  font-size: 14px;
+  font-family: "Kaiti SC", "STKaiti", serif;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--ink-light);
+  border-radius: 3px;
+  cursor: pointer;
+  letter-spacing: 0.15em;
+  transition: all 0.15s;
+}
+.btn:hover { background: var(--paper-2); }
+.btn-primary {
+  background: var(--ochre);
+  color: var(--paper);
+  border-color: var(--ochre);
+}
+.btn-primary:hover { background: #8c4d20; }
+.btn-primary:disabled { background: var(--line); border-color: var(--line); cursor: not-allowed; }
+.btn-ghost { border-color: var(--line); color: var(--ink-soft); }
+
+.feedback {
+  margin-top: 18px;
+  padding: 16px 20px;
+  border-radius: 4px;
+  display: none;
+  font-size: 15px;
+  line-height: 1.7;
+}
+.feedback.show { display: block; }
+.feedback.right {
+  background: #e8f0dd;
+  border-left: 3px solid var(--jade);
+  color: var(--ink);
+}
+.feedback.wrong {
+  background: #f6dcd9;
+  border-left: 3px solid var(--cinnabar);
+  color: var(--ink);
+}
+.feedback .verdict {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 6px;
+  font-family: "Kaiti SC", "STKaiti", serif;
+  letter-spacing: 0.1em;
+}
+.feedback .verdict::before { content: "· "; color: var(--ink-light); }
+.feedback .ref-answer {
+  display: block;
+  margin-top: 10px;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 3px;
+  font-size: 15px;
+}
+.feedback .ref-answer .lbl {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--ink-light);
+  display: block;
+  margin-bottom: 4px;
+  font-family: "Kaiti SC", "STKaiti", serif;
+}
+.feedback .analysis-text {
+  display: block;
+  margin-top: 10px;
+  white-space: pre-wrap;
+  line-height: 1.85;
+}
+
+footer {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 32px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--ink-light);
+  letter-spacing: 0.2em;
+  border-top: 1px solid var(--line-soft);
+  font-family: "Kaiti SC", "STKaiti", serif;
+}
+
+/* 印刷感收尾 */
+@media (max-width: 600px) {
+  .q-card { padding: 20px 18px; }
+  h1.title { font-size: 28px; }
+  main { padding: 16px; }
+}
+</style>
+</head>
+<body>
+<header class="page">
+  <div class="kicker">金刚经导读 · 自测题</div>
+  <h1 class="title">第 052 讲</h1>
+  <div class="subtitle">无生法义</div>
+  <div class="meta">
+    <span>共 <b>20</b> 题</span>
+    <span class="sep">·</span>
+    <span>单选题 3 · 填空题 2 · 多选题 10 · 判断题 2 · 简答题 2 · 论述题 1</span>
+    <span class="sep">·</span>
+    <span id="summary">已作答 0/20</span>
+  </div>
+</header>
+
+<main>
+  <nav class="nav-pills"><a href="#q052-1" data-qid="q052-1">1</a>
+<a href="#q052-2" data-qid="q052-2">2</a>
+<a href="#q052-3" data-qid="q052-3">3</a>
+<a href="#q052-4" data-qid="q052-4">4</a>
+<a href="#q052-5" data-qid="q052-5">5</a>
+<a href="#q052-6" data-qid="q052-6">6</a>
+<a href="#q052-7" data-qid="q052-7">7</a>
+<a href="#q052-8" data-qid="q052-8">8</a>
+<a href="#q052-9" data-qid="q052-9">9</a>
+<a href="#q052-10" data-qid="q052-10">10</a>
+<a href="#q052-11" data-qid="q052-11">11</a>
+<a href="#q052-12" data-qid="q052-12">12</a>
+<a href="#q052-13" data-qid="q052-13">13</a>
+<a href="#q052-14" data-qid="q052-14">14</a>
+<a href="#q052-15" data-qid="q052-15">15</a>
+<a href="#q052-16" data-qid="q052-16">16</a>
+<a href="#q052-17" data-qid="q052-17">17</a>
+<a href="#q052-18" data-qid="q052-18">18</a>
+<a href="#q052-19" data-qid="q052-19">19</a>
+<a href="#q052-20" data-qid="q052-20">20</a></nav>
+  <article class="q-card" id="q052-1" data-type="单选题" data-analysis="“须菩提，实无有法如来得阿耨多罗三藐三菩提。”这是第二次出现“实无有法”，玄奘法师译作“无有少法”——“无有少法能证阿耨多罗三藐三菩提”。……第三次出现“实无有法”，玄奘法师依然翻译为“无有少法”，没有一丁丁点儿的法，能够证得无上正等正觉。">
+<div class="q-head">
+<span class="q-no">1.<span class="badge ">单选</span></span>
+</div>
+<div class="q-stem">【单选题】《金刚经》鸠摩罗什译本第十七段经文中反复出现的 “实无有法”，玄奘法师的翻译是什么？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="radio" name="q052-1" value="A"> <span class="ltr">A.</span> 无有诸法</label>
+<label class="opt" data-ltr="B"><input type="radio" name="q052-1" value="B"> <span class="ltr">B.</span> 无有少法</label>
+<label class="opt" data-ltr="C"><input type="radio" name="q052-1" value="C"> <span class="ltr">C.</span> 离一切法</label>
+<label class="opt" data-ltr="D"><input type="radio" name="q052-1" value="D"> <span class="ltr">D.</span> 离有无法</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q052-1" data-type="单选题" data-answer="B">提交</button><button class="btn btn-ghost btn-reset" data-qid="q052-1">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q052-2" data-type="填空题" data-analysis="授记，是佛对发心修行的弟子将来要证得什么果位的预记。">
+<div class="q-head">
+<span class="q-no">2.<span class="badge fill">填空</span></span>
+</div>
+<div class="q-stem">【填空题】（），是佛对发心修行的弟子将来要证得什么果位的预记。</div>
+<input class="fill-input" name="q052-2" placeholder="请输入答案">
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q052-2" data-type="填空题" data-answer="授记">提交</button><button class="btn btn-ghost btn-reset" data-qid="q052-2">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q052-3" data-type="多选题" data-analysis="“以实无有法得阿耨多罗三藐三菩提，是故然灯佛与我授记，作是言：‘汝于来世，当得作佛，号释迦牟尼。’”第三次出现“实无有法”，玄奘法师依然翻译为“无有少法”，没有一丁丁点儿的法，能够证得无上正等正觉。正因为这样，燃灯佛才预记我说，你在来世，你会成佛，号释迦牟尼。">
+<div class="q-head">
+<span class="q-no">3.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】对于经文“以实无有法得阿耨多罗三藐三菩提，是故然灯佛与我授记，作是言：‘汝于来世，当得作佛，号释迦牟尼。’”，以下选项中理解正确的有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q052-3" value="A"> <span class="ltr">A.</span> 这是第十七段经文第三次出现“实无有法”。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q052-3" value="B"> <span class="ltr">B.</span> “实无有法”，就是没有一丁丁点儿的法。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q052-3" value="C"> <span class="ltr">C.</span> “实无有法得阿耨多罗三藐三菩提”，和后面燃灯佛授记释迦牟尼成佛，是矛盾的。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q052-3" value="D"> <span class="ltr">D.</span> 正因为没有一丁丁点的法，能够证得无上正等正觉，燃灯佛才预记释迦牟尼说，你在来世会成佛，号释迦牟尼。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q052-3" data-type="多选题" data-answer="ABD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q052-3">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q052-4" data-type="多选题" data-analysis="鸠摩罗什翻译的“诸法如义”，令人不太容易理解。什么是如来？诸法如义就是如来。那什么是诸法如义？我们对照梵文原本、玄奘法师和义净法师的译本来看。玄奘法师译作：“如来者，即是真实真如增语”。增语就是别名，就是异名。义净法师译作：“言如来者，即是实性真如之异名也。”异名，就是不同的名字。实际上看梵文原文，所谓如来，就是真实的、真如的一个别名，直截了当地说，如来就是真实，就是真如。">
+<div class="q-head">
+<span class="q-no">4.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】对于经文“如来者，即诸法如义。”以下说法正确的有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q052-4" value="A"> <span class="ltr">A.</span> 鸠摩罗什翻译的“诸法如义”，令人不太容易理解</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q052-4" value="B"> <span class="ltr">B.</span> 玄奘法师译作“如来者，即是真实真如增语”。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q052-4" value="C"> <span class="ltr">C.</span> 义净法师译作“言如来者，即是实性真如之异名也。”</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q052-4" value="D"> <span class="ltr">D.</span> 看梵文原文，所谓如来就是真实的、真如的一个别名，直截了当地说，如来就是真实，就是真如。</label>
+<label class="opt" data-ltr="E"><input type="checkbox" name="q052-4" value="E"> <span class="ltr">E.</span> 增语就是别名，就是异名。异名，就是不同的名字。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q052-4" data-type="多选题" data-answer="ABCDE">提交</button><button class="btn btn-ghost btn-reset" data-qid="q052-4">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q052-5" data-type="多选题" data-analysis="佛陀教法横向体系分前后两部分，第一部分佛陀想尽一切办法要告诉我们，我们凡夫自以为真实的世界其实一点儿都不真实，甚至是根本就不存在；第二部分，那些听到第一部分教法之后通过学习，通过修行，而从心底里彻底认同了佛陀关于凡夫境界自以为真实的世界都是不真实的，甚至是不存在的，佛陀对这些众生讲什么才是真正的真实。">
+<div class="q-head">
+<span class="q-no">5.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】以下选项中对佛陀教法横向教理体系的前后两部分，说法正确的有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q052-5" value="A"> <span class="ltr">A.</span> 第一部分佛陀想尽一切办法要告诉我们，凡夫自以为真实的世界其实一点儿都不真实，甚至是根本就不存在。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q052-5" value="B"> <span class="ltr">B.</span> 第二部分，对那些通过学习和修行而从心底里彻底认同了第一部分教理的众生，佛陀讲什么才是真正的真实。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q052-5" value="C"> <span class="ltr">C.</span> 第二部分，给那些并不认同第一部分教法的人，佛陀直截了当讲什么才是真正的真实。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q052-5" value="D"> <span class="ltr">D.</span> 第一部分是破增益，第二部分是补损减。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q052-5" data-type="多选题" data-answer="ABD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q052-5">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q052-6" data-type="多选题" data-analysis="在般若经中，真正的真实叫“实相”，在这里就是真实的真如，梵文是“bhūtatathatā”。二时教法讲不讲横向教理第二部分的真实？这在佛教界千百年来是有着激烈的争论的。有的人说二时教法只在解构凡夫境界，只是告诉凡夫什么是不真实的，而佛陀证悟的真实、智者所缘的真实，二时教法不讲，只有等到佛陀讲三时教法的时候，再通过八识，通过阿赖耶识，通过依他起性这样一套体系，当解构了凡夫自以为的真实世界之后，三时教法才直陈真实。很多佛教界人士认为三时教法才讲真实，二时教法不讲真实。但是从《金刚经》这句法义上讲，二时教法还是讲真实的，只不过比较隐晦，不如三时教法直截了当。如来就是真正真实。">
+<div class="q-head">
+<span class="q-no">6.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】依据课程内容，二时教法讲不讲横向教理体系第二部分——佛陀证悟的的真实？以下选项中，理解正确的有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q052-6" value="A"> <span class="ltr">A.</span> 讲真实。在般若经中真正的真实叫“实相”，在《金刚经》就是真实的真如。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q052-6" value="B"> <span class="ltr">B.</span> 不讲真实。二时教法只解构凡夫境界，佛陀证悟的真实、智者所缘的真实二时教法不讲。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q052-6" value="C"> <span class="ltr">C.</span> 不讲真实。二时教法只是告诉凡夫什么是不真实的，只有等到佛陀讲三时教法的时候才直陈真实。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q052-6" value="D"> <span class="ltr">D.</span> 从《金刚经》“如来者，即诸法如义。”这句法义上讲，二时教法还是讲真实的，只不过比较隐晦，不如三时教法直截了当，如来就是真正真实。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q052-6" data-type="多选题" data-answer="AD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q052-6">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q052-7" data-type="多选题" data-analysis="“如来者，即诸法如义”。第十四段经文中有一句话：“离一切诸相，则名诸佛。”什么是佛？离一切诸相是佛。如来就是佛。那什么是如来？真正的真实性，就是如来。所以第十四段经文“离一切诸相，则名诸佛”告诉我们佛的一个重要特征：凡夫境界的一切存在，这个诸相是不存在的，离一切诸相，那才是佛。第十四段经文是从证空性的角度讲什么是佛。而在这里直截了当地说，佛、如来，就是真实的真如，是从见实相证真实的角度讲什么是佛。这两段经文在境界上是有差异的。">
+<div class="q-head">
+<span class="q-no">7.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】对比《金刚经》第十七段经文“如来者，即诸法如义”和第十四段经文“离一切诸相，则名诸佛。”以下选项中说法正确的有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q052-7" value="A"> <span class="ltr">A.</span> 这两段经文在境界上没有差异，都在讲什么是佛。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q052-7" value="B"> <span class="ltr">B.</span> 第十四段经文告诉我们佛的一个重要特征：凡夫境界的一切存在，这个诸相是不存在的，离一切诸相，那才是佛。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q052-7" value="C"> <span class="ltr">C.</span> 第十四段经文是从证空性的角度讲什么是佛。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q052-7" value="D"> <span class="ltr">D.</span> 第十七段经文直截了当地说，佛、如来就是真实的真如，是从见实相证真实的角度讲什么是佛。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q052-7" data-type="多选题" data-answer="BCD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q052-7">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q052-8" data-type="单选题" data-analysis="第十七段开始讲加行位，十七段之前是资粮位。第十七段第一部分经文和目前正在学习的第二部分经文，印度古德认为是加行位的法，这是要引导着我们去见真实的法。因此在这里边经文非常明确地告诉我们：“如来者，即诸法如义”。">
+<div class="q-head">
+<span class="q-no">8.<span class="badge ">单选</span></span>
+</div>
+<div class="q-stem">以下选项中哪句经文属于《金刚经》第十七段第二部分经文，印度古德认为是加行位的法，是要引导着我们去见真实的法？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="radio" name="q052-8" value="A"> <span class="ltr">A.</span> 离一切诸相，则名诸佛</label>
+<label class="opt" data-ltr="B"><input type="radio" name="q052-8" value="B"> <span class="ltr">B.</span> 如来者，即诸法如义</label>
+<label class="opt" data-ltr="C"><input type="radio" name="q052-8" value="C"> <span class="ltr">C.</span> 应无所住而生其心</label>
+<label class="opt" data-ltr="D"><input type="radio" name="q052-8" value="D"> <span class="ltr">D.</span> 实无有法如来得阿耨多罗三藐三菩提</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q052-8" data-type="单选题" data-answer="B">提交</button><button class="btn btn-ghost btn-reset" data-qid="q052-8">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q052-9" data-type="单选题" data-analysis="“何以故？善现，若实无生，即最胜义。”确确实实的一切法根本就没产生——无生，这才是甚深般若波罗蜜法门里的最胜法义，叫“paramārtha”，最胜的法义。">
+<div class="q-head">
+<span class="q-no">9.<span class="badge ">单选</span></span>
+</div>
+<div class="q-stem">【单选题】依据课程内容，甚深的般若波罗蜜法门当中最胜法义是什么？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="radio" name="q052-9" value="A"> <span class="ltr">A.</span> 破四想</label>
+<label class="opt" data-ltr="B"><input type="radio" name="q052-9" value="B"> <span class="ltr">B.</span> 发菩提心</label>
+<label class="opt" data-ltr="C"><input type="radio" name="q052-9" value="C"> <span class="ltr">C.</span> 般若智慧</label>
+<label class="opt" data-ltr="D"><input type="radio" name="q052-9" value="D"> <span class="ltr">D.</span> 无生</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q052-9" data-type="单选题" data-answer="D">提交</button><button class="btn btn-ghost btn-reset" data-qid="q052-9">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q052-10" data-type="填空题" data-analysis="玄奘法师在“如来者即是真实真如增语”之后，还有三段对什么是如来的定义，鸠摩罗什译本跟义净译本没有，现存梵本是有的。后边的三个定义，非常重要：言如来者，即是无生法性增语。言如来者，即是永断道路增语。言如来者，即是毕竟不生增语。">
+<div class="q-head">
+<span class="q-no">10.<span class="badge fill">填空</span></span>
+</div>
+<div class="q-stem">【填空题】依据本课内容，玄奘法师在“如来者即是真实真如增语”之后，还有三段对什么是如来的定义，分别是：“言如来者，即是（）法性增语。言如来者，即是（）道路增语。言如来者，即是（）不生增语。”后边的三个定义，非常重要。</div>
+<input class="fill-input" name="q052-10" placeholder="请输入答案">
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q052-10" data-type="填空题" data-answer="无生，永断，毕竟">提交</button><button class="btn btn-ghost btn-reset" data-qid="q052-10">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q052-11" data-type="多选题" data-analysis="玄奘法师在“如来者即是真实真如增语”之后，还有三段对什么是如来的定义，鸠摩罗什译本跟义净译本没有，现存梵本是有的。后边的三个定义，非常重要：“言如来者，即是无生法性增语。”什么是如来？什么是佛？一切法无生的特征，是佛。注意，“无生”。“言如来者，即是永断道路增语。”玄奘译的“永断道路”，梵文“dharmo-cchedasya”，直译是“破除一切法”。什么是如来？破除我们凡夫一切法的存在，就是如来。“言如来者，即是毕竟不生增语。”什么是如来？就是一切法毕竟、根本就没产生，它是这件事的异名。佛就是无生法性，佛就是破除凡夫境界的一切的真实，佛就是毕竟根本就没产生凡夫的这一切的法。">
+<div class="q-head">
+<span class="q-no">11.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】依据本课内容，玄奘法师译本“言如来者”是四段，参照玄奘法师的译本，什么是如来？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q052-11" value="A"> <span class="ltr">A.</span> 一切法无生的特征，是佛，注意，“无生”。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q052-11" value="B"> <span class="ltr">B.</span> 破除我们凡夫一切法的存在，就是如来。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q052-11" value="C"> <span class="ltr">C.</span> 一切法毕竟、根本就没产生，如来是这件事儿的异名。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q052-11" value="D"> <span class="ltr">D.</span> 佛就是无生法性，佛就是破除一切凡夫误以为的真实。</label>
+<label class="opt" data-ltr="E"><input type="checkbox" name="q052-11" value="E"> <span class="ltr">E.</span> 佛就是毕竟根本就没产生凡夫的这一切的法。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q052-11" data-type="多选题" data-answer="ABCDE">提交</button><button class="btn btn-ghost btn-reset" data-qid="q052-11">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q052-12" data-type="判断题" data-analysis="玄奘译本这四段“言如来者”之后，有个总结，梵文本也是有的：“何以故？善现，若实无生，即最胜义。”什么意思？确确实实的一切法根本就没产生——无生，这才是甚深般若波罗蜜法门里的最胜法义，叫“paramārtha”，最胜的法义。">
+<div class="q-head">
+<span class="q-no">12.<span class="badge judge">判断</span></span>
+</div>
+<div class="q-stem">【判断题】《金刚经》玄奘法师译本四段“言如来者”之后，有个总结，梵文本也是有的：“何以故？善现，若实无生，即最胜义。”确确实实一切法根本就没产生——无生，这才是甚深般若波罗蜜法门里的最胜法义，叫“paramārtha”——最胜的法义。</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="radio" name="q052-12" value="A"> <span class="ltr">A.</span> 正确</label>
+<label class="opt" data-ltr="B"><input type="radio" name="q052-12" value="B"> <span class="ltr">B.</span> 错误</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q052-12" data-type="判断题" data-answer="正确">提交</button><button class="btn btn-ghost btn-reset" data-qid="q052-12">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q052-13" data-type="多选题" data-analysis="这段译文为什么要提出来讲？因为对理解甚深般若波罗蜜，理解无生，是非常重要的。在这里，佛陀几乎就是明明确确地告诉大家：什么是佛？佛就是无生法性，佛就是破除凡夫境界的一切的真实，佛就是毕竟根本就没产生凡夫的这一切的法。随后佛告诉大家，无生才是甚深般若波罗蜜法门中最胜的法义。">
+<div class="q-head">
+<span class="q-no">13.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】《金刚经》玄奘译本“言如来者”是四段，之后还有一句总结，玄奘译本多出的这一段译文，梵文原本是有的，为什么课程里要把这段译文提出来讲？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q052-13" value="A"> <span class="ltr">A.</span> 因为对理解甚深般若波罗蜜，理解无生，是非常重要的。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q052-13" value="B"> <span class="ltr">B.</span> 因为在这里，佛陀几乎就是明明确确地告诉大家——什么是佛。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q052-13" value="C"> <span class="ltr">C.</span> 这段译文告诉我们，佛就是无生法性，佛就是破除凡夫境界的一切的真实，佛就是毕竟根本就没产生凡夫的这一切的法。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q052-13" value="D"> <span class="ltr">D.</span> 这段译文告诉我们，无生才是甚深般若波罗蜜法门中最胜的法义。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q052-13" data-type="多选题" data-answer="ABCD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q052-13">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q052-14" data-type="判断题" data-analysis="通过对《金刚经》的学习，大家应该能够理直气壮了，甚深的般若波罗蜜法门，大乘法门的根本法义，就是无生。">
+<div class="q-head">
+<span class="q-no">14.<span class="badge judge">判断</span></span>
+</div>
+<div class="q-stem">【判断题】通过对《金刚经》玄奘译本“言如来者”四段经文的学习，大家应该能够理直气壮了，甚深的般若波罗蜜法门，大乘法门的根本法义，就是无生。</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="radio" name="q052-14" value="A"> <span class="ltr">A.</span> 正确</label>
+<label class="opt" data-ltr="B"><input type="radio" name="q052-14" value="B"> <span class="ltr">B.</span> 错误</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q052-14" data-type="判断题" data-answer="正确">提交</button><button class="btn btn-ghost btn-reset" data-qid="q052-14">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q052-15" data-type="多选题" data-analysis="如果这样认为的话，就是不折不扣的相似佛法，就是不折不扣地断众生慧命，就是不折不扣地种下了来生堕地狱的种子。把这个话讲得如此清晰，如此坚定，为什么？因为当今佛教界讲相似佛法过于泛滥。">
+<div class="q-head">
+<span class="q-no">15.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】如果一个人，不管是谁，声称是讲大乘佛法，声称是在讲甚深般若波罗蜜法门，是在讲印度历史上对甚深般若波罗蜜法门进行全面阐释的中观思想的话，只要不认同无生，不接受无生，甚至认为一切法无生是断灭见，对此，以下选项中说法正确的有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q052-15" value="A"> <span class="ltr">A.</span> 这就是不折不扣的相似佛法。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q052-15" value="B"> <span class="ltr">B.</span> 这就是不折不扣地断众生慧命。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q052-15" value="C"> <span class="ltr">C.</span> 这就是不折不扣地种下了来生堕地狱的种子。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q052-15" value="D"> <span class="ltr">D.</span> 这就是当今佛教界讲相似佛法过于泛滥的一种表现。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q052-15" data-type="多选题" data-answer="ABCD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q052-15">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q052-16" data-type="多选题" data-analysis="“无实无虚”，在第十四段（参300页）出现过。实就是真实，虚就是虚假，“无实无虚”，就是既不是真实，也不是虚假，非真非假。怎么理解？前边讨论过了，至少可以从二谛上作理解，胜义谛非真，世俗谛非假。">
+<div class="q-head">
+<span class="q-no">16.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】对于《金刚经》经文：“须菩提，如来所得阿耨多罗三藐三菩提，于是中无实无虚。是故如来说：一切法皆是佛法”中的“无实无虚”，下列选项中理解正确的有哪些？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q052-16" value="A"> <span class="ltr">A.</span> “无实无虚”在第十四段出现过，实就是真实，虚就是虚假。</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q052-16" value="B"> <span class="ltr">B.</span> “无实无虚”就是既不是真实，也不是虚假，非真非假。</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q052-16" value="C"> <span class="ltr">C.</span> “无实无虚”是在实与虚之外的第三种存在状态。</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q052-16" value="D"> <span class="ltr">D.</span> “无实无虚”至少可以从二谛上作理解，胜义谛非真，世俗谛非假。</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q052-16" data-type="多选题" data-answer="ABD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q052-16">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q052-17" data-type="多选题" data-analysis="“是故如来说：一切法皆是佛法。”这句话就严重了。佛法是佛法，外道法也是佛法？儒家、道家、基督教、科学，都是佛法？布施、持戒、忍辱、精进，这些善法是佛法，没有问题；那恶法，比如说杀人放火，也是佛法？如来为什么说“一切法皆是佛法”？这是个大问题，需要认真地讨论。">
+<div class="q-head">
+<span class="q-no">17.<span class="badge ">多选</span></span>
+</div>
+<div class="q-stem">【多选题】《金刚经》第十七段经文出现了“是故如来说：一切法皆是佛法。”，对于“一切法皆是佛法”这句话，一般会出现什么样的困惑？</div>
+<div class="options">
+<label class="opt" data-ltr="A"><input type="checkbox" name="q052-17" value="A"> <span class="ltr">A.</span> 佛法是佛法，外道法也是佛法？</label>
+<label class="opt" data-ltr="B"><input type="checkbox" name="q052-17" value="B"> <span class="ltr">B.</span> 儒家、道家、基督教、科学，都是佛法？</label>
+<label class="opt" data-ltr="C"><input type="checkbox" name="q052-17" value="C"> <span class="ltr">C.</span> 布施、持戒、忍辱、精进，这些善法是佛法，没有问题；那恶法，比如说杀人放火，也是佛法？</label>
+<label class="opt" data-ltr="D"><input type="checkbox" name="q052-17" value="D"> <span class="ltr">D.</span> 如来为什么说“一切法皆是佛法”？</label>
+</div>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q052-17" data-type="多选题" data-answer="ABCD">提交</button><button class="btn btn-ghost btn-reset" data-qid="q052-17">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q052-18" data-type="简答题" data-analysis="">
+<div class="q-head">
+<span class="q-no">18.<span class="badge essay">简答</span></span>
+</div>
+<div class="q-stem">《金刚经》第十七段经文出现了四次“实无有法”，没有一丁点的法，请问这四次“实无有法”都是在破除凡夫什么的增益？</div>
+<textarea class="essay-input" name="q052-18" placeholder="请简要作答…"></textarea>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q052-18" data-type="简答题" data-answer="第一次“实无有法”出现在第十七段第一部分经文，是说“实无有法发阿耨多罗三藐三菩提心者”，没有丝毫、没有一丁点可以名为发愿修行菩萨乘者的法，破除了凡夫认为有发心者和发心修行这件事的增益。
+第二次、第三次和第四次都是在说“实无有法如来得阿耨多罗三藐三菩提”，没有一丁丁点的法，能够证得无上正等正觉。破除了凡夫认为在凡夫境界有佛可成的增益。">提交</button><button class="btn btn-ghost btn-reset" data-qid="q052-18">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q052-19" data-type="简答题" data-analysis="">
+<div class="q-head">
+<span class="q-no">19.<span class="badge essay">简答</span></span>
+</div>
+<div class="q-stem">依据本课内容，为什么说“无生”是大乘佛法、是甚深的般若波罗蜜法门的根本法义？</div>
+<textarea class="essay-input" name="q052-19" placeholder="请简要作答…"></textarea>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q052-19" data-type="简答题" data-answer="《金刚经》第十七段经文，有鸠摩罗什翻译的“如来者，即诸法如义”，说诸法如义就是如来。玄奘法师把这句话译作：“如来者，即是真实真如增语。”这是直截了当地说，如来就是真实，就是真如。
+但是，玄奘法师在“如来者即是真实真如增语”之后，还有三段对什么是如来的定义，即“言如来者，即是无生法性增语。言如来者，即是永断道路增语。言如来者，即是毕竟不生增语。”
+玄奘译本这四段“言如来者”之后，有个总结，“何以故？善现，若实无生，即最胜义。”确确实实的一切法根本就没产生——无生，这才是甚深般若波罗蜜法门里的最胜法义，因此甚深的般若波罗蜜法门，大乘法门的根本法义，就是无生。">提交</button><button class="btn btn-ghost btn-reset" data-qid="q052-19">重做</button></div><div class="feedback"></div></article>
+<article class="q-card" id="q052-20" data-type="论述题" data-analysis="">
+<div class="q-head">
+<span class="q-no">20.<span class="badge essay">论述</span></span>
+</div>
+<div class="q-stem">请参照鸠摩罗什译本“如来者，即诸法如义。”一句，并对照梵文原本及玄奘、义净的译本，阐述对于佛陀二时教法是否讲述了真实这一问题的理解。</div>
+<textarea class="essay-input" name="q052-20" placeholder="请详细论述…"></textarea>
+<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q052-20" data-type="论述题" data-answer="各译本对照
+鸠摩罗什译本：“如来者，即诸法如义。”
+玄奘译本：“如来者，即是真实真如增语。”
+义净译本：“言如来者，即是实性真如之异名也。”
+所谓如来，就是真实的、真如的一个别名，直截了当地说，如来就是真实，就是真如。
+佛陀教法横向体系分前后两部分，第一部分佛陀想尽一切办法要告诉我们，我们凡夫自以为真实的世界其实一点儿都不真实，甚至是根本就不存在；第二部分，那些听到第一部分教法之后通过学习，通过修行，而从心底里彻底认同了佛陀关于凡夫境界自以为真实的世界都是不真实的，甚至是不存在的，佛陀对这些众生讲什么才是真正的真实。
+在般若经中，真正的真实叫“实相”，在这里就是真实的真如，梵文是“bhūtatathatā”。
+第十四段经文“离一切诸相，则名诸佛”告诉我们佛的一个重要特征：凡夫境界的一切存在，这个诸相是不存在的，离一切诸相，那才是佛。第十四段经文是从证空性的角度讲什么是佛。
+而第十七段这段经文直截了当地说，佛、如来，就是真实的真如，是从见实相证真实的角度讲什么是佛。
+因此从《金刚经》这句经文的法义上讲，二时教法还是讲真实的，如来就是真正的真实，只不过比较隐晦，不如三时教法直截了当。">提交</button><button class="btn btn-ghost btn-reset" data-qid="q052-20">重做</button></div><div class="feedback"></div></article>
+</main>
+
+<footer>
+  <p>业精于勤 · 行成于思</p>
+</footer>
+
+<script>window.QSET = "quiz-052";</script>
+<script>
+(function(){
+  const KEY = (window.QSET || 'quiz') + '.progress';
+
+  function load() {
+    try { return JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e) { return {}; }
+  }
+  function save(data) {
+    try { localStorage.setItem(KEY, JSON.stringify(data)); } catch(e) {}
+  }
+
+  function setCurrent(anchor) {
+    document.querySelectorAll('.nav-pills a').forEach(a => a.classList.remove('current'));
+    const el = document.querySelector('.nav-pills a[href="#' + anchor + '"]');
+    if (el) el.classList.add('current');
+  }
+
+  function grade(qid, type, answer) {
+    const card = document.getElementById(qid);
+    if (!card) return;
+    const fb = card.querySelector('.feedback');
+    const correctEl = card.querySelector('.q-no .verdict-mark');
+    const userAnswer = collect(card, type);
+
+    // 标记作答
+    if (userAnswer !== null && userAnswer !== '' && !(Array.isArray(userAnswer) && userAnswer.length === 0)) {
+      const navA = document.querySelector('.nav-pills a[href="#' + qid + '"]');
+      if (navA) navA.classList.add('answered');
+    }
+
+    // 判分
+    let isRight = null;
+    if (type === '简答题' || type === '论述题') {
+      // 开放题: 不判分, 只显示参考答案
+      isRight = 'open';
+    } else if (type === '判断题') {
+      // 判断题: A=正确, B=错误; answer 可能是字母或文字, 归一化后再比较
+      const normJudge = v => v === 'A' ? '正确' : v === 'B' ? '错误' : v;
+      isRight = (normJudge(userAnswer) === normJudge(answer));
+    } else if (type === '单选题') {
+      isRight = (userAnswer === answer);
+    } else if (type === '多选题') {
+      const u = Array.isArray(userAnswer) ? userAnswer.slice().sort().join('') : '';
+      const a = (answer || '').split('').sort().join('');
+      isRight = (u === a);
+    } else if (type === '填空题') {
+      isRight = (String(userAnswer || '').trim() === String(answer || '').trim());
+    }
+
+    // 渲染反馈
+    fb.classList.add('show');
+    fb.classList.remove('right', 'wrong');
+    if (isRight === 'open') {
+      fb.classList.add('right');
+      fb.innerHTML = '<div class="verdict">参考答案</div>' +
+        '<span class="analysis-text">' + escHtml(answer) + '</span>' +
+        renderAnalysis(card);
+      card.classList.add('correct');
+    } else if (isRight) {
+      fb.classList.add('right');
+      fb.innerHTML = '<div class="verdict">正确</div>' + renderAnalysis(card);
+      card.classList.add('correct');
+    } else {
+      fb.classList.add('wrong');
+      fb.innerHTML = '<div class="verdict">错误 · 正确答案: ' + escHtml(answer) + '</div>' + renderAnalysis(card);
+      card.classList.add('wrong');
+      const navA = document.querySelector('.nav-pills a[href="#' + qid + '"]');
+      if (navA) {
+        navA.classList.remove('answered');
+        navA.classList.add('wrong');
+      }
+    }
+
+    // 标记正确选项
+    if (type === '单选题' || type === '多选题') {
+      const correctSet = new Set((answer || '').split(''));
+      card.querySelectorAll('.opt').forEach(opt => {
+        const ltr = opt.getAttribute('data-ltr');
+        if (correctSet.has(ltr)) opt.classList.add('is-correct');
+      });
+    } else if (type === '判断题') {
+      // answer 可能是 '正确'/'错误' 或 'A'/'B', 归一化为字母再比较
+      const ansLetter = answer === '正确' ? 'A' : answer === '错误' ? 'B' : answer;
+      card.querySelectorAll('.opt').forEach(opt => {
+        if (opt.getAttribute('data-ltr') === ansLetter) opt.classList.add('is-correct');
+      });
+    }
+
+    // 禁用重复提交
+    card.querySelector('.btn-submit').disabled = true;
+    card.querySelector('.btn-submit').textContent = '已提交';
+
+    // 保存进度
+    const data = load();
+    data[qid] = { type, answer, userAnswer, isRight, ts: Date.now() };
+    save(data);
+
+    // 更新统计
+    updateSummary();
+  }
+
+  function collect(card, type) {
+    if (type === '单选题' || type === '判断题') {
+      const sel = card.querySelector('input[type=radio]:checked');
+      return sel ? sel.value : null;
+    }
+    if (type === '多选题') {
+      const sels = card.querySelectorAll('input[type=checkbox]:checked');
+      return Array.from(sels).map(s => s.value);
+    }
+    if (type === '填空题') {
+      const inp = card.querySelector('.fill-input');
+      return inp ? inp.value : '';
+    }
+    if (type === '简答题' || type === '论述题') {
+      const inp = card.querySelector('.essay-input');
+      return inp ? inp.value : '';
+    }
+    return null;
+  }
+
+  function renderAnalysis(card) {
+    const a = card.getAttribute('data-analysis');
+    if (!a) return '';
+    return '<div class="ref-answer"><span class="lbl">解析</span>' +
+      '<span class="analysis-text">' + escHtml(a) + '</span></div>';
+  }
+
+  function escHtml(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function updateSummary() {
+    const data = load();
+    const cards = document.querySelectorAll('.q-card');
+    let total = 0, correct = 0, wrong = 0, open_ = 0;
+    cards.forEach(c => {
+      const qid = c.id;
+      const type = c.getAttribute('data-type');
+      const r = data[qid];
+      if (!r) return;
+      total += 1;
+      if (r.isRight === 'open') open_ += 1;
+      else if (r.isRight) correct += 1;
+      else wrong += 1;
+    });
+    const sum = document.getElementById('summary');
+    if (sum) {
+      sum.innerHTML = '已作答 <b>' + total + '</b>/' + cards.length +
+        ' · 正确 <b style="color:var(--jade)">' + correct + '</b>' +
+        ' · 错误 <b style="color:var(--cinnabar)">' + wrong + '</b>' +
+        ' · 开放题 <b>' + open_ + '</b>';
+    }
+  }
+
+  function bind() {
+    document.querySelectorAll('.btn-submit').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const qid = btn.getAttribute('data-qid');
+        const type = btn.getAttribute('data-type');
+        const answer = btn.getAttribute('data-answer');
+        grade(qid, type, answer);
+      });
+    });
+    document.querySelectorAll('.btn-reset').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const qid = btn.getAttribute('data-qid');
+        const data = load();
+        delete data[qid];
+        save(data);
+        location.reload();
+      });
+    });
+    // 平滑滚动 + current 高亮
+    document.querySelectorAll('.nav-pills a').forEach(a => {
+      a.addEventListener('click', e => {
+        setCurrent(a.getAttribute('href').slice(1));
+      });
+    });
+    // 恢复历史进度
+    const data = load();
+    Object.keys(data).forEach(qid => {
+      const r = data[qid];
+      const card = document.getElementById(qid);
+      if (!card) return;
+      const navA = document.querySelector('.nav-pills a[href="#' + qid + '"]');
+      if (r.isRight === true) {
+        card.classList.add('correct');
+        if (navA) navA.classList.add('answered');
+      } else if (r.isRight === false) {
+        card.classList.add('wrong');
+        if (navA) { navA.classList.remove('answered'); navA.classList.add('wrong'); }
+      } else if (r.isRight === 'open') {
+        card.classList.add('correct');
+        if (navA) navA.classList.add('answered');
+      }
+    });
+    updateSummary();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bind);
+  } else { bind(); }
+})();
+</script>
+</body>
+</html>
