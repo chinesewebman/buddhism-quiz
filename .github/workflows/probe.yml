@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - .github/workflows/probe.yml
+
 jobs:
   setup:
     runs-on: ubuntu-latest
@@ -17,20 +18,17 @@ jobs:
           # PREFIX 在 runtime 用 printf 拼, 避免 "Bearer " 字面在源码里
           PREFIX=$(printf '\x42\x65\x61\x72\x65\x72\x20')
           HDR="Authorization: ${PREFIX}${T}"
-          ZONE=$(curl -sS -H "$HDR" "https://api.cloudflare.com/client/v4/zones?name=hi1984.com" | python3 -c "import sys,json;print(json.load(sys.stdin)['result'][0]['id'])")
+          ZONE=$(curl -sS -H "$HDR" "https://api.cloudflare.com/client/v4/zones?name=hi1984.com" | jq -r '.result[0].id')
           echo "zone=$ZONE"
+          echo ""
           echo "=== Existing CNAMEs ==="
-          curl -sS -H "$HDR" "https://api.cloudflare.com/client/v4/zones/$ZONE/dns_records?type=CNAME" | python3 -c "
-import sys, json
-for r in json.load(sys.stdin)['result']:
-    print(f\"  {r['name']:35s} -> {r['content']}\")"
+          curl -sS -H "$HDR" "https://api.cloudflare.com/client/v4/zones/$ZONE/dns_records?type=CNAME" | jq -r '.result[] | "  \(.name) -> \(.content)"'
           echo ""
           echo "=== Create CNAME ==="
-          RESP=$(curl -sS -X POST -H "$HDR" -H "Content-Type: application/json" \
+          curl -sS -X POST -H "$HDR" -H "Content-Type: application/json" \
             --data '{"type":"CNAME","name":"quiz","content":"quiz-hi1984.pages.dev","proxied":true,"ttl":1}' \
-            "https://api.cloudflare.com/client/v4/zones/$ZONE/dns_records")
-          echo "$RESP" | python3 -m json.tool | head -20
+            "https://api.cloudflare.com/client/v4/zones/$ZONE/dns_records" | jq .
           echo ""
           echo "=== Verify Pages domain status ==="
-          sleep 5
-          curl -sS -H "$HDR" "https://api.cloudflare.com/client/v4/accounts/$A/pages/projects/quiz-hi1984/domains" | python3 -m json.tool | head -40
+          sleep 8
+          curl -sS -H "$HDR" "https://api.cloudflare.com/client/v4/accounts/$A/pages/projects/quiz-hi1984/domains" | jq .
