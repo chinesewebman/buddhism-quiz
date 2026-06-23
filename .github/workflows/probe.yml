@@ -1,5 +1,10 @@
 name: Setup DNS
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/probe.yml
 jobs:
   setup:
     runs-on: ubuntu-latest
