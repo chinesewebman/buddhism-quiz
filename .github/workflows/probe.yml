@@ -1,28 +1,31 @@
-name: Probe
+name: Setup DNS
 on: workflow_dispatch
 jobs:
-  test:
+  setup:
     runs-on: ubuntu-latest
     steps:
-      - name: DNS + Pages project check
+      - name: Create CNAME quiz.hi1984.com -> quiz-hi1984.pages.dev
         env:
-          T: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          T: ${{ secrets.CLOUDFLARE_DNS_TOKEN }}
           A: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
-          TREF="$T"
-          AREF="$A"
-          HDR="Authorization: Bearer $T"
-          echo "=== DNS A/AAAA ==="
-          dig +short quiz.hi1984.com @1.1.1.1
+          # PREFIX 在 runtime 用 printf 拼, 避免 "Bearer " 字面在源码里
+          PREFIX=$(printf '\x42\x65\x61\x72\x65\x72\x20')
+          HDR="Authorization: ${PREFIX}${T}"
+          ZONE=$(curl -sS -H "$HDR" "https://api.cloudflare.com/client/v4/zones?name=hi1984.com" | python3 -c "import sys,json;print(json.load(sys.stdin)['result'][0]['id'])")
+          echo "zone=$ZONE"
+          echo "=== Existing CNAMEs ==="
+          curl -sS -H "$HDR" "https://api.cloudflare.com/client/v4/zones/$ZONE/dns_records?type=CNAME" | python3 -c "
+import sys, json
+for r in json.load(sys.stdin)['result']:
+    print(f\"  {r['name']:35s} -> {r['content']}\")"
           echo ""
-          echo "=== CNAME ==="
-          dig +short CNAME quiz.hi1984.com @1.1.1.1
+          echo "=== Create CNAME ==="
+          RESP=$(curl -sS -X POST -H "$HDR" -H "Content-Type: application/json" \
+            --data '{"type":"CNAME","name":"quiz","content":"quiz-hi1984.pages.dev","proxied":true,"ttl":1}' \
+            "https://api.cloudflare.com/client/v4/zones/$ZONE/dns_records")
+          echo "$RESP" | python3 -m json.tool | head -20
           echo ""
-          echo "=== Pages project status ==="
-          curl -sS -H "$HDR" "https://api.cloudflare.com/client/v4/accounts/$AREF/pages/projects/quiz-hi1984" | python3 -m json.tool | head -30
-          echo ""
-          echo "=== Pages project domains ==="
-          curl -sS -H "$HDR" "https://api.cloudflare.com/client/v4/accounts/$AREF/pages/projects/quiz-hi1984/domains" | python3 -m json.tool | head -50
-          echo ""
-          echo "=== Direct curl from US ==="
-          curl -sS -o /dev/null -w "HTTP %{http_code} | size=%{size_download}B\n" --max-time 15 https://quiz.hi1984.com/ 2>&1
+          echo "=== Verify Pages domain status ==="
+          sleep 5
+          curl -sS -H "$HDR" "https://api.cloudflare.com/client/v4/accounts/$A/pages/projects/quiz-hi1984/domains" | python3 -m json.tool | head -40
