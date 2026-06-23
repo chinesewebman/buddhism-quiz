@@ -24,8 +24,8 @@ jobs:
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@v1
         with:
-          apiToken: ${{ secrets.CF_API_TOKEN }}
-          accountId: ${{ secrets.CF_ACCOUNT_ID }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: quiz-hi1984
           directory: .
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
@@ -34,13 +34,13 @@ jobs:
       - name: Bind custom domain (idempotent)
         if: success()
         env:
-          T: ${{ secrets.CF_API_TOKEN }}
-          A: ${{ secrets.CF_ACCOUNT_ID }}
+          T: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          A: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           set -e
           RESP=$(curl -sS -X POST \
             "https://api.cloudflare.com/client/v4/accounts/${A}/pages/projects/quiz-hi1984/domains" \
-            -H "Authorization: Bearer ${T}" \
+            -H "Authorization: ${T}" \
             -H "Content-Type: application/json" \
             --data '{"name":"quiz.hi1984.com"}' \
             -w "\nHTTP_STATUS:%{http_code}")
@@ -58,10 +58,13 @@ jobs:
 
       - name: Deployment summary
         if: always()
+        env:
+          T: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: |
-          echo "### Cloudflare Pages deploy done" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "- URL: https://quiz.hi1984.com" >> $GITHUB_STEP_SUMMARY
-          echo "- Repo: chinesewebman/buddhism-quiz" >> $GITHUB_STEP_SUMMARY
-          echo "- Trigger: ${ github.event_name } (${ github.ref })" >> $GITHUB_STEP_SUMMARY
-          echo "- Commit: ${ github.sha }" >> $GITHUB_STEP_SUMMARY
+          F="${F}"
+          echo "### Cloudflare Pages deploy done" >> "$F"
+          echo "" >> "$F"
+          echo "- URL: https://quiz.hi1984.com" >> "$F"
+          echo "- Repo: chinesewebman/buddhism-quiz" >> "$F"
+          echo "- Trigger: $GITHUB_EVENT_NAME ($GITHUB_REF)" >> "$F"
+          echo "- Commit: $GITHUB_SHA" >> "$F"
