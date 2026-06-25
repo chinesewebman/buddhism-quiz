@@ -13,7 +13,13 @@ import os, sys, re, json, html
 from pathlib import Path
 
 # 需要 python-docx
-sys.path.insert(0, '/Users/apple/hermes-agent/venv/lib/python3.11/site-packages')
+# Use the system Python's site-packages for python-docx + lxml.
+# (The previous `/Users/apple/hermes-agent/venv/...` path had a broken lxml that
+# failed with `ImportError: cannot import name 'etree' from 'lxml'`.)
+try:
+    import docx  # noqa: F401  — already importable from the active interpreter
+except ImportError:
+    sys.path.insert(0, '/opt/homebrew/lib/python3.11/site-packages')
 from docx import Document
 
 # ═══════════════════════════════════════════════════════════════
@@ -31,7 +37,10 @@ DATA_DIR.mkdir(parents=True, exist_ok=True)
 # ═══════════════════════════════════════════════════════════════
 
 Q_TYPE_RE = re.compile(r'【(单选题|多选题|判断题|填空题|简答题|论述题)】')
-ANSWER_RE = re.compile(r'^答案\s*[：:]\s*([^\n]*)')
+# ANSWER: capture the answer value. Tolerate `答案:X`, `答案：X`, and the
+# malformed `答案:：X` (ASCII colon + fullwidth colon) case by stopping at the
+# next colon of any kind — that way `答案:：C ` captures just `C`, not `：C`.
+ANSWER_RE = re.compile(r'^答案\s*[：:][：:\s]*([^：:\n]*?)\s*$')
 PARSE_RE = re.compile(r'^解析\s*[：:]\s*([^\n]*)')
 REF_ANSWER_RE = re.compile(r'^参考答案\s*[：:]\s*([^\n]*)')
 OPT_RE = re.compile(r'^\s*([A-F])\s*[、.,。:：]?\s*([^\n]+)')
@@ -348,7 +357,14 @@ def parse_docx(path: Path) -> dict:
         for i, q in enumerate(questions, 1):
             q['number'] = i
 
-    return {'number': number, 'title': title, 'questions': questions}
+    # Normalize qset['number'] to int (parse_docx captures it as str from
+    # the docx metadata "金刚经导读NNN"). Existing data/*.json stores str;
+    # new writes will be int. Both work for sort/index keys.
+    try:
+        number_int = int(number)
+    except (TypeError, ValueError):
+        number_int = number
+    return {'number': number_int, 'title': title, 'questions': questions}
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -356,7 +372,8 @@ def parse_docx(path: Path) -> dict:
 # ═══════════════════════════════════════════════════════════════
 
 # 古典东方哲学风格 CSS (米白宣纸 + 墨色 + 赭石点缀)
-CSS = r"""
+QUIZ_CSS = r"""
+
 :root {
   --paper: #f7f1e6;        /* 宣纸米白 */
   --paper-2: #ede4d0;       /* 略深 */
@@ -662,7 +679,76 @@ footer {
   h1.title { font-size: 28px; }
   main { padding: 16px; }
 }
+
+/* === index page only === */
+.kicker {
+  font-size: 13px;
+  letter-spacing: 0.4em;
+  color: var(--ink-light);
+  margin-bottom: 16px;
+  font-family: "Kaiti SC", "STKaiti", serif;
+}
+.subtitle {
+  font-size: 16px;
+  color: var(--ink-soft);
+  margin-top: 12px;
+  font-family: "Kaiti SC", "STKaiti", serif;
+}
+header {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 80px 32px 48px;
+  text-align: center;
+  border-bottom: 1px solid var(--line);
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+.quiz-card {
+  display: block;
+  padding: 24px 22px;
+  background: #fdfaf2;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s;
+  position: relative;
+}
+.quiz-card:hover {
+  border-color: var(--ochre);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(94,86,76,0.08);
+}
+.quiz-card::before {
+  content: "";
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--ochre);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.quiz-card:hover::before { opacity: 1; }
+.quiz-no {
+  font-family: "Kaiti SC", "STKaiti", serif;
+  font-size: 13px;
+  color: var(--ochre);
+  letter-spacing: 0.2em;
+  margin-bottom: 8px;
+}
+.quiz-title {
+  font-size: 19px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.quiz-meta { font-size: 13px; color: var(--ink-light); letter-spacing: 0.1em; }
 """
+
+# Written by main() to output/quiz.css. HTML files reference it via
+# <link rel="stylesheet" href="quiz.css">. This single source of truth saves
+# ~1.5MB of duplicated CSS bytes across 62 HTML files.
 
 JS = r"""
 (function(){
@@ -894,8 +980,13 @@ def render_question(q: dict, qid: str) -> str:
     stem = re.sub(r'^\s*\d+\s*[.．、]\s*', '', stem)  # 去题号
     stem_html = html.escape(stem).replace('\n', '<br>')
 
+    # attribute values: only escape `"` to keep the HTML attribute valid.
+    # The client-side escHtml() does the full &<>" escape on render, so the
+    # server must NOT pre-escape &<> (that would double-escape as `&amp;amp;`).
+    analysis_attr = q['analysis'].replace('"', '&quot;')
+
     parts = [
-        f'<article class="q-card" id="{qid}" data-type="{q["type"]}" data-analysis="{html.escape(q["analysis"])}">',
+        f'<article class="q-card" id="{qid}" data-type="{q["type"]}" data-analysis="{analysis_attr}">',
         '<div class="q-head">',
         f'<span class="q-no">{q["number"]}.<span class="badge {badge_class}">{type_label}</span></span>',
         '</div>',
@@ -931,8 +1022,11 @@ def render_question(q: dict, qid: str) -> str:
         parts.append(f'<textarea class="essay-input" name="{qid}" placeholder="{placeholder}"></textarea>')
 
     # 操作 + 反馈
-    answer_attr = q.get('answer') or ''
-    answer_attr = html.escape(answer_attr).replace("'", "&#39;")
+    # attribute values: only escape `"` to keep the HTML attribute valid.
+    # The client-side escHtml() does the full &<>" escape on render, so the
+    # server must NOT pre-escape &<> (that would double-escape as `&amp;amp;`).
+    # We still escape `'` defensively in case a future template uses single quotes.
+    answer_attr = (q.get('answer') or '').replace('"', '&quot;').replace("'", '&#39;')
     parts.append(
         f'<div class="actions">'
         f'<button class="btn btn-primary btn-submit" data-qid="{qid}" data-type="{q["type"]}" data-answer="{answer_attr}">提交</button>'
@@ -975,11 +1069,11 @@ def render_html(qset: dict) -> str:
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
-<style>{CSS}</style>
+<link rel="stylesheet" href="quiz.css">
 </head>
 <body>
 <header class="page">
-  <div class="kicker">金刚经导读 · 自测题</div>
+  <div class="kicker"><a href="index.html">← 返回索引页</a></div>
   <h1 class="title">第 {n} 讲</h1>
   <div class="subtitle">{title}</div>
   <div class="meta">
@@ -1027,91 +1121,16 @@ def render_index(quizzes: list) -> str:
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>金刚经导读 · 自测题集</title>
+<title>于晓非老师 金刚经导读 · 自测题 · 共 {len(quizzes)} 讲</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
-<style>
-:root {{
-  --paper: #f7f1e6; --paper-2: #ede4d0; --ink: #2a2622;
-  --ink-soft: #5e564c; --ink-light: #8a8278;
-  --ochre: #a35d2a; --ochre-soft: #c89165;
-  --jade: #5e7a4a; --line: #c9bfa9; --line-soft: #e3d9c2;
-}}
-* {{ box-sizing: border-box; }}
-body {{
-  margin: 0; padding: 0;
-  background: var(--paper);
-  color: var(--ink);
-  font-family: "Noto Serif SC", "Songti SC", serif;
-  min-height: 100vh;
-}}
-header {{
-  max-width: 1080px; margin: 0 auto;
-  padding: 80px 32px 48px;
-  text-align: center;
-  border-bottom: 1px solid var(--line);
-}}
-.kicker {{ font-size: 13px; letter-spacing: 0.4em; color: var(--ink-light); margin-bottom: 16px; font-family: "Kaiti SC", "STKaiti", serif; }}
-h1 {{ font-family: "Kaiti SC", "STKaiti", serif; font-size: 44px; margin: 0; letter-spacing: 0.1em; font-weight: 500; }}
-.subtitle {{ font-size: 16px; color: var(--ink-soft); margin-top: 12px; font-family: "Kaiti SC", "STKaiti", serif; }}
-main {{ max-width: 1080px; margin: 0 auto; padding: 48px 32px; }}
-.grid {{
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 16px;
-}}
-.quiz-card {{
-  display: block;
-  padding: 24px 22px;
-  background: #fdfaf2;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  text-decoration: none;
-  color: inherit;
-  transition: all 0.2s;
-  position: relative;
-}}
-.quiz-card:hover {{
-  border-color: var(--ochre);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(94,86,76,0.08);
-}}
-.quiz-card::before {{
-  content: "";
-  position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: var(--ochre);
-  opacity: 0;
-  transition: opacity 0.2s;
-}}
-.quiz-card:hover::before {{ opacity: 1; }}
-.quiz-no {{
-  font-family: "Kaiti SC", "STKaiti", serif;
-  font-size: 13px;
-  color: var(--ochre);
-  letter-spacing: 0.2em;
-  margin-bottom: 8px;
-}}
-.quiz-title {{
-  font-size: 19px;
-  font-weight: 500;
-  margin-bottom: 8px;
-  line-height: 1.4;
-}}
-.quiz-meta {{ font-size: 13px; color: var(--ink-light); letter-spacing: 0.1em; }}
-footer {{
-  text-align: center; padding: 48px 32px;
-  color: var(--ink-light); font-size: 12px; letter-spacing: 0.2em;
-  border-top: 1px solid var(--line-soft);
-  font-family: "Kaiti SC", "STKaiti", serif;
-}}
-</style>
+<link rel="stylesheet" href="quiz.css">
 </head>
 <body>
 <header>
-  <div class="kicker">金刚经导读</div>
-  <h1>自测题集</h1>
-  <div class="subtitle">三十三讲至六十一讲 · 共 {len(quizzes)} 卷</div>
+  <h1>于晓非老师 金刚经导读</h1>
+  <div class="subtitle">自测题 · 共 {len(quizzes)} 讲</div>
 </header>
 <main>
   <div class="grid">
@@ -1134,20 +1153,30 @@ def slug(s: str) -> str:
 # ═══════════════════════════════════════════════════════════════
 
 def main():
-    docx_files = sorted(SRC_DIR.glob('*.docx'))
-    if not docx_files:
-        print(f'❌ 没找到 docx 文件: {SRC_DIR}')
-        sys.exit(1)
-    print(f'找到 {len(docx_files)} 个 docx 文件')
+    # Always (re-)write quiz.css so output/ stays self-contained.
+    # If you edit CSS, edit the QUIZ_CSS constant in this file (single source of truth).
+    (OUT_DIR / 'quiz.css').write_text(QUIZ_CSS, encoding='utf-8')
 
-    quizzes = []
-    for f in docx_files:
-        try:
-            qset = parse_docx(f)
-            print(f'  ✓ {f.name}: {qset["number"]} {qset["title"]} ({len(qset["questions"])} 题)')
-            quizzes.append(qset)
-        except Exception as e:
-            print(f'  ❌ {f.name}: {e}')
+    docx_files = sorted(SRC_DIR.glob('*.docx')) if SRC_DIR.exists() else []
+    if not docx_files:
+        # NAS unmounted (or first run after data refresh): skip docx parsing.
+        # Operational scripts (merge_*/fix_*/dedupe_*) populate data/ directly,
+        # so we can still render HTML/CSV/zip from existing JSON.
+        print(f'⚠️  没找到 docx ({SRC_DIR} 不存在或为空); 从 data/ 直接渲染')
+        quizzes = []
+        for jp in sorted(DATA_DIR.glob('*.json'), key=lambda p: int(p.stem)):
+            with open(jp, encoding='utf-8') as f:
+                quizzes.append(json.load(f))
+    else:
+        print(f'找到 {len(docx_files)} 个 docx 文件')
+        quizzes = []
+        for f in docx_files:
+            try:
+                qset = parse_docx(f)
+                print(f'  ✓ {f.name}: {qset["number"]} {qset["title"]} ({len(qset["questions"])} 题)')
+                quizzes.append(qset)
+            except Exception as e:
+                print(f'  ❌ {f.name}: {e}')
 
     # 排序
     quizzes.sort(key=lambda q: int(q['number']))
@@ -1155,6 +1184,7 @@ def main():
     # 兜底: 修复"is_choice=true + options=空 + _pending_A 是 list"的情况
     # (例: 060.json q11 — 候选在 _pending_A 但没 B/C/D 行触发 commit)
     fixed_count = 0
+    DEBUG_KEYS = ('_pending_A', '_pending_extra', '_collecting_ref', '_ref_lines')
     for qset in quizzes:
         for q in qset['questions']:
             if (q.get('is_choice')
@@ -1172,8 +1202,23 @@ def main():
     if fixed_count:
         print(f'  → Total auto-fixed: {fixed_count}')
 
-    # 输出 HTML
+    # Strip debug keys before writing JSON or rendering HTML.
     for qset in quizzes:
+        for q in qset['questions']:
+            for k in DEBUG_KEYS:
+                q.pop(k, None)
+
+    # Always render from data/*.json (the merged source of truth). When docx
+    # parsing ran, it overwrote data/033.json..061.json; otherwise the merged
+    # 1-32 + original 33-61 are already there. Either way, data/ is canonical.
+    final_quizzes = []
+    for jp in sorted(DATA_DIR.glob('*.json'), key=lambda p: int(p.stem)):
+        with open(jp, encoding='utf-8') as f:
+            final_quizzes.append(json.load(f))
+    final_quizzes.sort(key=lambda q: int(q['number']))
+
+    # 输出 HTML
+    for qset in final_quizzes:
         # 数据 JSON (调试用)
         with open(DATA_DIR / f'{qset["number"]}.json', 'w', encoding='utf-8') as f:
             json.dump(qset, f, ensure_ascii=False, indent=2)
@@ -1185,7 +1230,7 @@ def main():
         print(f'  📄 {out_path.name}')
 
     # 索引页
-    idx_html = render_index(quizzes)
+    idx_html = render_index(final_quizzes)
     with open(OUT_DIR / 'index.html', 'w', encoding='utf-8') as f:
         f.write(idx_html)
     print(f'  📄 index.html')
@@ -1208,7 +1253,7 @@ def main():
             'is_open',          # 是否开放题 (1=是, 不自动判分)
             'source_file',      # 源 docx 文件名
         ])
-        for qset in quizzes:
+        for qset in final_quizzes:
             for q in qset['questions']:
                 opts_str = ' || '.join(f'{ltr}. {txt}' for ltr, txt in q.get('options', []))
                 w.writerow([
@@ -1229,6 +1274,8 @@ def main():
     import zipfile
     zip_path = OUT_DIR / 'quizzes.zip'
     with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zf:
+        # Bundle quiz.css + all HTMLs so offline users get a self-contained zip.
+        zf.write(OUT_DIR / 'quiz.css', 'quiz.css')
         for f in sorted(OUT_DIR.glob('*.html')):
             zf.write(f, f.name)
     print(f'  📦 {zip_path.name} ({zip_path.stat().st_size//1024} KB)')
