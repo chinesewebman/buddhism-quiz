@@ -7,325 +7,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
-<style>
-:root {
-  --paper: #f7f1e6;        /* 宣纸米白 */
-  --paper-2: #ede4d0;       /* 略深 */
-  --ink: #2a2622;           /* 墨色 */
-  --ink-soft: #5e564c;      /* 浅墨 */
-  --ink-light: #8a8278;     /* 灰墨 */
-  --ochre: #a35d2a;         /* 赭石 */
-  --ochre-soft: #c89165;    /* 浅赭 */
-  --cinnabar: #b34340;      /* 朱砂 (用于错误) */
-  --jade: #5e7a4a;          /* 玉青 (用于正确) */
-  --line: #c9bfa9;          /* 边框线 */
-  --line-soft: #e3d9c2;     /* 软边框 */
-}
-* { box-sizing: border-box; }
-html, body {
-  margin: 0; padding: 0;
-  background: var(--paper);
-  color: var(--ink);
-  font-family: "Noto Serif SC", "Songti SC", "STSong", "宋体", serif;
-  font-size: 16px;
-  line-height: 1.75;
-  -webkit-font-smoothing: antialiased;
-}
-body {
-  background:
-    radial-gradient(ellipse at 10% 10%, rgba(167,93,42,0.04) 0%, transparent 40%),
-    radial-gradient(ellipse at 90% 80%, rgba(94,122,74,0.04) 0%, transparent 50%),
-    var(--paper);
-  min-height: 100vh;
-}
-header.page {
-  max-width: 880px;
-  margin: 0 auto;
-  padding: 56px 32px 32px;
-  text-align: center;
-  border-bottom: 1px solid var(--line);
-  position: relative;
-}
-header.page::before, header.page::after {
-  content: "";
-  position: absolute;
-  left: 50%; transform: translateX(-50%);
-  width: 60px; height: 1px;
-  background: var(--ink-light);
-}
-header.page::before { top: 32px; }
-header.page::after  { bottom: 0; }
-.kicker {
-  font-size: 13px;
-  letter-spacing: 0.4em;
-  color: var(--ink-light);
-  margin-bottom: 16px;
-  text-transform: none;
-  font-family: "Kaiti SC", "STKaiti", "KaiTi", serif;
-}
-h1.title {
-  font-family: "Kaiti SC", "STKaiti", "KaiTi", serif;
-  font-size: 38px;
-  font-weight: 500;
-  margin: 0 0 8px;
-  letter-spacing: 0.1em;
-}
-.subtitle {
-  font-size: 17px;
-  color: var(--ink-soft);
-  margin: 8px 0 24px;
-  font-family: "Kaiti SC", "STKaiti", serif;
-}
-.meta {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  font-size: 13px;
-  color: var(--ink-light);
-  letter-spacing: 0.1em;
-}
-.meta .sep { color: var(--line); }
-
-main {
-  max-width: 880px;
-  margin: 0 auto;
-  padding: 32px;
-}
-.nav-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 24px;
-  padding: 12px;
-  background: var(--paper-2);
-  border-radius: 4px;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  border: 1px solid var(--line-soft);
-}
-.nav-pills a {
-  display: inline-block;
-  min-width: 28px;
-  padding: 4px 8px;
-  text-align: center;
-  font-size: 13px;
-  color: var(--ink-soft);
-  text-decoration: none;
-  border: 1px solid transparent;
-  border-radius: 3px;
-  cursor: pointer;
-  font-family: "Kaiti SC", "STKaiti", serif;
-}
-.nav-pills a:hover { background: var(--paper); border-color: var(--line); }
-.nav-pills a.answered { background: var(--jade); color: var(--paper); }
-.nav-pills a.wrong    { background: var(--cinnabar); color: var(--paper); }
-.nav-pills a.current  { border-color: var(--ochre); color: var(--ochre); font-weight: 600; }
-
-.q-card {
-  background: #fdfaf2;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  padding: 28px 32px;
-  margin: 0 0 24px;
-  position: relative;
-  box-shadow: 0 1px 0 rgba(94,86,76,0.04);
-}
-.q-card.correct { border-color: var(--jade); border-width: 2px; }
-.q-card.wrong   { border-color: var(--cinnabar); border-width: 2px; }
-.q-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 16px;
-  font-family: "Kaiti SC", "STKaiti", serif;
-}
-.q-no {
-  font-size: 22px;
-  color: var(--ochre);
-  font-weight: 500;
-  letter-spacing: 0.05em;
-}
-.q-no .badge {
-  display: inline-block;
-  font-size: 12px;
-  padding: 2px 10px;
-  margin-left: 8px;
-  background: var(--paper-2);
-  color: var(--ink-soft);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  letter-spacing: 0.1em;
-  font-weight: 400;
-  vertical-align: middle;
-}
-.q-no .badge.judge   { color: var(--ochre); border-color: var(--ochre-soft); }
-.q-no .badge.fill    { color: var(--jade); border-color: var(--jade); }
-.q-no .badge.essay   { color: var(--ink-soft); }
-.q-stem {
-  font-size: 17px;
-  line-height: 1.85;
-  margin-bottom: 20px;
-  color: var(--ink);
-}
-.options { margin: 16px 0; }
-.opt {
-  display: block;
-  padding: 10px 16px;
-  margin: 6px 0;
-  background: var(--paper);
-  border: 1px solid var(--line-soft);
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.15s;
-  position: relative;
-}
-.opt:hover { background: var(--paper-2); border-color: var(--line); }
-.opt input { margin-right: 12px; vertical-align: middle; }
-.opt .ltr {
-  display: inline-block;
-  width: 22px;
-  font-family: "Kaiti SC", "STKaiti", serif;
-  color: var(--ochre);
-  font-weight: 500;
-}
-.opt.is-correct { background: #e8f0dd; border-color: var(--jade); color: var(--ink); }
-.opt.is-correct::after {
-  content: "✓";
-  position: absolute; right: 12px; top: 50%;
-  transform: translateY(-50%);
-  color: var(--jade); font-weight: 700;
-}
-.opt.is-wrong { background: #f6dcd9; border-color: var(--cinnabar); }
-.opt.is-wrong::after {
-  content: "✗";
-  position: absolute; right: 12px; top: 50%;
-  transform: translateY(-50%);
-  color: var(--cinnabar); font-weight: 700;
-}
-.fill-input, .essay-input {
-  width: 100%;
-  padding: 10px 14px;
-  font-size: 16px;
-  font-family: inherit;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  margin: 8px 0;
-  color: var(--ink);
-}
-.fill-input:focus, .essay-input:focus { outline: none; border-color: var(--ochre); }
-.essay-input { min-height: 140px; line-height: 1.7; resize: vertical; }
-
-.actions {
-  display: flex;
-  gap: 12px;
-  margin-top: 16px;
-  align-items: center;
-}
-.btn {
-  padding: 8px 20px;
-  font-size: 14px;
-  font-family: "Kaiti SC", "STKaiti", serif;
-  background: var(--paper);
-  color: var(--ink);
-  border: 1px solid var(--ink-light);
-  border-radius: 3px;
-  cursor: pointer;
-  letter-spacing: 0.15em;
-  transition: all 0.15s;
-}
-.btn:hover { background: var(--paper-2); }
-.btn-primary {
-  background: var(--ochre);
-  color: var(--paper);
-  border-color: var(--ochre);
-}
-.btn-primary:hover { background: #8c4d20; }
-.btn-primary:disabled { background: var(--line); border-color: var(--line); cursor: not-allowed; }
-.btn-ghost { border-color: var(--line); color: var(--ink-soft); }
-
-.feedback {
-  margin-top: 18px;
-  padding: 16px 20px;
-  border-radius: 4px;
-  display: none;
-  font-size: 15px;
-  line-height: 1.7;
-}
-.feedback.show { display: block; }
-.feedback.right {
-  background: #e8f0dd;
-  border-left: 3px solid var(--jade);
-  color: var(--ink);
-}
-.feedback.wrong {
-  background: #f6dcd9;
-  border-left: 3px solid var(--cinnabar);
-  color: var(--ink);
-}
-.feedback .verdict {
-  font-weight: 600;
-  font-size: 16px;
-  margin-bottom: 6px;
-  font-family: "Kaiti SC", "STKaiti", serif;
-  letter-spacing: 0.1em;
-}
-.feedback .verdict::before { content: "· "; color: var(--ink-light); }
-.feedback .ref-answer {
-  display: block;
-  margin-top: 10px;
-  padding: 10px 14px;
-  background: rgba(255,255,255,0.5);
-  border-radius: 3px;
-  font-size: 15px;
-}
-.feedback .ref-answer .lbl {
-  font-size: 12px;
-  letter-spacing: 0.2em;
-  color: var(--ink-light);
-  display: block;
-  margin-bottom: 4px;
-  font-family: "Kaiti SC", "STKaiti", serif;
-}
-.feedback .analysis-text {
-  display: block;
-  margin-top: 10px;
-  white-space: pre-wrap;
-  line-height: 1.85;
-}
-
-footer {
-  max-width: 880px;
-  margin: 0 auto;
-  padding: 32px;
-  text-align: center;
-  font-size: 12px;
-  color: var(--ink-light);
-  letter-spacing: 0.2em;
-  border-top: 1px solid var(--line-soft);
-  font-family: "Kaiti SC", "STKaiti", serif;
-}
-
-/* 印刷感收尾 */
-@media (max-width: 600px) {
-  .q-card { padding: 20px 18px; }
-  h1.title { font-size: 28px; }
-  main { padding: 16px; }
-}
-</style>
+<link rel="stylesheet" href="quiz.css">
 </head>
 <body>
 <header class="page">
-  <div class="kicker">金刚经导读 · 自测题</div>
+  <div class="kicker"><a href="index.html">← 返回索引页</a></div>
   <h1 class="title">第 051 讲</h1>
   <div class="subtitle">无相发心</div>
   <div class="meta">
-    <span>共 <b>19</b> 题</span>
+    <span>共 <b>18</b> 题</span>
     <span class="sep">·</span>
-    <span>判断题 3 · 多选题 10 · 单选题 1 · 填空题 2 · 简答题 2 · 论述题 1</span>
+    <span>判断题 3 · 多选题 10 · 单选题 1 · 填空题 2 · 简答题 2</span>
     <span class="sep">·</span>
-    <span id="summary">已作答 0/19</span>
+    <span id="summary">已作答 0/18</span>
   </div>
 </header>
 
@@ -347,8 +41,7 @@ footer {
 <a href="#q051-15" data-qid="q051-15">15</a>
 <a href="#q051-16" data-qid="q051-16">16</a>
 <a href="#q051-17" data-qid="q051-17">17</a>
-<a href="#q051-18" data-qid="q051-18">18</a>
-<a href="#q051-19" data-qid="q051-19">19</a></nav>
+<a href="#q051-18" data-qid="q051-18">18</a></nav>
   <article class="q-card" id="q051-1" data-type="判断题" data-analysis="大乘佛法的修行，从凡夫发心直到最后成佛，整个修行历程可以分为五个阶段，分别是资粮位、加行位、见道位、修道位和证道位。要说明的是，加行位的“加行”，千万不要和藏传佛教入手修行的“四加行法”混淆，这是两件事情。">
 <div class="q-head">
 <span class="q-no">1.<span class="badge judge">判断</span></span>
@@ -529,7 +222,7 @@ footer {
 <div class="q-head">
 <span class="q-no">17.<span class="badge essay">简答</span></span>
 </div>
-<div class="q-stem">【简答题】一个发阿耨多罗三藐三菩提心的人，应当如何生起其心？请分别从二谛角度和第十七段经文无相发心的角度来回答。</div>
+<div class="q-stem">【简答题】17.【简答题】一个发阿耨多罗三藐三菩提心的人，应当如何生起其心？请分别从二谛角度和第十七段经文无相发心的角度来回答。</div>
 <textarea class="essay-input" name="q051-17" placeholder="请简要作答…"></textarea>
 <div class="actions"><button class="btn btn-primary btn-submit" data-qid="q051-17" data-type="简答题" data-answer="从二谛角度：
 从世俗谛、从名言谛而言，他要发心度一切众生，而且切切实实灭度了一切众生，这是世俗谛菩提心。或者，在第四重二谛的世俗谛、名言谛上，如梦如幻的名言菩萨，发心度如梦如幻的一切名言众生，而且如梦如幻的名言菩萨，切切实实度化了如梦如幻的一切的名言众生。
@@ -544,19 +237,12 @@ footer {
 <div class="q-head">
 <span class="q-no">18.<span class="badge essay">简答</span></span>
 </div>
-<div class="q-stem">依据印度古德的理解，《金刚经》的结构是怎样的？这种对《金刚经》结构的划分，是否可以确定为绝对标准？</div>
+<div class="q-stem">【简答题】依据印度古德的理解，《金刚经》的结构是怎样的？这种对《金刚经》结构的划分，是否可以确定为绝对标准？</div>
 <textarea class="essay-input" name="q051-18" placeholder="请简要作答…"></textarea>
 <div class="actions"><button class="btn btn-primary btn-submit" data-qid="q051-18" data-type="简答题" data-answer="依照印度古德的理解，《金刚经》前十六段，是佛陀为我们凡夫说资粮位的修法，说资粮位的修行境界；
 从第十七段开始，佛陀开始说加行位、见道位和修道位的修法。
 印度古德把第十七段分为四个部分，认为第一部分和第二部分是给我们凡夫讲加行位的修行境界，第三部分说见道位的境界，第四部分以及后边的段落，是给我们这些凡夫说修道位的境界的修法。
 这是印度古德对整部《金刚经》说法的结构做的大概的一个划分。但是要注意，这个划分不是绝对的，每个段落，不同的段落，所表述的修行境界，表述的修行的法，是互有交叉，互有重复的。不要做太绝对的理解，这只是一个大概的划分。">提交</button><button class="btn btn-ghost btn-reset" data-qid="q051-18">重做</button></div><div class="feedback"></div></article>
-<article class="q-card" id="q051-19" data-type="论述题" data-analysis="">
-<div class="q-head">
-<span class="q-no">19.<span class="badge essay">论述</span></span>
-</div>
-<div class="q-stem">暂缺</div>
-<textarea class="essay-input" name="q051-19" placeholder="请详细论述…"></textarea>
-<div class="actions"><button class="btn btn-primary btn-submit" data-qid="q051-19" data-type="论述题" data-answer="">提交</button><button class="btn btn-ghost btn-reset" data-qid="q051-19">重做</button></div><div class="feedback"></div></article>
 </main>
 
 <footer>

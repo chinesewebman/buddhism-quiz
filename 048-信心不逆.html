@@ -7,317 +7,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
-<style>
-:root {
-  --paper: #f7f1e6;        /* 宣纸米白 */
-  --paper-2: #ede4d0;       /* 略深 */
-  --ink: #2a2622;           /* 墨色 */
-  --ink-soft: #5e564c;      /* 浅墨 */
-  --ink-light: #8a8278;     /* 灰墨 */
-  --ochre: #a35d2a;         /* 赭石 */
-  --ochre-soft: #c89165;    /* 浅赭 */
-  --cinnabar: #b34340;      /* 朱砂 (用于错误) */
-  --jade: #5e7a4a;          /* 玉青 (用于正确) */
-  --line: #c9bfa9;          /* 边框线 */
-  --line-soft: #e3d9c2;     /* 软边框 */
-}
-* { box-sizing: border-box; }
-html, body {
-  margin: 0; padding: 0;
-  background: var(--paper);
-  color: var(--ink);
-  font-family: "Noto Serif SC", "Songti SC", "STSong", "宋体", serif;
-  font-size: 16px;
-  line-height: 1.75;
-  -webkit-font-smoothing: antialiased;
-}
-body {
-  background:
-    radial-gradient(ellipse at 10% 10%, rgba(167,93,42,0.04) 0%, transparent 40%),
-    radial-gradient(ellipse at 90% 80%, rgba(94,122,74,0.04) 0%, transparent 50%),
-    var(--paper);
-  min-height: 100vh;
-}
-header.page {
-  max-width: 880px;
-  margin: 0 auto;
-  padding: 56px 32px 32px;
-  text-align: center;
-  border-bottom: 1px solid var(--line);
-  position: relative;
-}
-header.page::before, header.page::after {
-  content: "";
-  position: absolute;
-  left: 50%; transform: translateX(-50%);
-  width: 60px; height: 1px;
-  background: var(--ink-light);
-}
-header.page::before { top: 32px; }
-header.page::after  { bottom: 0; }
-.kicker {
-  font-size: 13px;
-  letter-spacing: 0.4em;
-  color: var(--ink-light);
-  margin-bottom: 16px;
-  text-transform: none;
-  font-family: "Kaiti SC", "STKaiti", "KaiTi", serif;
-}
-h1.title {
-  font-family: "Kaiti SC", "STKaiti", "KaiTi", serif;
-  font-size: 38px;
-  font-weight: 500;
-  margin: 0 0 8px;
-  letter-spacing: 0.1em;
-}
-.subtitle {
-  font-size: 17px;
-  color: var(--ink-soft);
-  margin: 8px 0 24px;
-  font-family: "Kaiti SC", "STKaiti", serif;
-}
-.meta {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  font-size: 13px;
-  color: var(--ink-light);
-  letter-spacing: 0.1em;
-}
-.meta .sep { color: var(--line); }
-
-main {
-  max-width: 880px;
-  margin: 0 auto;
-  padding: 32px;
-}
-.nav-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 24px;
-  padding: 12px;
-  background: var(--paper-2);
-  border-radius: 4px;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  border: 1px solid var(--line-soft);
-}
-.nav-pills a {
-  display: inline-block;
-  min-width: 28px;
-  padding: 4px 8px;
-  text-align: center;
-  font-size: 13px;
-  color: var(--ink-soft);
-  text-decoration: none;
-  border: 1px solid transparent;
-  border-radius: 3px;
-  cursor: pointer;
-  font-family: "Kaiti SC", "STKaiti", serif;
-}
-.nav-pills a:hover { background: var(--paper); border-color: var(--line); }
-.nav-pills a.answered { background: var(--jade); color: var(--paper); }
-.nav-pills a.wrong    { background: var(--cinnabar); color: var(--paper); }
-.nav-pills a.current  { border-color: var(--ochre); color: var(--ochre); font-weight: 600; }
-
-.q-card {
-  background: #fdfaf2;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  padding: 28px 32px;
-  margin: 0 0 24px;
-  position: relative;
-  box-shadow: 0 1px 0 rgba(94,86,76,0.04);
-}
-.q-card.correct { border-color: var(--jade); border-width: 2px; }
-.q-card.wrong   { border-color: var(--cinnabar); border-width: 2px; }
-.q-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 16px;
-  font-family: "Kaiti SC", "STKaiti", serif;
-}
-.q-no {
-  font-size: 22px;
-  color: var(--ochre);
-  font-weight: 500;
-  letter-spacing: 0.05em;
-}
-.q-no .badge {
-  display: inline-block;
-  font-size: 12px;
-  padding: 2px 10px;
-  margin-left: 8px;
-  background: var(--paper-2);
-  color: var(--ink-soft);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  letter-spacing: 0.1em;
-  font-weight: 400;
-  vertical-align: middle;
-}
-.q-no .badge.judge   { color: var(--ochre); border-color: var(--ochre-soft); }
-.q-no .badge.fill    { color: var(--jade); border-color: var(--jade); }
-.q-no .badge.essay   { color: var(--ink-soft); }
-.q-stem {
-  font-size: 17px;
-  line-height: 1.85;
-  margin-bottom: 20px;
-  color: var(--ink);
-}
-.options { margin: 16px 0; }
-.opt {
-  display: block;
-  padding: 10px 16px;
-  margin: 6px 0;
-  background: var(--paper);
-  border: 1px solid var(--line-soft);
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.15s;
-  position: relative;
-}
-.opt:hover { background: var(--paper-2); border-color: var(--line); }
-.opt input { margin-right: 12px; vertical-align: middle; }
-.opt .ltr {
-  display: inline-block;
-  width: 22px;
-  font-family: "Kaiti SC", "STKaiti", serif;
-  color: var(--ochre);
-  font-weight: 500;
-}
-.opt.is-correct { background: #e8f0dd; border-color: var(--jade); color: var(--ink); }
-.opt.is-correct::after {
-  content: "✓";
-  position: absolute; right: 12px; top: 50%;
-  transform: translateY(-50%);
-  color: var(--jade); font-weight: 700;
-}
-.opt.is-wrong { background: #f6dcd9; border-color: var(--cinnabar); }
-.opt.is-wrong::after {
-  content: "✗";
-  position: absolute; right: 12px; top: 50%;
-  transform: translateY(-50%);
-  color: var(--cinnabar); font-weight: 700;
-}
-.fill-input, .essay-input {
-  width: 100%;
-  padding: 10px 14px;
-  font-size: 16px;
-  font-family: inherit;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  margin: 8px 0;
-  color: var(--ink);
-}
-.fill-input:focus, .essay-input:focus { outline: none; border-color: var(--ochre); }
-.essay-input { min-height: 140px; line-height: 1.7; resize: vertical; }
-
-.actions {
-  display: flex;
-  gap: 12px;
-  margin-top: 16px;
-  align-items: center;
-}
-.btn {
-  padding: 8px 20px;
-  font-size: 14px;
-  font-family: "Kaiti SC", "STKaiti", serif;
-  background: var(--paper);
-  color: var(--ink);
-  border: 1px solid var(--ink-light);
-  border-radius: 3px;
-  cursor: pointer;
-  letter-spacing: 0.15em;
-  transition: all 0.15s;
-}
-.btn:hover { background: var(--paper-2); }
-.btn-primary {
-  background: var(--ochre);
-  color: var(--paper);
-  border-color: var(--ochre);
-}
-.btn-primary:hover { background: #8c4d20; }
-.btn-primary:disabled { background: var(--line); border-color: var(--line); cursor: not-allowed; }
-.btn-ghost { border-color: var(--line); color: var(--ink-soft); }
-
-.feedback {
-  margin-top: 18px;
-  padding: 16px 20px;
-  border-radius: 4px;
-  display: none;
-  font-size: 15px;
-  line-height: 1.7;
-}
-.feedback.show { display: block; }
-.feedback.right {
-  background: #e8f0dd;
-  border-left: 3px solid var(--jade);
-  color: var(--ink);
-}
-.feedback.wrong {
-  background: #f6dcd9;
-  border-left: 3px solid var(--cinnabar);
-  color: var(--ink);
-}
-.feedback .verdict {
-  font-weight: 600;
-  font-size: 16px;
-  margin-bottom: 6px;
-  font-family: "Kaiti SC", "STKaiti", serif;
-  letter-spacing: 0.1em;
-}
-.feedback .verdict::before { content: "· "; color: var(--ink-light); }
-.feedback .ref-answer {
-  display: block;
-  margin-top: 10px;
-  padding: 10px 14px;
-  background: rgba(255,255,255,0.5);
-  border-radius: 3px;
-  font-size: 15px;
-}
-.feedback .ref-answer .lbl {
-  font-size: 12px;
-  letter-spacing: 0.2em;
-  color: var(--ink-light);
-  display: block;
-  margin-bottom: 4px;
-  font-family: "Kaiti SC", "STKaiti", serif;
-}
-.feedback .analysis-text {
-  display: block;
-  margin-top: 10px;
-  white-space: pre-wrap;
-  line-height: 1.85;
-}
-
-footer {
-  max-width: 880px;
-  margin: 0 auto;
-  padding: 32px;
-  text-align: center;
-  font-size: 12px;
-  color: var(--ink-light);
-  letter-spacing: 0.2em;
-  border-top: 1px solid var(--line-soft);
-  font-family: "Kaiti SC", "STKaiti", serif;
-}
-
-/* 印刷感收尾 */
-@media (max-width: 600px) {
-  .q-card { padding: 20px 18px; }
-  h1.title { font-size: 28px; }
-  main { padding: 16px; }
-}
-</style>
+<link rel="stylesheet" href="quiz.css">
 </head>
 <body>
 <header class="page">
-  <div class="kicker">金刚经导读 · 自测题</div>
+  <div class="kicker"><a href="index.html">← 返回索引页</a></div>
   <h1 class="title">第 048 讲</h1>
   <div class="subtitle">信心不逆</div>
   <div class="meta">
@@ -536,7 +230,7 @@ footer {
 <div class="q-head">
 <span class="q-no">17.<span class="badge essay">简答</span></span>
 </div>
-<div class="q-stem">【简答题】请结合本讲内容谈谈，什么是“心住于法而行布施”？什么是“心不住于法的布施”？二者有何区别？</div>
+<div class="q-stem">【简答题】17.【简答题】请结合本讲内容谈谈，什么是“心住于法而行布施”？什么是“心不住于法的布施”？二者有何区别？</div>
 <textarea class="essay-input" name="q048-17" placeholder="请简要作答…"></textarea>
 <div class="actions"><button class="btn btn-primary btn-submit" data-qid="q048-17" data-type="简答题" data-answer="“心住于法而行布施”，是行了布施的，是善法，但是这个善法是心住于法的善法，佛教管它叫世间善法，虽然是布施，但是这样的布施，不能淡化凡夫心中的我执，不能引领着凡夫证悟空性，更不能引领凡夫去见实相，这样的布施是善法，它种下的善因，只能让凡夫在生死轮回中得个善报，不能令众生解脱，因此是世间善法，是有漏的善法。经中形象比喻：“如人入暗，则无所见。
 “心不住法而行布施”？其实就是在般若统摄下去行布施。如果失去了第六度即般若波罗蜜的摄受，佛教经典里说，前五度为盲。在第六度般若波罗蜜的摄受下进行布施，就如同一个人有了眼睛，有了光明，如经中比喻“如人有目，日光明照，见种种色”。">提交</button><button class="btn btn-ghost btn-reset" data-qid="q048-17">重做</button></div><div class="feedback"></div></article>
@@ -544,7 +238,7 @@ footer {
 <div class="q-head">
 <span class="q-no">18.<span class="badge essay">简答</span></span>
 </div>
-<div class="q-stem">【简答题】结合本讲内容，简述什么是对般若波罗蜜法门的 “信心不逆”？为何这件事不容易做到？</div>
+<div class="q-stem">【简答题】18.【简答题】结合本讲内容，简述什么是对般若波罗蜜法门的 “信心不逆”？为何这件事不容易做到？</div>
 <textarea class="essay-input" name="q048-18" placeholder="请简要作答…"></textarea>
 <div class="actions"><button class="btn btn-primary btn-submit" data-qid="q048-18" data-type="简答题" data-answer="对般若波罗蜜法门的 “信心不逆”指对金刚般若波罗蜜法门的信心不退转，“逆” 为倒退之意；对照现存梵本，指对金刚般若波罗蜜法门不生诽谤，玄奘法师译作“不生诽谤”，义净法师译作“不生毁谤”。
 这件事看似很容易，实际上有的时候无意当中就会诽谤。在讲第三重、第四重二谛之前，也就是讲无生、讲空性之前，特别强调，对大乘佛法，可以理解、可以不理解，听了以后，可以接受、也可能暂时接受不了，这都是可以的。但是当不能理解、不能接受的时候，千万不要诽谤。有人说不诽谤，没有诽谤，能做到，但是有的时候，有意的诽谤可以不做，但是由于无明所障，由于我们凡夫愚痴，无意的诽谤，还是很容易发生的。">提交</button><button class="btn btn-ghost btn-reset" data-qid="q048-18">重做</button></div><div class="feedback"></div></article>
@@ -552,7 +246,7 @@ footer {
 <div class="q-head">
 <span class="q-no">19.<span class="badge essay">论述</span></span>
 </div>
-<div class="q-stem">【论述题】结合本讲内容，谈谈修学大乘佛法者应如何践行 “法门无量誓愿学” 的誓愿？</div>
+<div class="q-stem">【论述题】19.【论述题】结合本讲内容，谈谈修学大乘佛法者应如何践行 “法门无量誓愿学” 的誓愿？</div>
 <textarea class="essay-input" name="q048-19" placeholder="请详细论述…"></textarea>
 <div class="actions"><button class="btn btn-primary btn-submit" data-qid="q048-19" data-type="论述题" data-answer="众生有种种差别与烦恼，度化众生需种种方便与法门，佛陀因此说种种法，修学者为度无量众生，当誓愿学佛陀所说无量法门。
 若暂做不到学无量法门，可拿出全部精力专精学习一部经、专修一部法。

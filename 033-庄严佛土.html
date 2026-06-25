@@ -7,317 +7,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
-<style>
-:root {
-  --paper: #f7f1e6;        /* 宣纸米白 */
-  --paper-2: #ede4d0;       /* 略深 */
-  --ink: #2a2622;           /* 墨色 */
-  --ink-soft: #5e564c;      /* 浅墨 */
-  --ink-light: #8a8278;     /* 灰墨 */
-  --ochre: #a35d2a;         /* 赭石 */
-  --ochre-soft: #c89165;    /* 浅赭 */
-  --cinnabar: #b34340;      /* 朱砂 (用于错误) */
-  --jade: #5e7a4a;          /* 玉青 (用于正确) */
-  --line: #c9bfa9;          /* 边框线 */
-  --line-soft: #e3d9c2;     /* 软边框 */
-}
-* { box-sizing: border-box; }
-html, body {
-  margin: 0; padding: 0;
-  background: var(--paper);
-  color: var(--ink);
-  font-family: "Noto Serif SC", "Songti SC", "STSong", "宋体", serif;
-  font-size: 16px;
-  line-height: 1.75;
-  -webkit-font-smoothing: antialiased;
-}
-body {
-  background:
-    radial-gradient(ellipse at 10% 10%, rgba(167,93,42,0.04) 0%, transparent 40%),
-    radial-gradient(ellipse at 90% 80%, rgba(94,122,74,0.04) 0%, transparent 50%),
-    var(--paper);
-  min-height: 100vh;
-}
-header.page {
-  max-width: 880px;
-  margin: 0 auto;
-  padding: 56px 32px 32px;
-  text-align: center;
-  border-bottom: 1px solid var(--line);
-  position: relative;
-}
-header.page::before, header.page::after {
-  content: "";
-  position: absolute;
-  left: 50%; transform: translateX(-50%);
-  width: 60px; height: 1px;
-  background: var(--ink-light);
-}
-header.page::before { top: 32px; }
-header.page::after  { bottom: 0; }
-.kicker {
-  font-size: 13px;
-  letter-spacing: 0.4em;
-  color: var(--ink-light);
-  margin-bottom: 16px;
-  text-transform: none;
-  font-family: "Kaiti SC", "STKaiti", "KaiTi", serif;
-}
-h1.title {
-  font-family: "Kaiti SC", "STKaiti", "KaiTi", serif;
-  font-size: 38px;
-  font-weight: 500;
-  margin: 0 0 8px;
-  letter-spacing: 0.1em;
-}
-.subtitle {
-  font-size: 17px;
-  color: var(--ink-soft);
-  margin: 8px 0 24px;
-  font-family: "Kaiti SC", "STKaiti", serif;
-}
-.meta {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  font-size: 13px;
-  color: var(--ink-light);
-  letter-spacing: 0.1em;
-}
-.meta .sep { color: var(--line); }
-
-main {
-  max-width: 880px;
-  margin: 0 auto;
-  padding: 32px;
-}
-.nav-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 24px;
-  padding: 12px;
-  background: var(--paper-2);
-  border-radius: 4px;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  border: 1px solid var(--line-soft);
-}
-.nav-pills a {
-  display: inline-block;
-  min-width: 28px;
-  padding: 4px 8px;
-  text-align: center;
-  font-size: 13px;
-  color: var(--ink-soft);
-  text-decoration: none;
-  border: 1px solid transparent;
-  border-radius: 3px;
-  cursor: pointer;
-  font-family: "Kaiti SC", "STKaiti", serif;
-}
-.nav-pills a:hover { background: var(--paper); border-color: var(--line); }
-.nav-pills a.answered { background: var(--jade); color: var(--paper); }
-.nav-pills a.wrong    { background: var(--cinnabar); color: var(--paper); }
-.nav-pills a.current  { border-color: var(--ochre); color: var(--ochre); font-weight: 600; }
-
-.q-card {
-  background: #fdfaf2;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  padding: 28px 32px;
-  margin: 0 0 24px;
-  position: relative;
-  box-shadow: 0 1px 0 rgba(94,86,76,0.04);
-}
-.q-card.correct { border-color: var(--jade); border-width: 2px; }
-.q-card.wrong   { border-color: var(--cinnabar); border-width: 2px; }
-.q-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 16px;
-  font-family: "Kaiti SC", "STKaiti", serif;
-}
-.q-no {
-  font-size: 22px;
-  color: var(--ochre);
-  font-weight: 500;
-  letter-spacing: 0.05em;
-}
-.q-no .badge {
-  display: inline-block;
-  font-size: 12px;
-  padding: 2px 10px;
-  margin-left: 8px;
-  background: var(--paper-2);
-  color: var(--ink-soft);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  letter-spacing: 0.1em;
-  font-weight: 400;
-  vertical-align: middle;
-}
-.q-no .badge.judge   { color: var(--ochre); border-color: var(--ochre-soft); }
-.q-no .badge.fill    { color: var(--jade); border-color: var(--jade); }
-.q-no .badge.essay   { color: var(--ink-soft); }
-.q-stem {
-  font-size: 17px;
-  line-height: 1.85;
-  margin-bottom: 20px;
-  color: var(--ink);
-}
-.options { margin: 16px 0; }
-.opt {
-  display: block;
-  padding: 10px 16px;
-  margin: 6px 0;
-  background: var(--paper);
-  border: 1px solid var(--line-soft);
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.15s;
-  position: relative;
-}
-.opt:hover { background: var(--paper-2); border-color: var(--line); }
-.opt input { margin-right: 12px; vertical-align: middle; }
-.opt .ltr {
-  display: inline-block;
-  width: 22px;
-  font-family: "Kaiti SC", "STKaiti", serif;
-  color: var(--ochre);
-  font-weight: 500;
-}
-.opt.is-correct { background: #e8f0dd; border-color: var(--jade); color: var(--ink); }
-.opt.is-correct::after {
-  content: "✓";
-  position: absolute; right: 12px; top: 50%;
-  transform: translateY(-50%);
-  color: var(--jade); font-weight: 700;
-}
-.opt.is-wrong { background: #f6dcd9; border-color: var(--cinnabar); }
-.opt.is-wrong::after {
-  content: "✗";
-  position: absolute; right: 12px; top: 50%;
-  transform: translateY(-50%);
-  color: var(--cinnabar); font-weight: 700;
-}
-.fill-input, .essay-input {
-  width: 100%;
-  padding: 10px 14px;
-  font-size: 16px;
-  font-family: inherit;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  margin: 8px 0;
-  color: var(--ink);
-}
-.fill-input:focus, .essay-input:focus { outline: none; border-color: var(--ochre); }
-.essay-input { min-height: 140px; line-height: 1.7; resize: vertical; }
-
-.actions {
-  display: flex;
-  gap: 12px;
-  margin-top: 16px;
-  align-items: center;
-}
-.btn {
-  padding: 8px 20px;
-  font-size: 14px;
-  font-family: "Kaiti SC", "STKaiti", serif;
-  background: var(--paper);
-  color: var(--ink);
-  border: 1px solid var(--ink-light);
-  border-radius: 3px;
-  cursor: pointer;
-  letter-spacing: 0.15em;
-  transition: all 0.15s;
-}
-.btn:hover { background: var(--paper-2); }
-.btn-primary {
-  background: var(--ochre);
-  color: var(--paper);
-  border-color: var(--ochre);
-}
-.btn-primary:hover { background: #8c4d20; }
-.btn-primary:disabled { background: var(--line); border-color: var(--line); cursor: not-allowed; }
-.btn-ghost { border-color: var(--line); color: var(--ink-soft); }
-
-.feedback {
-  margin-top: 18px;
-  padding: 16px 20px;
-  border-radius: 4px;
-  display: none;
-  font-size: 15px;
-  line-height: 1.7;
-}
-.feedback.show { display: block; }
-.feedback.right {
-  background: #e8f0dd;
-  border-left: 3px solid var(--jade);
-  color: var(--ink);
-}
-.feedback.wrong {
-  background: #f6dcd9;
-  border-left: 3px solid var(--cinnabar);
-  color: var(--ink);
-}
-.feedback .verdict {
-  font-weight: 600;
-  font-size: 16px;
-  margin-bottom: 6px;
-  font-family: "Kaiti SC", "STKaiti", serif;
-  letter-spacing: 0.1em;
-}
-.feedback .verdict::before { content: "· "; color: var(--ink-light); }
-.feedback .ref-answer {
-  display: block;
-  margin-top: 10px;
-  padding: 10px 14px;
-  background: rgba(255,255,255,0.5);
-  border-radius: 3px;
-  font-size: 15px;
-}
-.feedback .ref-answer .lbl {
-  font-size: 12px;
-  letter-spacing: 0.2em;
-  color: var(--ink-light);
-  display: block;
-  margin-bottom: 4px;
-  font-family: "Kaiti SC", "STKaiti", serif;
-}
-.feedback .analysis-text {
-  display: block;
-  margin-top: 10px;
-  white-space: pre-wrap;
-  line-height: 1.85;
-}
-
-footer {
-  max-width: 880px;
-  margin: 0 auto;
-  padding: 32px;
-  text-align: center;
-  font-size: 12px;
-  color: var(--ink-light);
-  letter-spacing: 0.2em;
-  border-top: 1px solid var(--line-soft);
-  font-family: "Kaiti SC", "STKaiti", serif;
-}
-
-/* 印刷感收尾 */
-@media (max-width: 600px) {
-  .q-card { padding: 20px 18px; }
-  h1.title { font-size: 28px; }
-  main { padding: 16px; }
-}
-</style>
+<link rel="stylesheet" href="quiz.css">
 </head>
 <body>
 <header class="page">
-  <div class="kicker">金刚经导读 · 自测题</div>
+  <div class="kicker"><a href="index.html">← 返回索引页</a></div>
   <h1 class="title">第 033 讲</h1>
   <div class="subtitle">庄严佛土</div>
   <div class="meta">
@@ -567,7 +261,7 @@ footer {
 <div class="q-head">
 <span class="q-no">19.<span class="badge essay">简答</span></span>
 </div>
-<div class="q-stem">简述什么是“通愿”与“别愿”，并分别举例说明。</div>
+<div class="q-stem">【简答题】简述什么是“通愿”与“别愿”，并分别举例说明。</div>
 <textarea class="essay-input" name="q033-19" placeholder="请简要作答…"></textarea>
 <div class="actions"><button class="btn btn-primary btn-submit" data-qid="q033-19" data-type="简答题" data-answer="通愿（共愿）：四弘誓愿也叫作“通愿”，也叫作“共愿”，是修行大乘佛法的人、誓愿成就无上菩提的众生都要发的愿，是大乘佛法世俗谛菩提心的根本愿心。
 别愿：具体到不同的修行者，除了要发四弘誓愿这样的共愿之外，还要发自己区别于其他众生的愿，叫作“别愿”。
@@ -577,7 +271,7 @@ footer {
 <div class="q-head">
 <span class="q-no">20.<span class="badge essay">简答</span></span>
 </div>
-<div class="q-stem">简述“四弘誓愿”的具体内容和解释，并定位四弘誓愿与世俗谛菩提心的关系。</div>
+<div class="q-stem">【简答题】简述“四弘誓愿”的具体内容和解释，并定位四弘誓愿与世俗谛菩提心的关系。</div>
 <textarea class="essay-input" name="q033-20" placeholder="请简要作答…"></textarea>
 <div class="actions"><button class="btn btn-primary btn-submit" data-qid="q033-20" data-type="简答题" data-answer="“四弘誓愿”即众生无边誓愿度，烦恼无尽誓愿断，法门无量誓愿学，佛道无上誓愿成。
 “众生无边誓愿度”，一个发大乘心的人，众生虽是无边，但是我要发愿度尽一切众生。
@@ -590,7 +284,7 @@ footer {
 <div class="q-head">
 <span class="q-no">21.<span class="badge essay">论述</span></span>
 </div>
-<div class="q-stem">简述阿弥陀佛别愿的要点，以及与药师琉璃光佛别愿的区别。作为大乘修行者，在修持和弘扬阿弥陀佛法门和药师佛法门上应该采取什么样的态度？</div>
+<div class="q-stem">【论述题】简述阿弥陀佛别愿的要点，以及与药师琉璃光佛别愿的区别。作为大乘修行者，在修持和弘扬阿弥陀佛法门和药师佛法门上应该采取什么样的态度？</div>
 <textarea class="essay-input" name="q033-21" placeholder="请详细论述…"></textarea>
 <div class="actions"><button class="btn btn-primary btn-submit" data-qid="q033-21" data-type="论述题" data-answer="弥陀别愿：
 《无量寿经》云，阿弥陀佛在因地发了四十八个大愿，这就是阿弥陀佛的别愿。

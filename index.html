@@ -7,91 +7,49 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
-<style>
-:root {
-  --paper: #f7f1e6; --paper-2: #ede4d0; --ink: #2a2622;
-  --ink-soft: #5e564c; --ink-light: #8a8278;
-  --ochre: #a35d2a; --ochre-soft: #c89165;
-  --jade: #5e7a4a; --line: #c9bfa9; --line-soft: #e3d9c2;
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0; padding: 0;
-  background: var(--paper);
-  color: var(--ink);
-  font-family: "Noto Serif SC", "Songti SC", serif;
-  min-height: 100vh;
-}
-header {
-  max-width: 1080px; margin: 0 auto;
-  padding: 80px 32px 48px;
-  text-align: center;
-  border-bottom: 1px solid var(--line);
-}
-.kicker { font-size: 13px; letter-spacing: 0.4em; color: var(--ink-light); margin-bottom: 16px; font-family: "Kaiti SC", "STKaiti", serif; }
-h1 { font-family: "Kaiti SC", "STKaiti", serif; font-size: 44px; margin: 0; letter-spacing: 0.1em; font-weight: 500; }
-.subtitle { font-size: 16px; color: var(--ink-soft); margin-top: 12px; font-family: "Kaiti SC", "STKaiti", serif; }
-main { max-width: 1080px; margin: 0 auto; padding: 48px 32px; }
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 16px;
-}
-.quiz-card {
-  display: block;
-  padding: 24px 22px;
-  background: #fdfaf2;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  text-decoration: none;
-  color: inherit;
-  transition: all 0.2s;
-  position: relative;
-}
-.quiz-card:hover {
-  border-color: var(--ochre);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(94,86,76,0.08);
-}
-.quiz-card::before {
-  content: "";
-  position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: var(--ochre);
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-.quiz-card:hover::before { opacity: 1; }
-.quiz-no {
-  font-family: "Kaiti SC", "STKaiti", serif;
-  font-size: 13px;
-  color: var(--ochre);
-  letter-spacing: 0.2em;
-  margin-bottom: 8px;
-}
-.quiz-title {
-  font-size: 19px;
-  font-weight: 500;
-  margin-bottom: 8px;
-  line-height: 1.4;
-}
-.quiz-meta { font-size: 13px; color: var(--ink-light); letter-spacing: 0.1em; }
-footer {
-  text-align: center; padding: 48px 32px;
-  color: var(--ink-light); font-size: 12px; letter-spacing: 0.2em;
-  border-top: 1px solid var(--line-soft);
-  font-family: "Kaiti SC", "STKaiti", serif;
-}
-</style>
+<link rel="stylesheet" href="quiz.css">
 </head>
 <body>
 <header>
   <div class="kicker">金刚经导读</div>
   <h1>自测题集</h1>
-  <div class="subtitle">三十三讲至六十一讲 · 共 29 卷</div>
+  <div class="subtitle">第一讲至第六十一讲 · 共 61 卷</div>
 </header>
 <main>
   <div class="grid">
-    <a class="quiz-card" href="033-庄严佛土.html"><div class="quiz-no">第 033 讲</div><div class="quiz-title">庄严佛土</div><div class="quiz-meta">共 21 题</div></a>
+    <a class="quiz-card" href="001-为什么学和如何学-金刚经.html"><div class="quiz-no">第 001 讲</div><div class="quiz-title">为什么学和如何学《金刚经》</div><div class="quiz-meta">共 29 题</div></a>
+<a class="quiz-card" href="002-波罗蜜与三世说的生命观-上.html"><div class="quiz-no">第 002 讲</div><div class="quiz-title">波罗蜜与三世说的生命观（上）</div><div class="quiz-meta">共 14 题</div></a>
+<a class="quiz-card" href="003-波罗蜜与三世说的生命观-中.html"><div class="quiz-no">第 003 讲</div><div class="quiz-title">波罗蜜与三世说的生命观（中）</div><div class="quiz-meta">共 23 题</div></a>
+<a class="quiz-card" href="004-波罗蜜与三世说的生命观-下.html"><div class="quiz-no">第 004 讲</div><div class="quiz-title">波罗蜜与三世说的生命观（下）</div><div class="quiz-meta">共 17 题</div></a>
+<a class="quiz-card" href="005-佛教是消极的却又是大积极的.html"><div class="quiz-no">第 005 讲</div><div class="quiz-title">佛教是消极的却又是大积极的</div><div class="quiz-meta">共 19 题</div></a>
+<a class="quiz-card" href="006-远离颠倒梦想.html"><div class="quiz-no">第 006 讲</div><div class="quiz-title">远离颠倒梦想</div><div class="quiz-meta">共 24 题</div></a>
+<a class="quiz-card" href="007-佛教横向教理体系-破增益与补损减.html"><div class="quiz-no">第 007 讲</div><div class="quiz-title">佛教横向教理体系：破增益与补损减</div><div class="quiz-meta">共 25 题</div></a>
+<a class="quiz-card" href="008-打破无明见真实.html"><div class="quiz-no">第 008 讲</div><div class="quiz-title">打破无明见真实</div><div class="quiz-meta">共 30 题</div></a>
+<a class="quiz-card" href="009-佛教纵向教理体系-上.html"><div class="quiz-no">第 009 讲</div><div class="quiz-title">佛教纵向教理体系（上）</div><div class="quiz-meta">共 27 题</div></a>
+<a class="quiz-card" href="010-佛教纵向教理体系-下.html"><div class="quiz-no">第 010 讲</div><div class="quiz-title">佛教纵向教理体系（下）</div><div class="quiz-meta">共 25 题</div></a>
+<a class="quiz-card" href="011-世俗谛与胜义谛.html"><div class="quiz-no">第 011 讲</div><div class="quiz-title">世俗谛与胜义谛</div><div class="quiz-meta">共 25 题</div></a>
+<a class="quiz-card" href="012-四重二谛之第一重-实有缘生与无常.html"><div class="quiz-no">第 012 讲</div><div class="quiz-title">四重二谛之第一重：实有缘生与无常</div><div class="quiz-meta">共 11 题</div></a>
+<a class="quiz-card" href="013-四重二谛之第二重-缘生性空与无我.html"><div class="quiz-no">第 013 讲</div><div class="quiz-title">四重二谛之第二重：缘生性空与无我</div><div class="quiz-meta">共 19 题</div></a>
+<a class="quiz-card" href="014-不常不断与相似相续.html"><div class="quiz-no">第 014 讲</div><div class="quiz-title">不常不断与相似相续</div><div class="quiz-meta">共 15 题</div></a>
+<a class="quiz-card" href="015-大乘佛法修行纲领.html"><div class="quiz-no">第 015 讲</div><div class="quiz-title">大乘佛法修行纲领</div><div class="quiz-meta">共 19 题</div></a>
+<a class="quiz-card" href="016-菩提心-大乘佛法修行的根本.html"><div class="quiz-no">第 016 讲</div><div class="quiz-title">菩提心：大乘佛法修行的根本</div><div class="quiz-meta">共 24 题</div></a>
+<a class="quiz-card" href="017-释题-金刚-和-经.html"><div class="quiz-no">第 017 讲</div><div class="quiz-title">释题：“金刚”和“经”</div><div class="quiz-meta">共 24 题</div></a>
+<a class="quiz-card" href="018-如是我闻.html"><div class="quiz-no">第 018 讲</div><div class="quiz-title">如是我闻</div><div class="quiz-meta">共 13 题</div></a>
+<a class="quiz-card" href="019-比丘与乞食.html"><div class="quiz-no">第 019 讲</div><div class="quiz-title">比丘与乞食</div><div class="quiz-meta">共 14 题</div></a>
+<a class="quiz-card" href="020-阿耨多罗三藐三菩提.html"><div class="quiz-no">第 020 讲</div><div class="quiz-title">阿耨多罗三藐三菩提</div><div class="quiz-meta">共 20 题</div></a>
+<a class="quiz-card" href="021-须菩提三问.html"><div class="quiz-no">第 021 讲</div><div class="quiz-title">须菩提三问</div><div class="quiz-meta">共 24 题</div></a>
+<a class="quiz-card" href="022-令入无余涅槃而灭度之.html"><div class="quiz-no">第 022 讲</div><div class="quiz-title">令入无余涅槃而灭度之</div><div class="quiz-meta">共 25 题</div></a>
+<a class="quiz-card" href="023-发菩提心.html"><div class="quiz-no">第 023 讲</div><div class="quiz-title">发菩提心</div><div class="quiz-meta">共 15 题</div></a>
+<a class="quiz-card" href="024-如何发菩提心.html"><div class="quiz-no">第 024 讲</div><div class="quiz-title">如何发菩提心</div><div class="quiz-meta">共 19 题</div></a>
+<a class="quiz-card" href="025-世俗谛和胜义谛菩提心修法-四无量心和五蕴皆空.html"><div class="quiz-no">第 025 讲</div><div class="quiz-title">世俗谛和胜义谛菩提心修法：四无量心和五蕴皆空</div><div class="quiz-meta">共 21 题</div></a>
+<a class="quiz-card" href="026-闻思与四相.html"><div class="quiz-no">第 026 讲</div><div class="quiz-title">闻思与四相</div><div class="quiz-meta">共 28 题</div></a>
+<a class="quiz-card" href="027-波罗蜜净住处.html"><div class="quiz-no">第 027 讲</div><div class="quiz-title">波罗蜜净住处</div><div class="quiz-meta">共 28 题</div></a>
+<a class="quiz-card" href="028-凡所有相-皆是虚妄.html"><div class="quiz-no">第 028 讲</div><div class="quiz-title">凡所有相，皆是虚妄</div><div class="quiz-meta">共 13 题</div></a>
+<a class="quiz-card" href="029-智不住生死-悲不住涅槃.html"><div class="quiz-no">第 029 讲</div><div class="quiz-title">智不住生死  悲不住涅槃</div><div class="quiz-meta">共 28 题</div></a>
+<a class="quiz-card" href="030-无法相无非法相.html"><div class="quiz-no">第 030 讲</div><div class="quiz-title">无法相无非法相</div><div class="quiz-meta">共 20 题</div></a>
+<a class="quiz-card" href="031-法布施为最.html"><div class="quiz-no">第 031 讲</div><div class="quiz-title">法布施为最</div><div class="quiz-meta">共 21 题</div></a>
+<a class="quiz-card" href="032-破除对修证果位的执着.html"><div class="quiz-no">第 032 讲</div><div class="quiz-title">破除对修证果位的执着</div><div class="quiz-meta">共 26 题</div></a>
+<a class="quiz-card" href="033-庄严佛土.html"><div class="quiz-no">第 033 讲</div><div class="quiz-title">庄严佛土</div><div class="quiz-meta">共 21 题</div></a>
 <a class="quiz-card" href="034-熏习-佛教教理体系.html"><div class="quiz-no">第 034 讲</div><div class="quiz-title">熏习：佛教教理体系</div><div class="quiz-meta">共 23 题</div></a>
 <a class="quiz-card" href="035-四重二谛之第三重-缘生其实是无生.html"><div class="quiz-no">第 035 讲</div><div class="quiz-title">四重二谛之第三重：缘生其实是无生</div><div class="quiz-meta">共 20 题</div></a>
 <a class="quiz-card" href="036-四重二谛之第四重-离言空性.html"><div class="quiz-no">第 036 讲</div><div class="quiz-title">四重二谛之第四重：“离言空性”</div><div class="quiz-meta">共 25 题</div></a>
@@ -109,7 +67,7 @@ footer {
 <a class="quiz-card" href="048-信心不逆.html"><div class="quiz-no">第 048 讲</div><div class="quiz-title">信心不逆</div><div class="quiz-meta">共 19 题</div></a>
 <a class="quiz-card" href="049-违缘与证量.html"><div class="quiz-no">第 049 讲</div><div class="quiz-title">违缘与证量</div><div class="quiz-meta">共 18 题</div></a>
 <a class="quiz-card" href="050-修行五位.html"><div class="quiz-no">第 050 讲</div><div class="quiz-title">修行五位</div><div class="quiz-meta">共 17 题</div></a>
-<a class="quiz-card" href="051-无相发心.html"><div class="quiz-no">第 051 讲</div><div class="quiz-title">无相发心</div><div class="quiz-meta">共 19 题</div></a>
+<a class="quiz-card" href="051-无相发心.html"><div class="quiz-no">第 051 讲</div><div class="quiz-title">无相发心</div><div class="quiz-meta">共 18 题</div></a>
 <a class="quiz-card" href="052-无生法义.html"><div class="quiz-no">第 052 讲</div><div class="quiz-title">无生法义</div><div class="quiz-meta">共 20 题</div></a>
 <a class="quiz-card" href="053-中观与二谛.html"><div class="quiz-no">第 053 讲</div><div class="quiz-title">中观与二谛</div><div class="quiz-meta">共 21 题</div></a>
 <a class="quiz-card" href="054-彻底泯灭二边.html"><div class="quiz-no">第 054 讲</div><div class="quiz-title">彻底泯灭二边</div><div class="quiz-meta">共 23 题</div></a>
