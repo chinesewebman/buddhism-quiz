@@ -1252,6 +1252,12 @@ def main():
         with open(jp, encoding='utf-8') as f:
             final_quizzes.append(json.load(f))
     final_quizzes.sort(key=lambda q: int(q['number']))
+    # Strip debug keys from data/*.json too — they can leak in if data/
+    # was edited directly (e.g., one-off question patches like 028.13).
+    for qset in final_quizzes:
+        for q in qset['questions']:
+            for k in DEBUG_KEYS:
+                q.pop(k, None)
 
     # 输出 HTML
     for qset in final_quizzes:
