@@ -63,7 +63,7 @@ def parse_docx(path: Path) -> dict:
         raise ValueError(f'{path.name}: 找不到元数据段')
     # 去掉前导符号 (如 '·' ' ' 等)
     meta_line = re.sub(r'^[^\S\n]*[·•\s]*', '', paras[meta_idx])
-    m = re.match(r'所属题库[：:]\s*(?:初级)?金刚经导读(\d+)\s*(.+)', meta_line)
+    m = re.match(r'所属题库[：:]\s*(?:初级)?金刚经导读\s*(\d+)\s*(.+)', meta_line)
     if not m:
         raise ValueError(f'{path.name}: 元数据格式不对: {paras[meta_idx]}')
     number, title = m.group(1), m.group(2).strip()
