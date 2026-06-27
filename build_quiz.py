@@ -51,7 +51,140 @@ NUM_RE = re.compile(r'^\s*(\d+)\s*[.．、]\s*')
 def parse_docx(path: Path) -> dict:
     """返回: {'number': '033', 'title': '庄严佛土', 'questions': [...]}"""
     doc = Document(path)
-    paras = [p.text for p in doc.paragraphs]
+    # ── Bug fix 2026-06-27: docx may contain track-changes insertions
+    # (<w:ins>) — typically shown in red in Word. python-docx's `doc.paragraphs`
+    # only walks top-level <w:p>, missing <w:p> nested inside <w:ins>. Fix:
+    # walk `doc.element.body` recursively and collect text from every <w:p>,
+    # including those inside <w:ins>. Skip <w:del> (deleted content).
+    # ── Bug fix 2026-06-27 (cont.): docx options may use Word numbered lists
+    # (<w:numPr><w:numId>) where the "A、" prefix is rendered by Word at view
+    # time but NOT stored in the text. Reconstruct the prefix from numId + ilvl
+    # by reading word/numbering.xml (upperLetter → A/B/C/...).
+    from docx.oxml.ns import qn as _qn
+    W_NS = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'
+    W = '{' + W_NS + '}'
+    body = doc.element.body
+
+    # Build numId → list-format mapping (e.g., 2 → ['A', 'B', 'C', ...])
+    num_letters = {}  # numId → list of prefix strings
+    try:
+        numbering_part = doc.part.numbering_part
+        if numbering_part is not None:
+            num_xml = numbering_part.element
+            # numId → abstractNumId
+            num_to_abs = {}
+            for num in num_xml.findall(W + 'num'):
+                nid = num.get(W + 'numId')
+                abs_id_el = num.find(W + 'abstractNumId')
+                if nid and abs_id_el is not None:
+                    num_to_abs[nid] = abs_id_el.get(W + 'val')
+            # abstractNumId → list of (ilvl, prefix_letter)
+            abs_letters = {}
+            for an in num_xml.findall(W + 'abstractNum'):
+                abs_id = an.get(W + 'abstractNumId')
+                letters = []
+                for lvl in an.findall(W + 'lvl'):
+                    ilvl = lvl.get(W + 'ilvl')
+                    fmt_el = lvl.find(W + 'numFmt')
+                    text_el = lvl.find(W + 'lvlText')
+                    if fmt_el is None or text_el is None:
+                        continue
+                    fmt = fmt_el.get(W + 'val')
+                    # Only handle upperLetter (A,B,C,...) / lowerLetter (a,b,c,...)
+                    if fmt not in ('upperLetter', 'lowerLetter'):
+                        continue
+                    # text_el value contains %1 placeholder; assume sequential A-Z
+                    is_upper = (fmt == 'upperLetter')
+                    # Build alphabet once per abstractNum (sequential per ilvl)
+                    letters.append((ilvl, is_upper))
+                abs_letters[abs_id] = letters
+            # Convert numId → list of prefix generators (one per ilvl)
+            for nid, abs_id in num_to_abs.items():
+                if abs_id not in abs_letters:
+                    continue
+                num_letters[nid] = abs_letters[abs_id]
+    except (AttributeError, KeyError, NotImplementedError):
+        # No numbering.xml or python-docx version without numbering_part
+        pass
+
+    def _make_prefix_gen(num_id, ilvl):
+        """Generator yielding A, B, C, ... for each paragraph with this numId+ilvl."""
+        def gen():
+            for i in range(26):
+                letter = chr(ord('A') + i) if num_id and num_letters.get(num_id) else None
+                if letter is None:
+                    return
+                yield letter
+        return gen()
+
+    # Track next letter per (numId, ilvl)
+    counters = {}  # (num_id, ilvl) → index (0,1,2...)
+
+    def _get_num_prefix(p_elem):
+        """If paragraph has w:numPr, return (numId, ilvl, prefix_letter). Else None."""
+        pPr = p_elem.find(W + 'pPr')
+        if pPr is None:
+            return None
+        numPr = pPr.find(W + 'numPr')
+        if numPr is None:
+            return None
+        numId_el = numPr.find(W + 'numId')
+        ilvl_el = numPr.find(W + 'ilvl')
+        if numId_el is None:
+            return None
+        num_id = numId_el.get(W + 'val')
+        ilvl = ilvl_el.get(W + 'val') if ilvl_el is not None else '0'
+        if num_id not in num_letters:
+            return None
+        # Look up the format for this ilvl; default to upperLetter
+        is_upper = True
+        for lvl_ilvl, lvl_is_upper in num_letters[num_id]:
+            if str(lvl_ilvl) == str(ilvl):
+                is_upper = lvl_is_upper
+                break
+        # Increment counter
+        key = (num_id, str(ilvl))
+        idx = counters.get(key, 0)
+        counters[key] = idx + 1
+        base = ord('A') if is_upper else ord('a')
+        letter = chr(base + idx)
+        return f'{letter}、'
+
+    def _collect_paragraphs(elem):
+        """Recursively yield paragraph text, descending into <w:ins> only.
+        Translate <w:br/> soft breaks to '\n'. Prepend A/B/C/ prefix if
+        paragraph uses <w:numPr> AND does not contain a 【题型】 marker
+        (题号 stem already has its own prefix)."""
+        for child in elem:
+            tag = child.tag.split('}')[-1]
+            if tag == 'p':
+                # Walk children in order; <w:t> → text, <w:br/> → '\n',
+                # <w:tab/> → '\t'. Other elements ignored.
+                parts = []
+                for sub in child.iter():
+                    sub_tag = sub.tag.split('}')[-1]
+                    if sub_tag == 't':
+                        parts.append(sub.text or '')
+                    elif sub_tag == 'br':
+                        parts.append('\n')
+                    elif sub_tag == 'tab':
+                        parts.append('\t')
+                body_text = ''.join(parts)
+                # Skip numPr prefix for paragraphs containing 【题型】 marker
+                has_qtype = any(m in body_text for m in
+                                ('【单选题】', '【多选题】', '【判断题】',
+                                 '【填空题】', '【简答题】', '【论述题】'))
+                prefix = None if has_qtype else _get_num_prefix(child)
+                if prefix and body_text.strip():
+                    yield prefix + body_text
+                else:
+                    yield body_text
+            elif tag == 'ins':
+                # Track-changes insertion — Word shows red; include content
+                yield from _collect_paragraphs(child)
+            # Skip <w:del>, <w:sectPr>, <w:tbl>, etc.
+
+    paras = list(_collect_paragraphs(body))
 
     # 元数据 (可能不在段 0, 找前 3 段内第一个以 '所属题库' 开头的)
     meta_idx = None
