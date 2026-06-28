@@ -917,7 +917,7 @@ header {
 """
 
 # Written by main() to output/quiz.css. HTML files reference it via
-# <link rel="stylesheet" href="https://quiz.hi1984.com/quiz.css">. This single source of truth saves
+# <link rel="stylesheet" href="https://css-5l7.pages.dev/quiz.css">. This single source of truth saves
 # ~1.5MB of duplicated CSS bytes across 62 HTML files.
 
 JS = r"""
@@ -1239,7 +1239,7 @@ def render_html(qset: dict) -> str:
 <link rel="preconnect" href="https://fonts.loli.net">
 <link rel="preconnect" href="https://fonts.loli.net" crossorigin>
 <link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://quiz.hi1984.com/quiz.css">
+<link rel="stylesheet" href="https://css-5l7.pages.dev/quiz.css">
 </head>
 <body>
 <header class="page">
@@ -1294,7 +1294,7 @@ def render_index(quizzes: list) -> str:
 <link rel="preconnect" href="https://fonts.loli.net">
 <link rel="preconnect" href="https://fonts.loli.net" crossorigin>
 <link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://quiz.hi1984.com/quiz.css">
+<link rel="stylesheet" href="https://css-5l7.pages.dev/quiz.css">
 </head>
 <body>
 <header>
